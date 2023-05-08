@@ -58,60 +58,9 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         
-        #Frame para la parte de creacion de grupos
+        ##Frame Widget Para la creacion de grupos
+        self.frame_2 = GrupoWidget(self.centralwidget)
 
-        self.frame_2 = QtWidgets.QFrame(self.centralwidget)
-        self.frame_2.setGeometry(QtCore.QRect(231, 188, 754, 770))
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.frame_2.setStyleSheet("background-color: #004B73; border-radius: 30px;")
-        
-        #Boton para crear grupos
-
-        self.pushButton_3 = QtWidgets.QPushButton(self.frame_2)
-        self.pushButton_3.setGeometry(QtCore.QRect(60, 40, 100, 100))
-        self.pushButton_3.setObjectName("pushButton_3")
-        icon3 = QIcon()
-        icon3.addPixmap(QPixmap("C:/Users/juanc/Documents/My Un APP Grupos/Iconos/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png"), QIcon.Normal, QIcon.Off)
-        self.pushButton_3.setIcon(icon3)
-        self.pushButton_3.setIconSize(QtCore.QSize(100, 100))
-
-        self.widget_2 = QtWidgets.QWidget(self.frame_2)
-        self.widget_2.setGeometry(QtCore.QRect(60, 168, 619, 530))
-        self.widget_2.setObjectName("widget_2")
-        self.widget_2.setStyleSheet("background-color: #C0E1EC; border-radius: 0px;")   
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.widget_2)
-        self.plainTextEdit.setGeometry(QtCore.QRect(20, 10, 201, 21))
-        self.plainTextEdit.setObjectName("plainTextEdit")
-        self.textEdit = QtWidgets.QTextEdit(self.widget_2)
-        self.textEdit.setGeometry(QtCore.QRect(20, 40, 201, 21))
-        self.textEdit.setObjectName("textEdit")
-        self.plainTextEdit_2 = QtWidgets.QPlainTextEdit(self.widget_2)
-        self.plainTextEdit_2.setGeometry(QtCore.QRect(20, 70, 201, 21))
-        self.plainTextEdit_2.setObjectName("plainTextEdit_2")
-        self.scrollArea = QtWidgets.QScrollArea(self.widget_2)
-        self.scrollArea.setGeometry(QtCore.QRect(20, 110, 201, 221))
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 199, 219))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.verticalScrollBar = QtWidgets.QScrollBar(self.scrollAreaWidgetContents)
-        self.verticalScrollBar.setGeometry(QtCore.QRect(170, 30, 16, 160))
-        self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
-        self.verticalScrollBar.setObjectName("verticalScrollBar")
-        self.checkBox = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
-        self.checkBox.setGeometry(QtCore.QRect(20, 40, 141, 17))
-        self.checkBox.setObjectName("checkBox")
-        self.checkBox_2 = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
-        self.checkBox_2.setGeometry(QtCore.QRect(20, 80, 131, 17))
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.checkBox_3 = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
-        self.checkBox_3.setGeometry(QtCore.QRect(20, 120, 141, 17))
-        self.checkBox_3.setObjectName("checkBox_3")
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        
         ##Frame para la seleccion de grupos y lista de miembros
         
         self.frame_3 = QtWidgets.QFrame(self.centralwidget)
@@ -161,6 +110,10 @@ class Ui_MainWindow(object):
         self.widget_4.setGeometry(QtCore.QRect(60, 450, 619, 274))
         self.widget_4.setObjectName("widget_4")
         self.widget_4.setStyleSheet("background-color: #C0E1EC; border-radius: 0px;")
+        
+        self.lineEdit = QtWidgets.QLineEdit(self.widget_4)
+        self.lineEdit.setGeometry(QtCore.QRect(20, 10, 201, 21))
+        self.lineEdit.setObjectName("lineEdit")   
 
        
         MainWindow.setCentralWidget(self.centralwidget)
@@ -180,14 +133,88 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", " "))
         self.pushButton_2.setText(_translate("MainWindow", " "))
-        self.pushButton_3.setText(_translate("MainWindow", " "))
         self.pushButton_4.setText(_translate("MainWindow", " "))
         self.pushButton_5.setText(_translate("MainWindow", "GRUPO EPICO 1"))
+        self.lineEdit.setText(_translate("MainWindow", "Buscar..."))
+
+class GrupoWidget(QtWidgets.QFrame):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        
+        # Configuración del Frame
+        self.setGeometry(QtCore.QRect(231, 188, 754, 770))
+        self.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.setObjectName("frame_2")
+        self.setStyleSheet("background-color: #004B73; border-radius: 30px;")
+        
+        # Botón para crear grupos
+        self.pushButton_3 = QtWidgets.QPushButton(self)
+        self.pushButton_3.setGeometry(QtCore.QRect(60, 40, 100, 100))
+        self.pushButton_3.setObjectName("pushButton_3")
+        icon3 = QIcon()
+        icon3.addPixmap(QPixmap("C:/Users/juanc/Documents/My Un APP Grupos/Iconos/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png"), QIcon.Normal, QIcon.Off)
+        self.pushButton_3.setIcon(icon3)
+        self.pushButton_3.setIconSize(QtCore.QSize(100, 100))
+
+        # Widget para la configuración del grupo
+        self.widget_2 = QtWidgets.QWidget(self)
+        self.widget_2.setGeometry(QtCore.QRect(60, 168, 619, 530))
+        self.widget_2.setObjectName("widget_2")
+        self.widget_2.setStyleSheet("background-color: #C0E1EC; border-radius: 0px;")
+
+        self.lineEdit = QtWidgets.QLineEdit(self.widget_2)
+        self.lineEdit.setGeometry(QtCore.QRect(20, 10, 201, 21))
+        self.lineEdit.setObjectName("lineEdit")   
+        
+     
+        self.textEdit = QtWidgets.QTextEdit(self.widget_2)
+        self.textEdit.setGeometry(QtCore.QRect(20, 40, 201, 21))
+        self.textEdit.setObjectName("textEdit")
+        
+        self.plainTextEdit_2 = QtWidgets.QPlainTextEdit(self.widget_2)
+        self.plainTextEdit_2.setGeometry(QtCore.QRect(20, 70, 201, 21))
+        self.plainTextEdit_2.setObjectName("plainTextEdit_2")
+        
+        self.scrollArea = QtWidgets.QScrollArea(self.widget_2)
+        self.scrollArea.setGeometry(QtCore.QRect(20, 110, 201, 221))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 199, 219))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        
+        self.verticalScrollBar = QtWidgets.QScrollBar(self.scrollAreaWidgetContents)
+        self.verticalScrollBar.setGeometry(QtCore.QRect(170, 30, 16, 160))
+        self.verticalScrollBar.setOrientation(QtCore.Qt.Vertical)
+        self.verticalScrollBar.setObjectName("verticalScrollBar")
+        
+        self.checkBox = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
+        self.checkBox.setGeometry(QtCore.QRect(20, 40, 141, 17))
+        self.checkBox.setObjectName("checkBox")
+        
+        self.checkBox_2 = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
+        self.checkBox_2.setGeometry(QtCore.QRect(20, 80, 131, 17))
+        self.checkBox_2.setObjectName("checkBox_2")
+        
+        self.checkBox_3 = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
+        self.checkBox_3.setGeometry(QtCore.QRect(20, 120, 141, 17))
+        self.checkBox_3.setObjectName("checkBox_3")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pushButton_3.setText(_translate("MainWindow", " "))
         self.plainTextEdit.setPlainText(_translate("MainWindow", "NOMBRE DEL GRUPO"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "NOMBRE DEL GRUPO"))
         self.plainTextEdit_2.setPlainText(_translate("MainWindow", "AÑADIR MIEMBROS"))
         self.checkBox.setText(_translate("MainWindow", "USUARIO DISPONIBLE"))
         self.checkBox_2.setText(_translate("MainWindow", "USUARIO DISPONIBLE"))
         self.checkBox_3.setText(_translate("MainWindow", "USUARIO DISPONIBLE"))
+
+
 
 
 if __name__ == "__main__":
