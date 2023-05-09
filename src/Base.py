@@ -24,7 +24,7 @@ class Entrada(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         #Fondo
-        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("resources\Fondo.png"))
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
 
 class Creacion_Usuario(QtWidgets.QMainWindow):
     def __init__(self):
@@ -33,7 +33,7 @@ class Creacion_Usuario(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Fondo
-        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("resources\Fondo.png"))
+        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
 
 
 class Creacion_Menu(QtWidgets.QMainWindow):
@@ -43,7 +43,7 @@ class Creacion_Menu(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Fondo
-        self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("resources\Fondo.png"))
+        self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
 
 
 
@@ -76,9 +76,9 @@ class Aplicacion(QtWidgets.QMainWindow):
 
     def Conexion_BD(self):
         self.HostBD = "localhost"
-        self.UsuarioBD = ""
-        self.ContraseñaBD = ""
-        self.DataBase = ""
+        self.UsuarioBD = "root"
+        self.ContraseñaBD = "Sol56da17*"
+        self.DataBase = "myundb"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
         self.cur = self.conexion.cursor()
