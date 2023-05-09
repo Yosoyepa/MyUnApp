@@ -4,6 +4,7 @@ import datetime
 from PyQt5 import QtWidgets, uic, QtGui
 from Ventana_Ingreso import Ui_Window_Inicio
 from Ventana_Registro import Ui_Window_Registro
+from Ventana_Menu import Ui_Ventana_Menu
 import sys
 
 #Libreria para SQL
@@ -35,6 +36,16 @@ class Creacion_Usuario(QtWidgets.QMainWindow):
         self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("resources\Fondo.png"))
 
 
+class Creacion_Menu(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(Creacion_Menu, self).__init__()
+        self.ui = Ui_Ventana_Menu()
+        self.ui.setupUi(self)
+
+        # Fondo
+        self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("resources\Fondo.png"))
+
+
 
 #Clase maestra
 class Aplicacion(QtWidgets.QMainWindow):
@@ -45,8 +56,10 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Repertorio = QtWidgets.QStackedWidget(self)
         self.Pagina_Entrada = Entrada()
         self.Pagina_Creacion_Usuario = Creacion_Usuario()
+        self.Pagina_Menu = Creacion_Menu()
         self.Repertorio.addWidget(self.Pagina_Entrada)
         self.Repertorio.addWidget(self.Pagina_Creacion_Usuario)
+        self.Repertorio.addWidget(self.Pagina_Menu)
 
         #Widget central del repertorio
         self.setCentralWidget(self.Repertorio)
@@ -62,11 +75,11 @@ class Aplicacion(QtWidgets.QMainWindow):
 
 
     def Conexion_BD(self):
-        self.HostBD = ""
-        self.UsuarioBD = ""
-        self.ContraseñaBD = ""
-        self.DataBase = ""
-        self.PortBD = ""
+        self.HostBD = "localhost"
+        self.UsuarioBD = "root"
+        self.ContraseñaBD = "29072003Juan."
+        self.DataBase = "myun"
+        self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
         self.cur = self.conexion.cursor()
 
@@ -77,7 +90,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.cur.execute(query, (self.Usuario,self.Contraseña))
         Resultado=self.cur.fetchone()
         if Resultado!=None and self.Usuario == Resultado[0] and self.Contraseña == Resultado[1]:
-            self.Mostrar_MsgError("Conectado","Proceso de conexion exitoso")
+            self.Cambio_A_Menu()
         else:
             self.Mostrar_MsgError("Error a conectar",'Usuario o contraseña incorrectos')
 
@@ -114,6 +127,9 @@ class Aplicacion(QtWidgets.QMainWindow):
 
     def Cambio_A_Inicio(self):
         self.Repertorio.setCurrentWidget(self.Pagina_Entrada)
+
+    def Cambio_A_Menu(self):
+        self.Repertorio.setCurrentWidget(self.Pagina_Menu)
 
 
 #Ejecutable
