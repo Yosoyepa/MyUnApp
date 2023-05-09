@@ -75,11 +75,11 @@ class Aplicacion(QtWidgets.QMainWindow):
 
 
     def Conexion_BD(self):
-        self.HostBD = ""
+        self.HostBD = "localhost"
         self.UsuarioBD = ""
         self.ContraseñaBD = ""
         self.DataBase = ""
-        self.PortBD = ""
+        self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
         self.cur = self.conexion.cursor()
 
@@ -113,7 +113,7 @@ class Aplicacion(QtWidgets.QMainWindow):
             self.Mostrar_MsgError("Datos incompletos","Por favor diligenciar todos los campos")
         else:
             try:
-                query = ("INSERT INTO USUARIO Values(%s,%s,%s,%s,%s)")
+                query = ("INSERT INTO USUARIO Values(NULL,%s,%s,%s,%s,%s)")
                 self.cur.execute(query, (self.Nombre_Nuevo, self.Correo_Nuevo, self.Contraseña_Nueva, self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
                 self.conexion.commit()
                 self.Mostrar_MsgError("Registro exitoso", "El usuario a sido creado")

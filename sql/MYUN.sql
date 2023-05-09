@@ -1,9 +1,13 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     1/05/2023 8:36:50 p. m.                      */
+/* Created on:     1/05/2023 8:36:50 p.Â m.                      */
 /*==============================================================*/
 
+drop database if exists myundb;
 
+create database myundb;
+
+use myundb;
 drop table if exists ADMINISTRADOR_GRUPO;
 
 drop table if exists EVENTO;
@@ -21,7 +25,7 @@ drop table if exists USUARIO;
 /*==============================================================*/
 create table ADMINISTRADOR_GRUPO
 (
-   ID_ADMINISTRADOR     int not null,
+   ID_ADMINISTRADOR     int auto_increment not null,
    ID_GRUPO             int not null,
    ID_USUARIO           int not null,
    CREADOR_GRUPO        bool not null,
@@ -33,7 +37,7 @@ create table ADMINISTRADOR_GRUPO
 /*==============================================================*/
 create table EVENTO
 (
-   ID_EVENTO            int not null,
+   ID_EVENTO            int auto_increment not null,
    ID_GRUPO             int not null,
    ID_USUARIO           int not null,
    NOMBRE_EVENTO        varchar(30) not null,
@@ -57,7 +61,7 @@ create table EVENTO_APROBADO
 /*==============================================================*/
 create table GRUPO
 (
-   ID_GRUPO             int not null,
+   ID_GRUPO             int auto_increment not null,
    NOMBRE_GRUPO         varchar(30) not null,
    TIPO_GRUPO           bool not null,
    DESCRIPCION_GRUPO    text not null,
@@ -80,7 +84,7 @@ create table MIEMBRO_GRUPO_
 /*==============================================================*/
 create table USUARIO
 (
-   ID_USUARIO           int not null,
+   ID_USUARIO           int auto_increment not null,
    NOMBRE_USUARIO       varchar(30) not null,
    CORREO_USUARIO       varchar(30) not null,
    CONTRASENA_USUARIO   varchar(30) not null,
