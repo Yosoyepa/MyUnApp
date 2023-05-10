@@ -142,9 +142,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.cur.execute(query, (self.Usuario,self.Contraseña))
         Resultado=self.cur.fetchone()
         if Resultado!=None and self.Usuario == Resultado[0] and self.Contraseña == Resultado[1]:
-            self.Cambio_A_Codigo()
-            self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(Resultado[0])
-            self.Codigo_en_verificacion()
+            self.Cambio_A_Menu()
         else:
             self.Mostrar_MsgError("Error a conectar",'Usuario o contraseña incorrectos')
 
@@ -166,16 +164,24 @@ class Aplicacion(QtWidgets.QMainWindow):
         if self.Nombre_Nuevo == "" or self.Apellido_Nuevo == "" or self.Contraseña_Nueva == "" or self.Correo_Nuevo == "" or self.Fecha_Nacimiento_Nueva == "":
             self.Mostrar_MsgError("Datos incompletos","Por favor diligenciar todos los campos")
         else:
-            try:
-                query = ("INSERT INTO USUARIO Values(%s,%s,%s,%s,%s,%s)")
-                #####correo, nombre, apellido, contrasena , fecha nacimiento, fecha registro                
-                self.cur.execute(query, (self.Correo_Nuevo, self.Nombre_Nuevo, self.Apellido_Nuevo, self.Contraseña_Nueva, self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
-                self.conexion.commit()
-                self.Mostrar_MsgError("Registro exitoso", "El usuario a sido creado")
-                self.Cambio_A_Inicio()
-            except Exception as e:
-                print(e)
-                self.Mostrar_MsgError("Datos invalidos", "Por favor diligenciar los campos con logica")
+            self.Cambio_A_Codigo()
+            self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(self.Correo_Nuevo)
+            self.Codigo_en_verificacion()
+
+    def Añadir_Con_Codigo(self):
+        try:
+            query = ("INSERT INTO USUARIO Values(%s,%s,%s,%s,%s,%s)")
+
+            #####correo, nombre, apellido, contrasena , fecha nacimiento, fecha registro
+
+            self.cur.execute(query, (self.Correo_Nuevo, self.Nombre_Nuevo, self.Apellido_Nuevo, self.Contraseña_Nueva,
+                                     self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
+            self.conexion.commit()
+            self.Mostrar_MsgError("Registro exitoso", "El usuario a sido creado")
+            self.Cambio_A_Inicio()
+        except Exception as e:
+            print(e)
+            self.Mostrar_MsgError("Datos invalidos", "Por favor diligenciar los campos con logica")
 
     def Cambio_A_Creacion_Usuario(self):
         self.Repertorio.setCurrentWidget(self.Pagina_Creacion_Usuario)
@@ -199,9 +205,17 @@ class Aplicacion(QtWidgets.QMainWindow):
     def Verificar_Codigo(self):
         self.codigo_usr = self.Pagina_Codigo_Seguridad.ui.mostrar_texto()
         if self.Codigo == self.codigo_usr:
-            self.Cambio_A_Menu()
+            self.Añadir_Con_Codigo()
         else:
-            self.Pagina_Codigo_Seguridad.Opacidad(1)
+            self.Mostrar_MsgError("Codigo invalido", "Por favor digitar el codigo correcto")
+
+
+    def creacion_grupo(self):
+        self.nombre_grupo = self.Pagina_grupo.ui.line_Nombre_Grupo.text()
+        query = ("INSERT INTO GRUPO Values(NULL,%s)")
+        self.cur.execute(query, self.nombre_grupo)
+        self.conexion.commit()
+    
 
     def creacion_grupo(self):
         self.nombre_grupo = self.Pagina_grupo.ui.line_Nombre_Grupo.text()
