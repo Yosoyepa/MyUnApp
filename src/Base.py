@@ -6,6 +6,7 @@ from Ventana_Ingreso import Ui_Window_Inicio
 from Ventana_Registro import Ui_Window_Registro
 from Ventana_Menu import Ui_Ventana_Menu
 import sys
+from view import Grupos_Ui
 
 #Libreria para SQL
 import mysql.connector
@@ -45,6 +46,12 @@ class Creacion_Menu(QtWidgets.QMainWindow):
         # Fondo
         self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
 
+class Creacion_Grupo(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(Creacion_Grupo, self).__init__()
+        self.ui = Grupos_Ui.Ui_MainWindow()
+        self.ui.setupUi(self)
+
 
 
 #Clase maestra
@@ -57,9 +64,11 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Entrada = Entrada()
         self.Pagina_Creacion_Usuario = Creacion_Usuario()
         self.Pagina_Menu = Creacion_Menu()
+        self.Pagina_grupo = Creacion_Grupo()
         self.Repertorio.addWidget(self.Pagina_Entrada)
         self.Repertorio.addWidget(self.Pagina_Creacion_Usuario)
         self.Repertorio.addWidget(self.Pagina_Menu)
+        self.Repertorio.addWidget(self.Pagina_grupo)
 
         #Widget central del repertorio
         self.setCentralWidget(self.Repertorio)
@@ -69,6 +78,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Entrada.ui.Ingresar.clicked.connect(self.Analisis)
         self.Pagina_Entrada.ui.Boton_Cracion_Usuario.clicked.connect(self.Cambio_A_Creacion_Usuario)
         self.Pagina_Creacion_Usuario.ui.Boton_Registro.clicked.connect(self.Anadir)
+        self.Pagina_Menu.ui.pushButton.clicked.connect(self.Cambio_A_Grupo)
 
         #ConexionBD
         self.Conexion_BD()
@@ -77,8 +87,8 @@ class Aplicacion(QtWidgets.QMainWindow):
     def Conexion_BD(self):
         self.HostBD = "localhost"
         self.UsuarioBD = "root"
-        self.ContraseñaBD = ""
-        self.DataBase = ""
+        self.ContraseñaBD = "Sol56da17*"
+        self.DataBase = "myundb"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
         self.cur = self.conexion.cursor()
@@ -130,6 +140,9 @@ class Aplicacion(QtWidgets.QMainWindow):
 
     def Cambio_A_Menu(self):
         self.Repertorio.setCurrentWidget(self.Pagina_Menu)
+    
+    def Cambio_A_Grupo(self):
+        self.Repertorio.setCurrentWidget(self.Pagina_grupo)
 
 
 #Ejecutable
