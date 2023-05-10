@@ -91,6 +91,8 @@ class Creacion_Grupo(QtWidgets.QMainWindow):
 
 
 
+
+
 #Clase maestra
 class Aplicacion(QtWidgets.QMainWindow):
     def __init__(self):
@@ -109,6 +111,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Repertorio.addWidget(self.Pagina_grupo)
         self.Repertorio.addWidget(self.Pagina_Codigo_Seguridad)
 
+
         #Widget central del repertorio
         self.setCentralWidget(self.Repertorio)
         self.Repertorio.setCurrentWidget(self.Pagina_Entrada)
@@ -126,7 +129,7 @@ class Aplicacion(QtWidgets.QMainWindow):
     def Conexion_BD(self):
         self.HostBD = "localhost"
         self.UsuarioBD = "root"
-        self.ContraseñaBD = ""
+        self.ContraseñaBD = "Sol56da17*"
         self.DataBase = "myundb"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
@@ -165,9 +168,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         else:
             try:
                 query = ("INSERT INTO USUARIO Values(%s,%s,%s,%s,%s,%s)")
-
-                #####correo, nombre, apellido, contrasena , fecha nacimiento, fecha registro
-                
+                #####correo, nombre, apellido, contrasena , fecha nacimiento, fecha registro                
                 self.cur.execute(query, (self.Correo_Nuevo, self.Nombre_Nuevo, self.Apellido_Nuevo, self.Contraseña_Nueva, self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
                 self.conexion.commit()
                 self.Mostrar_MsgError("Registro exitoso", "El usuario a sido creado")
@@ -201,6 +202,13 @@ class Aplicacion(QtWidgets.QMainWindow):
             self.Cambio_A_Menu()
         else:
             self.Pagina_Codigo_Seguridad.Opacidad(1)
+
+    def creacion_grupo(self):
+        self.nombre_grupo = self.Pagina_grupo.ui.line_Nombre_Grupo.text()
+        query = ("INSERT INTO GRUPO Values(NULL,%s)")
+        self.cur.execute(query, self.nombre_grupo)
+        self.conexion.commit()
+    
 
     
 
