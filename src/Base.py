@@ -1,10 +1,13 @@
 import datetime
+from random import randint
 
 #librerias para PYQT5
 from PyQt5 import QtWidgets, uic, QtGui
 from Ventana_Ingreso import Ui_Window_Inicio
 from Ventana_Registro import Ui_Window_Registro
 from Ventana_Menu import Ui_Ventana_Menu
+
+from Ventana_Codigo import Ui_Window_Codigo
 import sys
 from view import Grupos_Ui
 
@@ -15,6 +18,9 @@ import mysql.connector
 import smtplib
 from email.message import EmailMessage
 
+#Librerias para .env
+from dotenv import load_dotenv
+import os
 
 
 #Cargar archivo ui.py
@@ -25,7 +31,7 @@ class Entrada(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         #Fondo
-        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
 
 class Creacion_Usuario(QtWidgets.QMainWindow):
     def __init__(self):
@@ -34,8 +40,43 @@ class Creacion_Usuario(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Fondo
-        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
+        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
 
+class Codigo_Seguridad(QtWidgets.QMainWindow): 
+    def __init__(self):
+        super(Codigo_Seguridad,self).__init__()
+        self.ui = Ui_Window_Codigo()
+        self.ui.setupUi(self)
+        self.Opacidad(0)
+
+        #Fondo
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
+
+
+    def Opacidad(self,Valor):
+        self.Opa = QtWidgets.QGraphicsOpacityEffect()
+        self.Opa.setOpacity(Valor)
+        self.ui.textoIncorrecto.setGraphicsEffect(self.Opa)
+    
+    def Mandar_Codigo(self, correo):
+        Codigo = ""
+        for i in range(5):
+            Codigo += str(randint(0,9))
+        print(Codigo)
+
+        message = "Hola, tu codigo es: " + Codigo
+        subject = "Envio de Codigo"
+        message = 'Subject: {}\n\n{}'.format(subject,message)
+        
+        load_dotenv('MyUnApp/env/.env') #si no funciona, pip install python_dotenv en terminal bash
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        password = os.getenv('passwordDev') #contraseña ocultada en env/.env
+        server.starttls()
+        server.login("myunapp3@gmail.com", password)
+        server.sendmail ('myunapp3@gmail.com', correo, message) 
+        server.quit()
+
+        return Codigo
 
 class Creacion_Menu(QtWidgets.QMainWindow):
     def __init__(self):
@@ -44,7 +85,7 @@ class Creacion_Menu(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Fondo
-        self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
+        self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
 
 class Creacion_Grupo(QtWidgets.QMainWindow):
     def __init__(self):
@@ -65,10 +106,12 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Creacion_Usuario = Creacion_Usuario()
         self.Pagina_Menu = Creacion_Menu()
         self.Pagina_grupo = Creacion_Grupo()
+        self.Pagina_Codigo_Seguridad = Codigo_Seguridad()
         self.Repertorio.addWidget(self.Pagina_Entrada)
         self.Repertorio.addWidget(self.Pagina_Creacion_Usuario)
         self.Repertorio.addWidget(self.Pagina_Menu)
         self.Repertorio.addWidget(self.Pagina_grupo)
+        self.Repertorio.addWidget(self.Pagina_Codigo_Seguridad)
 
         #Widget central del repertorio
         self.setCentralWidget(self.Repertorio)
@@ -85,9 +128,12 @@ class Aplicacion(QtWidgets.QMainWindow):
 
 
     def Conexion_BD(self):
+        load_dotenv('MyUnApp/env/.env') #Yo uso un archivo .env para guardar contraseñas y no ponerlas explicitamente en el codigo
         self.HostBD = "localhost"
         self.UsuarioBD = "savillotaa"
-        self.ContraseñaBD = "12345qwerty"
+        self.ContraseñaBD = "12345qwerty" 
+        print(os.getenv("passwordBD"))
+        print(self.ContraseñaBD)
         self.DataBase = "myundb"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
@@ -96,11 +142,13 @@ class Aplicacion(QtWidgets.QMainWindow):
     def Analisis(self):
         self.Usuario = self.Pagina_Entrada.ui.Line_Usuario.text()
         self.Contraseña = self.Pagina_Entrada.ui.Line_Contrasena.text()
-        query = ("SELECT NOMBRE_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE NOMBRE_USUARIO = %s AND CONTRASENA_USUARIO = %s")
+        query = ("SELECT NOMBRE_USUARIO, CONTRASENA_USUARIO, CORREO_USUARIO FROM USUARIO WHERE NOMBRE_USUARIO = %s AND CONTRASENA_USUARIO = %s")
         self.cur.execute(query, (self.Usuario,self.Contraseña))
         Resultado=self.cur.fetchone()
         if Resultado!=None and self.Usuario == Resultado[0] and self.Contraseña == Resultado[1]:
-            self.Cambio_A_Menu()
+            self.Cambio_A_Codigo()
+            self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(Resultado[2])
+            self.Codigo_en_verificacion()
         else:
             self.Mostrar_MsgError("Error a conectar",'Usuario o contraseña incorrectos')
 
@@ -143,6 +191,22 @@ class Aplicacion(QtWidgets.QMainWindow):
     
     def Cambio_A_Grupo(self):
         self.Repertorio.setCurrentWidget(self.Pagina_grupo)
+
+    def Cambio_A_Codigo(self):
+        self.Repertorio.setCurrentWidget(self.Pagina_Codigo_Seguridad)
+
+    def Codigo_en_verificacion(self):
+        self.Pagina_Codigo_Seguridad.ui.okButton.clicked.connect(self.Verificar_Codigo)
+        self.Pagina_Codigo_Seguridad.ui.atrasButton.clicked.connect(self.Cambio_A_Inicio)
+
+    def Verificar_Codigo(self):
+        self.codigo_usr = self.Pagina_Codigo_Seguridad.ui.mostrar_texto()
+        if self.Codigo == self.codigo_usr:
+            self.Cambio_A_Menu()
+        else:
+            self.Pagina_Codigo_Seguridad.Opacidad(1)
+
+    
 
 
 #Ejecutable
