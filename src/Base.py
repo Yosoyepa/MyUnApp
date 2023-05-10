@@ -75,7 +75,7 @@ class Aplicacion(QtWidgets.QMainWindow):
 
 
     def Conexion_BD(self):
-        self.HostBD = ""
+        self.HostBD = "localhost"
         self.UsuarioBD = ""
         self.ContraseñaBD = ""
         self.DataBase = ""
