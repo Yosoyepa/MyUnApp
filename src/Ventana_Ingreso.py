@@ -19,6 +19,16 @@ class Ui_Window_Inicio(object):
         Window_Inicio.setMaximumSize(QtCore.QSize(810, 523))
         self.centralwidget = QtWidgets.QWidget(Window_Inicio)
         self.centralwidget.setObjectName("centralwidget")
+        self.centralwidget.setStyleSheet("background-color:#01233C")
+        
+        self.label_logo = QtWidgets.QLabel(self.centralwidget)
+        self.label_logo.setGeometry(QtCore.QRect(280, 20, 251, 201))
+        self.label_logo.setText("")
+        self.label_logo.setPixmap(QtGui.QPixmap("MyUnApp/resources/logo.png"))
+        self.label_logo.setScaledContents(True)
+        self.label_logo.setObjectName("label_logo")
+        self.label_logo.setStyleSheet("background-color: transparent")
+        
         self.Line_Usuario = QtWidgets.QLineEdit(self.centralwidget)
         self.Line_Usuario.setGeometry(QtCore.QRect(220, 250, 371, 20))
         font = QtGui.QFont()
@@ -44,8 +54,10 @@ class Ui_Window_Inicio(object):
         font.setStrikeOut(False)
         self.Ingresar.setFont(font)
         self.Ingresar.setObjectName("Ingresar")
+        self.Ingresar.setStyleSheet("background-color:#FFFFFF; color:#01233C; border-radius:25px")
         self.Boton_Cracion_Usuario = QtWidgets.QPushButton(self.centralwidget)
         self.Boton_Cracion_Usuario.setGeometry(QtCore.QRect(350, 400, 91, 21))
+        self.Boton_Cracion_Usuario.setStyleSheet("color: #FFFFFF; background-color: transparent; border-radius:10px")
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -66,21 +78,28 @@ class Ui_Window_Inicio(object):
         font.setBold(True)
         font.setWeight(75)
         self.Label_Usuario.setFont(font)
-        self.Label_Usuario.setStyleSheet("color: rgb(255, 255, 255);")
+        self.Label_Usuario.setStyleSheet("color: #FFFFFF; background-color: transparent;")
         self.Label_Usuario.setObjectName("Label_Usuario")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(220, 280, 101, 16))
+        self.label_2.setGeometry(QtCore.QRect(220, 280, 110, 16))
         font = QtGui.QFont()
         font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_2.setStyleSheet("color: #FFFFFF; background-color: transparent;")
         self.label_2.setObjectName("label_2")
         self.Boton_Cambio_Contra = QtWidgets.QPushButton(self.centralwidget)
         self.Boton_Cambio_Contra.setGeometry(QtCore.QRect(320, 450, 151, 23))
         self.Boton_Cambio_Contra.setObjectName("Boton_Cambio_Contra")
         self.Label_Imagen.raise_()
         self.Line_Usuario.raise_()
+        ##Set Background fot line_Usuario
+        self.Line_Usuario.setStyleSheet("background-color:#FFFFFF; color:#01233C; border-radius:10px")
         self.Line_Contrasena.raise_()
+        self.Line_Contrasena.setStyleSheet("background-color:#FFFFFF; color:#01233C; border-radius:10px")
+        ##Set line_Contrasena Occult characters
+        self.Line_Contrasena.setEchoMode(QtWidgets.QLineEdit.Password)
         self.Ingresar.raise_()
         self.Boton_Cracion_Usuario.raise_()
         self.Label_Usuario.raise_()
@@ -97,6 +116,12 @@ class Ui_Window_Inicio(object):
 
         self.retranslateUi(Window_Inicio)
         QtCore.QMetaObject.connectSlotsByName(Window_Inicio)
+
+    def set_image_opacity(self, value):
+        graphics_effect = QtWidgets.QGraphicsOpacityEffect(self.Label_Imagen)
+        graphics_effect.setOpacity(value)
+        self.Label_Imagen.setGraphicsEffect(graphics_effect)
+
 
     def retranslateUi(self, Window_Inicio):
         _translate = QtCore.QCoreApplication.translate
