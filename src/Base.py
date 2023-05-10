@@ -18,9 +18,6 @@ import mysql.connector
 import smtplib
 from email.message import EmailMessage
 
-#Librerias para .env
-from dotenv import load_dotenv
-import os
 
 
 #Cargar archivo ui.py
@@ -67,8 +64,7 @@ class Codigo_Seguridad(QtWidgets.QMainWindow):
         message = "Hola, tu codigo es: " + Codigo
         subject = "Envio de Codigo"
         message = 'Subject: {}\n\n{}'.format(subject,message)
-        
-        load_dotenv('MyUnApp/env/.env') #si no funciona, pip install python_dotenv en terminal bash
+
         server = smtplib.SMTP('smtp.gmail.com', 587)
         password = "tsmicpleanexdnsm" #contraseña ocultada en env/.env
         server.starttls()
@@ -128,10 +124,9 @@ class Aplicacion(QtWidgets.QMainWindow):
 
 
     def Conexion_BD(self):
-        load_dotenv('MyUnApp/env/.env') #Yo uso un archivo .env para guardar contraseñas y no ponerlas explicitamente en el codigo
         self.HostBD = "localhost"
         self.UsuarioBD = "root"
-        self.ContraseñaBD = "29072003Juan."
+        self.ContraseñaBD = ""
         self.DataBase = "myundb"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
