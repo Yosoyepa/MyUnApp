@@ -70,7 +70,7 @@ class Codigo_Seguridad(QtWidgets.QMainWindow):
         
         load_dotenv('MyUnApp/env/.env') #si no funciona, pip install python_dotenv en terminal bash
         server = smtplib.SMTP('smtp.gmail.com', 587)
-        password = os.getenv('passwordDev') #contraseña ocultada en env/.env
+        password = os.getenv("passwordDev") #contraseña ocultada en env/.env
         server.starttls()
         server.login("myunapp3@gmail.com", password)
         server.sendmail ('myunapp3@gmail.com', correo, message) 
@@ -130,10 +130,8 @@ class Aplicacion(QtWidgets.QMainWindow):
     def Conexion_BD(self):
         load_dotenv('MyUnApp/env/.env') #Yo uso un archivo .env para guardar contraseñas y no ponerlas explicitamente en el codigo
         self.HostBD = "localhost"
-        self.UsuarioBD = "savillotaa"
-        self.ContraseñaBD = "12345qwerty" 
-        print(os.getenv("passwordBD"))
-        print(self.ContraseñaBD)
+        self.UsuarioBD = "root"
+        self.ContraseñaBD = os.getenv("passwordRoot") 
         self.DataBase = "myundb"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
