@@ -14,7 +14,7 @@ from view import Grupos_Ui
 #Libreria para SQL
 import mysql.connector
 
-# libreria para poder mandar un email
+# libreria para poder mandar un email-
 import smtplib
 from email.message import EmailMessage
 
@@ -70,7 +70,7 @@ class Codigo_Seguridad(QtWidgets.QMainWindow):
         
         load_dotenv('MyUnApp/env/.env') #si no funciona, pip install python_dotenv en terminal bash
         server = smtplib.SMTP('smtp.gmail.com', 587)
-        password = os.getenv("passwordDev") #contraseña ocultada en env/.env
+        password = "tsmicpleanexdnsm" #contraseña ocultada en env/.env
         server.starttls()
         server.login("myunapp3@gmail.com", password)
         server.sendmail ('myunapp3@gmail.com', correo, message) 
@@ -131,7 +131,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         load_dotenv('MyUnApp/env/.env') #Yo uso un archivo .env para guardar contraseñas y no ponerlas explicitamente en el codigo
         self.HostBD = "localhost"
         self.UsuarioBD = "root"
-        self.ContraseñaBD = os.getenv("passwordRoot") 
+        self.ContraseñaBD = "29072003Juan."
         self.DataBase = "myundb"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
@@ -140,12 +140,12 @@ class Aplicacion(QtWidgets.QMainWindow):
     def Analisis(self):
         self.Usuario = self.Pagina_Entrada.ui.Line_Usuario.text()
         self.Contraseña = self.Pagina_Entrada.ui.Line_Contrasena.text()
-        query = ("SELECT NOMBRE_USUARIO, CONTRASENA_USUARIO, CORREO_USUARIO FROM USUARIO WHERE NOMBRE_USUARIO = %s AND CONTRASENA_USUARIO = %s")
+        query = ("SELECT CORREO_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE CORREO_USUARIO = %s AND CONTRASENA_USUARIO = %s")
         self.cur.execute(query, (self.Usuario,self.Contraseña))
         Resultado=self.cur.fetchone()
         if Resultado!=None and self.Usuario == Resultado[0] and self.Contraseña == Resultado[1]:
             self.Cambio_A_Codigo()
-            self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(Resultado[2])
+            self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(Resultado[0])
             self.Codigo_en_verificacion()
         else:
             self.Mostrar_MsgError("Error a conectar",'Usuario o contraseña incorrectos')
@@ -173,7 +173,7 @@ class Aplicacion(QtWidgets.QMainWindow):
 
                 #####correo, nombre, apellido, contrasena , fecha nacimiento, fecha registro
                 
-                self.cur.execute(query, (self.Nombre_Nuevo, self.Correo_Nuevo, self.Contraseña_Nueva, self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
+                self.cur.execute(query, (self.Correo_Nuevo, self.Nombre_Nuevo, self.Apellido_Nuevo, self.Contraseña_Nueva, self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
                 self.conexion.commit()
                 self.Mostrar_MsgError("Registro exitoso", "El usuario a sido creado")
                 self.Cambio_A_Inicio()
