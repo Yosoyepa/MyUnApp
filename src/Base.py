@@ -169,7 +169,10 @@ class Aplicacion(QtWidgets.QMainWindow):
             self.Mostrar_MsgError("Datos incompletos","Por favor diligenciar todos los campos")
         else:
             try:
-                query = ("INSERT INTO USUARIO Values(NULL,%s,%s,%s,%s,%s)")
+                query = ("INSERT INTO USUARIO Values(%s,%s,%s,%s,%s,%s)")
+
+                #####correo, nombre, apellido, contrasena , fecha nacimiento, fecha registro
+                
                 self.cur.execute(query, (self.Nombre_Nuevo, self.Correo_Nuevo, self.Contraseña_Nueva, self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
                 self.conexion.commit()
                 self.Mostrar_MsgError("Registro exitoso", "El usuario a sido creado")
