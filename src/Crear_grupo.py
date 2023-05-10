@@ -5,8 +5,8 @@ def create_user_group(group_name):
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="mateus0526",
-        database="myundb"
+        password="",
+        database=""
     )
 
     cursor = conn.cursor()
