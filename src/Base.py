@@ -1,16 +1,20 @@
 import datetime
+from random import randint
 
 #librerias para PYQT5
 from PyQt5 import QtWidgets, uic, QtGui
 from Ventana_Ingreso import Ui_Window_Inicio
 from Ventana_Registro import Ui_Window_Registro
 from Ventana_Menu import Ui_Ventana_Menu
+
+from Ventana_Codigo import Ui_Window_Codigo
 import sys
+from view import Grupos_Ui
 
 #Libreria para SQL
 import mysql.connector
 
-# libreria para poder mandar un email
+# libreria para poder mandar un email-
 import smtplib
 from email.message import EmailMessage
 
@@ -24,7 +28,7 @@ class Entrada(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         #Fondo
-        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
 
 class Creacion_Usuario(QtWidgets.QMainWindow):
     def __init__(self):
@@ -33,8 +37,42 @@ class Creacion_Usuario(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Fondo
-        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
+        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
 
+class Codigo_Seguridad(QtWidgets.QMainWindow): 
+    def __init__(self):
+        super(Codigo_Seguridad,self).__init__()
+        self.ui = Ui_Window_Codigo()
+        self.ui.setupUi(self)
+        self.Opacidad(0)
+
+        #Fondo
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
+
+
+    def Opacidad(self,Valor):
+        self.Opa = QtWidgets.QGraphicsOpacityEffect()
+        self.Opa.setOpacity(Valor)
+        self.ui.textoIncorrecto.setGraphicsEffect(self.Opa)
+    
+    def Mandar_Codigo(self, correo):
+        Codigo = ""
+        for i in range(5):
+            Codigo += str(randint(0,9))
+        print(Codigo)
+
+        message = "Hola, tu codigo es: " + Codigo
+        subject = "Envio de Codigo"
+        message = 'Subject: {}\n\n{}'.format(subject,message)
+
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        password = "tsmicpleanexdnsm" #contraseña ocultada en env/.env
+        server.starttls()
+        server.login("myunapp3@gmail.com", password)
+        server.sendmail ('myunapp3@gmail.com', correo, message) 
+        server.quit()
+
+        return Codigo
 
 class Creacion_Menu(QtWidgets.QMainWindow):
     def __init__(self):
@@ -43,7 +81,15 @@ class Creacion_Menu(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Fondo
-        self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("MYUNAPP/resources/Fondo.png"))
+        self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
+
+class Creacion_Grupo(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(Creacion_Grupo, self).__init__()
+        self.ui = Grupos_Ui.Ui_MainWindow()
+        self.ui.setupUi(self)
+
+
 
 
 
@@ -57,9 +103,14 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Entrada = Entrada()
         self.Pagina_Creacion_Usuario = Creacion_Usuario()
         self.Pagina_Menu = Creacion_Menu()
+        self.Pagina_grupo = Creacion_Grupo()
+        self.Pagina_Codigo_Seguridad = Codigo_Seguridad()
         self.Repertorio.addWidget(self.Pagina_Entrada)
         self.Repertorio.addWidget(self.Pagina_Creacion_Usuario)
         self.Repertorio.addWidget(self.Pagina_Menu)
+        self.Repertorio.addWidget(self.Pagina_grupo)
+        self.Repertorio.addWidget(self.Pagina_Codigo_Seguridad)
+
 
         #Widget central del repertorio
         self.setCentralWidget(self.Repertorio)
@@ -69,16 +120,19 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Entrada.ui.Ingresar.clicked.connect(self.Analisis)
         self.Pagina_Entrada.ui.Boton_Cracion_Usuario.clicked.connect(self.Cambio_A_Creacion_Usuario)
         self.Pagina_Creacion_Usuario.ui.Boton_Registro.clicked.connect(self.Anadir)
+        self.Pagina_Menu.ui.pushButton.clicked.connect(self.Cambio_A_Grupo)
 
         #ConexionBD
         self.Conexion_BD()
 
 
     def Conexion_BD(self):
+
+        #ejecutar en mysql workbench creacion user.sql para que el usuario especial para la bd sea creado
         self.HostBD = "localhost"
-        self.UsuarioBD = "root"
-        self.ContraseñaBD = ""
-        self.DataBase = ""
+        self.UsuarioBD = "usuario"
+        self.ContraseñaBD = "userpass"
+        self.DataBase = "myundb"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
         self.cur = self.conexion.cursor()
@@ -86,7 +140,7 @@ class Aplicacion(QtWidgets.QMainWindow):
     def Analisis(self):
         self.Usuario = self.Pagina_Entrada.ui.Line_Usuario.text()
         self.Contraseña = self.Pagina_Entrada.ui.Line_Contrasena.text()
-        query = ("SELECT NOMBRE_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE NOMBRE_USUARIO = %s AND CONTRASENA_USUARIO = %s")
+        query = ("SELECT CORREO_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE CORREO_USUARIO = %s AND CONTRASENA_USUARIO = %s")
         self.cur.execute(query, (self.Usuario,self.Contraseña))
         Resultado=self.cur.fetchone()
         if Resultado!=None and self.Usuario == Resultado[0] and self.Contraseña == Resultado[1]:
@@ -112,15 +166,24 @@ class Aplicacion(QtWidgets.QMainWindow):
         if self.Nombre_Nuevo == "" or self.Apellido_Nuevo == "" or self.Contraseña_Nueva == "" or self.Correo_Nuevo == "" or self.Fecha_Nacimiento_Nueva == "":
             self.Mostrar_MsgError("Datos incompletos","Por favor diligenciar todos los campos")
         else:
-            try:
-                query = ("INSERT INTO USUARIO Values(NULL,%s,%s,%s,%s,%s)")
-                self.cur.execute(query, (self.Nombre_Nuevo, self.Correo_Nuevo, self.Contraseña_Nueva, self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
-                self.conexion.commit()
-                self.Mostrar_MsgError("Registro exitoso", "El usuario a sido creado")
-                self.Cambio_A_Inicio()
-            except Exception as e:
-                print(e)
-                self.Mostrar_MsgError("Datos invalidos", "Por favor diligenciar los campos con logica")
+            self.Cambio_A_Codigo()
+            self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(self.Correo_Nuevo)
+            self.Codigo_en_verificacion()
+
+    def Añadir_Con_Codigo(self):
+        try:
+            query = ("INSERT INTO USUARIO Values(%s,%s,%s,%s,%s,%s)")
+
+            #####correo, nombre, apellido, contrasena , fecha nacimiento, fecha registro
+
+            self.cur.execute(query, (self.Correo_Nuevo, self.Nombre_Nuevo, self.Apellido_Nuevo, self.Contraseña_Nueva,
+                                     self.Fecha_Nacimiento_Nueva, datetime.datetime.now()))
+            self.conexion.commit()
+            self.Mostrar_MsgError("Registro exitoso", "El usuario a sido creado")
+            self.Cambio_A_Inicio()
+        except Exception as e:
+            print(e)
+            self.Mostrar_MsgError("Datos invalidos", "Por favor diligenciar los campos con logica")
 
     def Cambio_A_Creacion_Usuario(self):
         self.Repertorio.setCurrentWidget(self.Pagina_Creacion_Usuario)
@@ -130,6 +193,40 @@ class Aplicacion(QtWidgets.QMainWindow):
 
     def Cambio_A_Menu(self):
         self.Repertorio.setCurrentWidget(self.Pagina_Menu)
+    
+    def Cambio_A_Grupo(self):
+        self.Repertorio.setCurrentWidget(self.Pagina_grupo)
+
+    def Cambio_A_Codigo(self):
+        self.Repertorio.setCurrentWidget(self.Pagina_Codigo_Seguridad)
+
+    def Codigo_en_verificacion(self):
+        self.Pagina_Codigo_Seguridad.ui.okButton.clicked.connect(self.Verificar_Codigo)
+        self.Pagina_Codigo_Seguridad.ui.atrasButton.clicked.connect(self.Cambio_A_Inicio)
+
+    def Verificar_Codigo(self):
+        self.codigo_usr = self.Pagina_Codigo_Seguridad.ui.mostrar_texto()
+        if self.Codigo == self.codigo_usr:
+            self.Añadir_Con_Codigo()
+        else:
+            self.Mostrar_MsgError("Codigo invalido", "Por favor digitar el codigo correcto")
+
+
+    def creacion_grupo(self):
+        self.nombre_grupo = self.Pagina_grupo.ui.line_Nombre_Grupo.text()
+        query = ("INSERT INTO GRUPO Values(NULL,%s)")
+        self.cur.execute(query, self.nombre_grupo)
+        self.conexion.commit()
+    
+
+    def creacion_grupo(self):
+        self.nombre_grupo = self.Pagina_grupo.ui.line_Nombre_Grupo.text()
+        query = ("INSERT INTO GRUPO Values(NULL,%s)")
+        self.cur.execute(query, self.nombre_grupo)
+        self.conexion.commit()
+    
+
+    
 
 
 #Ejecutable
