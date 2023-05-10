@@ -127,6 +127,8 @@ class Aplicacion(QtWidgets.QMainWindow):
 
 
     def Conexion_BD(self):
+
+        #ejecutar en mysql workbench creacion user.sql para que el usuario especial para la bd sea creado
         self.HostBD = "localhost"
         self.UsuarioBD = "usuario"
         self.ContraseñaBD = "userpass"
