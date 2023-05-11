@@ -231,11 +231,13 @@ class Aplicacion(QtWidgets.QMainWindow):
         
 
     def actualizar_listWidget(self):
+        
         self.Obtener_nombres_grupo()
+        print(self.Nombres_grupos)
         self.Pagina_grupo.ui.listWidget.clear()
         for nombre in self.Nombres_grupos:
             item = QtWidgets.QListWidgetItem()
-            item.setText(str(nombre))
+            item.setText(str(nombre[0]))
             self.Pagina_grupo.ui.listWidget.addItem(item)
     
     
