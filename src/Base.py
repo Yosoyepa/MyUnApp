@@ -125,6 +125,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Entrada.ui.Boton_Cracion_Usuario.clicked.connect(self.Cambio_A_Creacion_Usuario)
         self.Pagina_Creacion_Usuario.ui.Boton_Registro.clicked.connect(self.Anadir)
         self.Pagina_Menu.ui.pushButton_2.clicked.connect(self.Cambio_A_Grupo)
+        self.Pagina_grupo.ui.pushButton_3.clicked.connect(self.creacion_grupo)
 
         #ConexionBD
         self.Conexion_BD()
@@ -218,14 +219,7 @@ class Aplicacion(QtWidgets.QMainWindow):
 
     def creacion_grupo(self):
         self.nombre_grupo = self.Pagina_grupo.ui.line_Nombre_Grupo.text()
-        query = ("INSERT INTO GRUPO Values(NULL,%s)")
-        self.cur.execute(query, self.nombre_grupo)
-        self.conexion.commit()
-    
-
-    def creacion_grupo(self):
-        self.nombre_grupo = self.Pagina_grupo.ui.line_Nombre_Grupo.text()
-        query = ("INSERT INTO GRUPO Values(NULL,%s)")
+        query = ("INSERT INTO GRUPO Values(NULL, %s,'01','Grupo')")
         self.cur.execute(query, self.nombre_grupo)
         self.conexion.commit()
     
