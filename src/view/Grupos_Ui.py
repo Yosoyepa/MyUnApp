@@ -164,6 +164,7 @@ class Ui_MainWindow(object):
         
         #Lista para widget_3 con los grupos
         self.listWidget = QtWidgets.QListWidget()
+        self.listWidget.setGeometry(QtCore.QRect(50, 50, 600, 180))
         self.listWidget.setObjectName("listWidget")
         self.scrollArea.setWidget(self.listWidget)
         font = QtGui.QFont()
