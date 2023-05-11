@@ -157,10 +157,20 @@ class Ui_MainWindow(object):
         self.widget_3.setObjectName("widget_3")
         self.widget_3.setStyleSheet("background-color: #C0E1EC; border-radius: 0px;")
 
+        #Agregar un QScrollArea
+        self.scrollArea = QtWidgets.QScrollArea(self.widget_3)
+        self.scrollArea.setGeometry(QtCore.QRect(50, 50, 651, 671))
+        self.scrollArea.setObjectName("scrollArea")
+        
         #Lista para widget_3 con los grupos
-        self.listWidget = QtWidgets.QListWidget(self.widget_3)
-        self.listWidget.setGeometry(QtCore.QRect(50, 50, 651, 671))
+        self.listWidget = QtWidgets.QListWidget()
         self.listWidget.setObjectName("listWidget")
+        self.scrollArea.setWidget(self.listWidget)
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        self.listWidget.setFont(font)
+        self.listWidget.setStyleSheet("QListWidget {color: #01233C;}")
         ##Boton con el icono para seleccionar un grupo
         # self.pushButton_5 = QtWidgets.QPushButton(self.widget_3)
         # self.pushButton_5.setGeometry(QtCore.QRect(20, 10, 376, 100))
