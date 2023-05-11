@@ -232,7 +232,10 @@ class Aplicacion(QtWidgets.QMainWindow):
             try:
                 Correo_Unal2 = self.Confirmacion_Correo.split("@")
                 Correo_Unal2 = Correo_Unal2[1]
-                if Correo_Unal2 == "unal.edu.co":
+                self.cur.execute(("SELECT CORREO_USUARIO FROM USUARIO WHERE CORREO_USUARIO='%s'")%(self.Confirmacion_Correo))
+                Resultado = self.cur.fetchone()
+
+                if Correo_Unal2 == "unal.edu.co" and Resultado[0]!=None:
                     self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(self.Confirmacion_Correo)
                     self.Pagina_Codigo_Seguridad.ui.okButton.clicked.connect(self.Verificar_Codigo_Rec)
                     self.Cambio_A_Codigo()
