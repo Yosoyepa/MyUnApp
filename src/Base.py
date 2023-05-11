@@ -331,6 +331,13 @@ class Aplicacion(QtWidgets.QMainWindow):
             item = QtWidgets.QListWidgetItem()
             item.setText(str(nombre[0]))
             self.Pagina_grupo.ui.listWidget.addItem(item)
+
+    def Verificar_Codigo_Rec(self):
+        self.codigo_usr = self.Pagina_Codigo_Seguridad.ui.mostrar_texto()
+        if self.Codigo == self.codigo_usr:
+            self.Cambio_A_Cambiar_Contra()
+        else:
+            self.Mostrar_MsgError("Codigo invalido", "Por favor digitar el codigo correcto")
     
     
     
