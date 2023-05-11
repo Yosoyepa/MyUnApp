@@ -151,6 +151,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Creacion_Usuario.ui.Boton_Registro.clicked.connect(self.Anadir)
         self.Pagina_Menu.ui.pushButton_2.clicked.connect(self.Cambio_A_Grupo)
         self.Pagina_grupo.ui.pushButton_3.clicked.connect(self.creacion_grupo)
+        self.Pagina_grupo.ui.pushButton.clicked.connect(self.Cambio_A_Menu)
 
         self.Pagina_Codigo_Seguridad.ui.atrasButton.clicked.connect(self.Cambio_A_Inicio)
 

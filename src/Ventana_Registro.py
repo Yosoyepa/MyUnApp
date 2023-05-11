@@ -96,6 +96,7 @@ class Ui_Window_Registro(object):
         font.setBold(True)
         font.setWeight(75)
         self.Boton_Registro.setFont(font)
+        self.Boton_Registro.setStyleSheet("background-color:#FFFFFF; color:#01233C; border-radius:20px")
         self.Boton_Registro.setObjectName("Boton_Registro")
         Window_Registro.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Window_Registro)

@@ -71,6 +71,12 @@ class Ui_Ventana_Menu(object):
         self.pushButton.setGeometry(QtCore.QRect(20, 60, 51, 41))
         self.pushButton.setText("")
         self.pushButton.setObjectName("pushButton")
+        icon = QIcon()
+        icon.addPixmap(QPixmap("MyUnApp/resources/Iconos/Exterior.png"), QIcon.Normal, QIcon.Off)
+        self.pushButton.setIcon(icon)
+        self.pushButton.setFlat(True)
+        self.pushButton.setStyleSheet("background-color: transparent;")
+        self.pushButton.setIconSize(QtCore.QSize(50, 50))
         # Para imagen de boton
 
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
