@@ -161,13 +161,6 @@ class Ui_MainWindow(object):
         self.listWidget = QtWidgets.QListWidget(self.widget_3)
         self.listWidget.setGeometry(QtCore.QRect(50, 50, 651, 671))
         self.listWidget.setObjectName("listWidget")
-
-        #Añadir los grupos a la lista
-        nombres_grupos = ["Grupo 1", "Grupo 2", "Grupo 3","Grupo 7","las Marmotas"] # Reemplazar con la lista de nombres de grupo
-        for nombre_grupo in nombres_grupos:
-            item = QtWidgets.QListWidgetItem(nombre_grupo)
-            self.listWidget.addItem(item)
-
         ##Boton con el icono para seleccionar un grupo
         # self.pushButton_5 = QtWidgets.QPushButton(self.widget_3)
         # self.pushButton_5.setGeometry(QtCore.QRect(20, 10, 376, 100))

@@ -220,8 +220,25 @@ class Aplicacion(QtWidgets.QMainWindow):
         query = ("INSERT INTO GRUPO Values(NULL, '%s', 01, 'Grupo')") %(self.nombre_grupo)
         self.cur.execute(query)
         self.conexion.commit()
-    
+        self.actualizar_listWidget()
 
+    
+    def Obtener_nombres_grupo(self):
+        query = ("SELECT nombre_grupo FROM grupo")
+        self.cur.execute(query)
+        self.Nombres_grupos = self.cur.fetchall()
+
+        
+
+    def actualizar_listWidget(self):
+        self.Obtener_nombres_grupo()
+        self.Pagina_grupo.ui.listWidget.clear()
+        for nombre in self.Nombres_grupos:
+            item = QtWidgets.QListWidgetItem()
+            item.setText(str(nombre))
+            self.Pagina_grupo.ui.listWidget.addItem(item)
+    
+    
     
 
 
