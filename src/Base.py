@@ -26,18 +26,19 @@ class Entrada(QtWidgets.QMainWindow):
         super(Entrada, self).__init__()
         self.ui = Ui_Window_Inicio()
         self.ui.setupUi(self)
-
         #Fondo
-        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/viejito-01.png"))
+        self.ui.set_image_opacity(0.44)
+        ##self.ui.label_logo.setPixmap(QtGui.QPixmap("MyUnApp/resources/logo.png"))
 
 class Creacion_Usuario(QtWidgets.QMainWindow):
     def __init__(self):
         super(Creacion_Usuario, self).__init__()
         self.ui = Ui_Window_Registro()
         self.ui.setupUi(self)
-
         # Fondo
-        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
+        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/viejito-01.png"))
+
 
 class Codigo_Seguridad(QtWidgets.QMainWindow): 
     def __init__(self):
@@ -47,7 +48,7 @@ class Codigo_Seguridad(QtWidgets.QMainWindow):
         self.Opacidad(0)
 
         #Fondo
-        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/viejito-01.png"))
 
 
     def Opacidad(self,Valor):
@@ -81,7 +82,10 @@ class Creacion_Menu(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Fondo
-        self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
+        ##self.ui.label_Imagen_Menu.setPixmap(QtGui.QPixmap("MyUnApp/resources/Fondo.png"))
+        #set opacity to 44% of label_Imagen_Menu
+        ##self.ui.label_Imagen_Menu.setGraphicsEffect(self.setOpacity(0.44))
+
 
 class Creacion_Grupo(QtWidgets.QMainWindow):
     def __init__(self):
@@ -120,7 +124,7 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Entrada.ui.Ingresar.clicked.connect(self.Analisis)
         self.Pagina_Entrada.ui.Boton_Cracion_Usuario.clicked.connect(self.Cambio_A_Creacion_Usuario)
         self.Pagina_Creacion_Usuario.ui.Boton_Registro.clicked.connect(self.Anadir)
-        self.Pagina_Menu.ui.pushButton.clicked.connect(self.Cambio_A_Grupo)
+        self.Pagina_Menu.ui.pushButton_2.clicked.connect(self.Cambio_A_Grupo)
 
         #ConexionBD
         self.Conexion_BD()
