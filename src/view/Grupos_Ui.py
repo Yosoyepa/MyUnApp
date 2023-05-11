@@ -157,24 +157,35 @@ class Ui_MainWindow(object):
         self.widget_3.setObjectName("widget_3")
         self.widget_3.setStyleSheet("background-color: #C0E1EC; border-radius: 0px;")
 
+        #Lista para widget_3 con los grupos
+        self.listWidget = QtWidgets.QListWidget(self.widget_3)
+        self.listWidget.setGeometry(QtCore.QRect(50, 50, 651, 671))
+        self.listWidget.setObjectName("listWidget")
+
+        #Añadir los grupos a la lista
+        nombres_grupos = ["Grupo 1", "Grupo 2", "Grupo 3","Grupo 7","las Marmotas"] # Reemplazar con la lista de nombres de grupo
+        for nombre_grupo in nombres_grupos:
+            item = QtWidgets.QListWidgetItem(nombre_grupo)
+            self.listWidget.addItem(item)
+
         ##Boton con el icono para seleccionar un grupo
-        self.pushButton_5 = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton_5.setGeometry(QtCore.QRect(20, 10, 376, 100))
-        self.pushButton_5.setObjectName("pushButton_5")
-        icon5 = QIcon()
-        icon5.addPixmap(QPixmap("MyUnApp/resources/Iconos/R2-D2.png"), QIcon.Normal, QIcon.Off)
-        self.pushButton_5.setIcon(icon5)
-        self.pushButton_5.setIconSize(QtCore.QSize(100, 100))
+        # self.pushButton_5 = QtWidgets.QPushButton(self.widget_3)
+        # self.pushButton_5.setGeometry(QtCore.QRect(20, 10, 376, 100))
+        # self.pushButton_5.setObjectName("pushButton_5")
+        # icon5 = QIcon()
+        # icon5.addPixmap(QPixmap("MyUnApp/resources/Iconos/R2-D2.png"), QIcon.Normal, QIcon.Off)
+        # self.pushButton_5.setIcon(icon5)
+        # self.pushButton_5.setIconSize(QtCore.QSize(100, 100))
         
         # Aumenta el tamaño del texto del botón
-        font = QtGui.QFont()
-        font.setPointSize(20) # Ajusta el tamaño del texto
-        self.pushButton_5.setFont(font)
+        # font = QtGui.QFont()
+        # font.setPointSize(20) # Ajusta el tamaño del texto
+        # self.pushButton_5.setFont(font)
         
-        # Ajusta la política de tamaño para que el botón sea redimensionable
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
-        self.pushButton_5.setSizePolicy(sizePolicy)
+        # # Ajusta la política de tamaño para que el botón sea redimensionable
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        # sizePolicy.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
+        # self.pushButton_5.setSizePolicy(sizePolicy)
 
         ##Widget para la lista de miembros de un grupo seleccionado
         self.widget_4 = QtWidgets.QWidget(self.frame_3)
@@ -202,7 +213,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", " "))
         self.pushButton_3.setText(_translate("MainWindow", " "))
         self.pushButton_4.setText(_translate("MainWindow", " "))
-        self.pushButton_5.setText(_translate("MainWindow", "GRUPO EPICO 1"))
+        #self.pushButton_5.setText(_translate("MainWindow", "GRUPO EPICO 1"))
         self.label_Nombre_Grupo.setText(_translate("MainWindow", "NOMBRE DEL GRUPO"))
         self.label_Añadir_Miembros.setText(_translate("MainWindow", "AÑADIR MIEMBROS"))
         self.checkBox_1.setText(_translate("MainWindow", "USUARIO DISPONIBLE"))
