@@ -144,6 +144,16 @@ class Aplicacion(QtWidgets.QMainWindow):
         self.Pagina_Creacion_Usuario.ui.Boton_Registro.clicked.connect(self.Anadir)
         self.Pagina_Menu.ui.pushButton.clicked.connect(self.Cambio_A_Grupo)
 
+        self.Pagina_Codigo_Seguridad.ui.atrasButton.clicked.connect(self.Cambio_A_Inicio)
+
+        self.Pagina_Entrada.ui.Boton_Cambio_Contra.clicked.connect(self.Cambio_A_Correo_Recuperacion)
+        self.Pagina_Correo_Cambio_Contra.ui.Boton_Continuar_Correo_Rec_Contra.clicked.connect(self.Cambiar_Contrasena)
+        self.Pagina_Correo_Cambio_Contra.ui.Boton_Regresar_Correo_Rec_Contra1.clicked.connect(self.Cambio_A_Inicio)
+
+        self.Pagina_Cambio_Contra.ui.Boton_Avanzar_Cambio_Rec_Contra.clicked.connect(self.Cambiar_Contrasena_SQL)
+        self.Pagina_Cambio_Contra.ui.Boton_Regresar_Cambio_Rec_Contra.clicked.connect(self.Cambio_A_Inicio)
+
+
         #ConexionBD
         self.Conexion_BD()
 
@@ -191,8 +201,8 @@ class Aplicacion(QtWidgets.QMainWindow):
                 Correo_Unal = Correo_Unal[1]
                 if Correo_Unal == "unal.edu.co":
                     self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(self.Correo_Nuevo)
+                    self.Pagina_Codigo_Seguridad.ui.okButton.clicked.connect(self.Verificar_Codigo)
                     self.Cambio_A_Codigo()
-                    self.Codigo_en_verificacion()
                 else:
                     self.Mostrar_MsgError("Datos invalidos", "Por favor revisar correo, tiene que ser de la UNAL")
             except Exception as e:
@@ -214,6 +224,41 @@ class Aplicacion(QtWidgets.QMainWindow):
             print(e)
             self.Mostrar_MsgError("Datos invalidos", "Por favor diligenciar los campos con logica")
 
+    def Cambiar_Contrasena(self):
+        self.Confirmacion_Correo = self.Pagina_Correo_Cambio_Contra.ui.Line_Correo_Rec.text()
+        if self.Confirmacion_Correo == "":
+            self.Mostrar_MsgError("Datos incompletos", "Por favor diligenciar todos los campos")
+        else:
+            try:
+                Correo_Unal2 = self.Confirmacion_Correo.split("@")
+                Correo_Unal2 = Correo_Unal2[1]
+                if Correo_Unal2 == "unal.edu.co":
+                    self.Codigo = self.Pagina_Codigo_Seguridad.Mandar_Codigo(self.Confirmacion_Correo)
+                    self.Pagina_Codigo_Seguridad.ui.okButton.clicked.connect(self.Verificar_Codigo_Rec)
+                    self.Cambio_A_Codigo()
+                else:
+                    self.Mostrar_MsgError("Datos invalidos", "Por favor revisar correo, tiene que ser de la UNAL")
+                    self.Pagina_Correo_Cambio_Contra.ui.Line_Correo_Rec.setText("")
+
+            except Exception as e:
+                print(e)
+                self.Mostrar_MsgError("Datos invalidos", "Por favor revisar correo")
+                self.Pagina_Correo_Cambio_Contra.ui.Line_Correo_Rec.setText("")
+
+
+    def Cambiar_Contrasena_SQL(self):
+        self.Nueva_Contrasena_Cambio = self.Pagina_Cambio_Contra.ui.Line_Cambio_Rec_Contra.text()
+        try:
+            query = ("UPDATE USUARIO SET CONTRASENA_USUARIO=%s WHERE CORREO_USUARIO=%s")
+            self.cur.execute(query,(self.Nueva_Contrasena_Cambio,self.Confirmacion_Correo))
+            self.conexion.commit()
+            self.Mostrar_MsgError("Cambio exitoso", "La contraseña a sido cambiada")
+            self.Cambio_A_Inicio()
+        except Exception as e:
+            print(e)
+            self.Mostrar_MsgError("Datos invalidos", "Por favor diligenciar otra contraseña")
+
+
     def Cambio_A_Creacion_Usuario(self):
         self.Repertorio.setCurrentWidget(self.Pagina_Creacion_Usuario)
 
@@ -229,9 +274,11 @@ class Aplicacion(QtWidgets.QMainWindow):
     def Cambio_A_Codigo(self):
         self.Repertorio.setCurrentWidget(self.Pagina_Codigo_Seguridad)
 
-    def Codigo_en_verificacion(self):
-        self.Pagina_Codigo_Seguridad.ui.okButton.clicked.connect(self.Verificar_Codigo)
-        self.Pagina_Codigo_Seguridad.ui.atrasButton.clicked.connect(self.Cambio_A_Inicio)
+    def Cambio_A_Correo_Recuperacion(self):
+        self.Repertorio.setCurrentWidget(self.Pagina_Correo_Cambio_Contra)
+
+    def Cambio_A_Cambiar_Contra(self):
+        self.Repertorio.setCurrentWidget(self.Pagina_Cambio_Contra)
 
     def Verificar_Codigo(self):
         self.codigo_usr = self.Pagina_Codigo_Seguridad.ui.mostrar_texto()
@@ -239,6 +286,15 @@ class Aplicacion(QtWidgets.QMainWindow):
             self.Añadir_Con_Codigo()
         else:
             self.Mostrar_MsgError("Codigo invalido", "Por favor digitar el codigo correcto")
+
+    def Verificar_Codigo_Rec(self):
+        self.codigo_usr = self.Pagina_Codigo_Seguridad.ui.mostrar_texto()
+        if self.Codigo == self.codigo_usr:
+            self.Cambio_A_Cambiar_Contra()
+        else:
+            self.Mostrar_MsgError("Codigo invalido", "Por favor digitar el codigo correcto")
+
+
 
 
     
