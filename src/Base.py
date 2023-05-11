@@ -40,6 +40,7 @@ class Creacion_Usuario(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         # Fondo
         self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/viejito-01.png"))
+        self.ui.set_image_opacity(0.44)
 
 
 class Codigo_Seguridad(QtWidgets.QMainWindow): 

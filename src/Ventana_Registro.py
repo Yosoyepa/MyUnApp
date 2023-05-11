@@ -19,6 +19,7 @@ class Ui_Window_Registro(object):
         Window_Registro.setMaximumSize(QtCore.QSize(810, 523))
         self.centralwidget = QtWidgets.QWidget(Window_Registro)
         self.centralwidget.setObjectName("centralwidget")
+        self.centralwidget.setStyleSheet("background-color:#01233C")
         self.Laber_Imagen = QtWidgets.QLabel(self.centralwidget)
         self.Laber_Imagen.setGeometry(QtCore.QRect(-10, -10, 831, 501))
         self.Laber_Imagen.setAutoFillBackground(False)
@@ -37,7 +38,7 @@ class Ui_Window_Registro(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.Label_Nombre.setFont(font)
-        self.Label_Nombre.setStyleSheet("color: rgb(255, 255, 255);")
+        self.Label_Nombre.setStyleSheet("color: #FFFFFF; background-color: transparent;")
         self.Label_Nombre.setObjectName("Label_Nombre")
         self.Line_Apellido = QtWidgets.QLineEdit(self.centralwidget)
         self.Line_Apellido.setGeometry(QtCore.QRect(380, 120, 341, 20))
@@ -103,6 +104,12 @@ class Ui_Window_Registro(object):
 
         self.retranslateUi(Window_Registro)
         QtCore.QMetaObject.connectSlotsByName(Window_Registro)
+    
+    def set_image_opacity(self, value):
+        graphics_effect = QtWidgets.QGraphicsOpacityEffect(self.Laber_Imagen)
+        graphics_effect.setOpacity(value)
+        self.Laber_Imagen.setGraphicsEffect(graphics_effect)
+
 
     def retranslateUi(self, Window_Registro):
         _translate = QtCore.QCoreApplication.translate
