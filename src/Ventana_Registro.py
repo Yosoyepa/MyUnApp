@@ -20,6 +20,18 @@ class Ui_Window_Registro(object):
         self.centralwidget = QtWidgets.QWidget(Window_Registro)
         self.centralwidget.setObjectName("centralwidget")
         self.centralwidget.setStyleSheet("background-color:#01233C")
+        # #Boton para regresar a la ventana de inicio
+        # self.Boton_Regresar = QtWidgets.QPushButton(self.centralwidget)
+        # self.Boton_Regresar.setGeometry(QtCore.QRect(200, 200, 100, 100))
+        # self.Boton_Regresar.setStyleSheet("background-color: transparent")
+        # self.Boton_Regresar.setText("")
+        # self.Boton_Regresar.setObjectName("Boton_Regresar")
+        # ##Establecer un icono para el boton de regresar
+        # icon = QtGui.QIcon()
+        # icon.addPixmap(QtGui.QPixmap("resources/back.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # self.Boton_Regresar.setIcon(icon)
+        # self.Boton_Regresar.setIconSize(QtCore.QSize(50, 50))
+
         self.Laber_Imagen = QtWidgets.QLabel(self.centralwidget)
         self.Laber_Imagen.setGeometry(QtCore.QRect(-10, -10, 831, 501))
         self.Laber_Imagen.setAutoFillBackground(False)
@@ -29,7 +41,7 @@ class Ui_Window_Registro(object):
         self.Laber_Imagen.setObjectName("Laber_Imagen")
         self.Label_Fonodo_Monocromatico = QtWidgets.QLabel(self.centralwidget)
         self.Label_Fonodo_Monocromatico.setGeometry(QtCore.QRect(350, 30, 411, 391))
-        self.Label_Fonodo_Monocromatico.setStyleSheet("background-color: rgb(98, 7, 255);\n"
+        self.Label_Fonodo_Monocromatico.setStyleSheet("background-color: #277DA1;\n"
 "border-radius : 20px")
         self.Label_Fonodo_Monocromatico.setText("")
         self.Label_Fonodo_Monocromatico.setObjectName("Label_Fonodo_Monocromatico")
@@ -126,6 +138,7 @@ class Ui_Window_Registro(object):
         self.Label_Apellido.setText(_translate("Window_Registro", "Apellido"))
         self.Fecha.setDisplayFormat(_translate("Window_Registro", "yyyy/MM/dd"))
         self.Boton_Registro.setText(_translate("Window_Registro", "Registrarse"))
+        # self.Boton_Regresar.setText(_translate("Window_Registro", ""))
 
 
 if __name__ == "__main__":

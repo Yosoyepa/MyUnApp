@@ -92,6 +92,7 @@ class Ui_Window_Inicio(object):
         self.Boton_Cambio_Contra = QtWidgets.QPushButton(self.centralwidget)
         self.Boton_Cambio_Contra.setGeometry(QtCore.QRect(320, 450, 151, 23))
         self.Boton_Cambio_Contra.setObjectName("Boton_Cambio_Contra")
+        self.Boton_Cambio_Contra.setStyleSheet("color: #FFFFFF; background-color: transparent; border-radius:10px")
         self.Label_Imagen.raise_()
         self.Line_Usuario.raise_()
         ##Set Background fot line_Usuario
