@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon, QPixmap
 
 
 class Ui_Ventana_Menu(object):
@@ -70,10 +71,18 @@ class Ui_Ventana_Menu(object):
         self.pushButton.setGeometry(QtCore.QRect(20, 60, 51, 41))
         self.pushButton.setText("")
         self.pushButton.setObjectName("pushButton")
+        # Para imagen de boton
+
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(20, 120, 51, 41))
         self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
+        icon2 = QIcon()
+        icon2.addPixmap(QPixmap("MyUnApp/resources/Iconos/User_Groups_Icon.png"), QIcon.Normal, QIcon.Off)
+        self.pushButton_2.setIcon(icon2)
+        self.pushButton_2.setFlat(True)
+        self.pushButton_2.setStyleSheet("background-color: transparent;")
+        self.pushButton_2.setIconSize(QtCore.QSize(50, 50))
         Ventana_Menu.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Ventana_Menu)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 781, 21))
