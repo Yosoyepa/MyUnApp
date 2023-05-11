@@ -217,8 +217,8 @@ class Aplicacion(QtWidgets.QMainWindow):
 
     def creacion_grupo(self):
         self.nombre_grupo = self.Pagina_grupo.ui.line_Nombre_Grupo.text()
-        query = ("INSERT INTO GRUPO Values(NULL, %s,'01','Grupo')")
-        self.cur.execute(query, self.nombre_grupo)
+        query = ("INSERT INTO GRUPO Values(NULL, '%s', 01, 'Grupo')") %(self.nombre_grupo)
+        self.cur.execute(query)
         self.conexion.commit()
     
 
