@@ -11,6 +11,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon, QPixmap
 
 
+import view.resource as rsc
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -27,7 +29,7 @@ class Ui_MainWindow(object):
         self.pushButton.setObjectName("pushButton")
         #Establecer la imagen del boton
         icon = QIcon()
-        icon.addPixmap(QPixmap("MyUnApp/resources/Iconos/Exterior.png"), QIcon.Normal, QIcon.Off)
+        icon.addPixmap(QPixmap(rsc.resource_path("resources/Iconos/Exterior.png")), QIcon.Normal, QIcon.Off)
         self.pushButton.setIcon(icon)
         # Establecer propiedades del botón
         # Hacer que la imagen tenga animacion al ser presionada
@@ -42,7 +44,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setGeometry(QtCore.QRect(20, 210, 100, 100))
         self.pushButton_2.setObjectName("pushButton_2")
         icon2 = QIcon()
-        icon2.addPixmap(QPixmap("MyUnApp/resources/Iconos/User_Groups_Icon.png"), QIcon.Normal, QIcon.Off)
+        icon2.addPixmap(QPixmap(rsc.resource_path("resources/Iconos/User_Groups_Icon.png")), QIcon.Normal, QIcon.Off)
         self.pushButton_2.setIcon(icon2)
         self.pushButton_2.setFlat(True)
         self.pushButton_2.setStyleSheet("background-color: transparent;")
@@ -72,7 +74,7 @@ class Ui_MainWindow(object):
         self.pushButton_3.setGeometry(QtCore.QRect(60, 40, 100, 100))
         self.pushButton_3.setObjectName("pushButton_3")
         icon3 = QIcon()
-        icon3.addPixmap(QPixmap("MyUnApp/resources/Iconos/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png"), QIcon.Normal, QIcon.Off)
+        icon3.addPixmap(QPixmap(rsc.resource_path("resources/Iconos/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png")), QIcon.Normal, QIcon.Off)
         self.pushButton_3.setIcon(icon3)
         self.pushButton_3.setIconSize(QtCore.QSize(100, 100))
 
@@ -147,7 +149,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.setGeometry(QtCore.QRect(60, 40, 100, 100))
         self.pushButton_4.setObjectName("pushButton_4")
         icon4 = QIcon()
-        icon4.addPixmap(QPixmap("MyUnApp/resources/Iconos/Conferencia.png"), QIcon.Normal, QIcon.Off)
+        icon4.addPixmap(QPixmap(rsc.resource_path("resources/Iconos/Conferencia.png")), QIcon.Normal, QIcon.Off)
         self.pushButton_4.setIcon(icon4)
         self.pushButton_4.setIconSize(QtCore.QSize(100, 100))
 

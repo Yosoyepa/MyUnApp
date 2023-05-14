@@ -1,4 +1,8 @@
 import datetime
+import os
+
+
+
 from random import randint
 
 #librerias para PYQT5
@@ -20,7 +24,7 @@ import mysql.connector
 import smtplib
 from email.message import EmailMessage
 
-
+import view.resource as rsc
 
 #Cargar archivo ui.py
 class Entrada(QtWidgets.QMainWindow):
@@ -29,9 +33,9 @@ class Entrada(QtWidgets.QMainWindow):
         self.ui = Ui_Window_Inicio()
         self.ui.setupUi(self)
         #Fondo
-        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/viejito-01.png"))
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap(rsc.resource_path("resources/viejito-01.png")))
         self.ui.set_image_opacity(0.44)
-        ##self.ui.label_logo.setPixmap(QtGui.QPixmap("MyUnApp/resources/logo.png"))
+        ##self.ui.label_logo.setPixmap(QtGui.QPixmap("resources/Iconos/logo.png"))
 
 class Creacion_Usuario(QtWidgets.QMainWindow):
     def __init__(self):
@@ -39,7 +43,7 @@ class Creacion_Usuario(QtWidgets.QMainWindow):
         self.ui = Ui_Window_Registro()
         self.ui.setupUi(self)
         # Fondo
-        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/viejito-01.png"))
+        self.ui.Laber_Imagen.setPixmap(QtGui.QPixmap(rsc.resource_path("resources/viejito-01.png")))
         self.ui.set_image_opacity(0.44)
 
 
@@ -51,7 +55,7 @@ class Codigo_Seguridad(QtWidgets.QMainWindow):
         self.Opacidad(0)
 
         #Fondo
-        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap("MyUnApp/resources/viejito-01.png"))
+        self.ui.Label_Imagen.setPixmap(QtGui.QPixmap(rsc.resource_path("resources/viejito-01.png")))
 
 
     def Opacidad(self,Valor):
@@ -340,6 +344,7 @@ class Aplicacion(QtWidgets.QMainWindow):
             self.Cambio_A_Cambiar_Contra()
         else:
             self.Mostrar_MsgError("Codigo invalido", "Por favor digitar el codigo correcto")
+
     
     
     
