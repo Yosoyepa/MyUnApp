@@ -17,7 +17,7 @@ class Usuario:
         except:
             print("error")
             
-            
+    '''
     def mostrar(self):
       
         print(self.correo)
@@ -26,7 +26,7 @@ class Usuario:
         print(self.contrasena)
         print(self.fechaNacimiento)
         print(self.fechaRegistro)
-     
+        '''                 
      
         
     @classmethod
