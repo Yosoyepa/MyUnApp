@@ -1,0 +1,16 @@
+setup.py
+controller/__init__.py
+model/CRUD.py
+model/Evento.py
+model/Grupo.py
+model/MiembroGrupo.py
+model/Usuario.py
+model/__init__.py
+proyecto.egg-info/PKG-INFO
+proyecto.egg-info/SOURCES.txt
+proyecto.egg-info/dependency_links.txt
+proyecto.egg-info/top_level.txt
+view/Grupos_Ui.py
+view/__init__.py
+view/resource.py
+view/test.py

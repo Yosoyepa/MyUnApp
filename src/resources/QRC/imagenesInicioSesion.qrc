@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="inicioSesion">
+    <file>Icons/logo.png</file>
+  </qresource>
+  <qresource prefix="newPrefix">
+    <file>Images/Fondo.png</file>
+  </qresource>
+</RCC>
