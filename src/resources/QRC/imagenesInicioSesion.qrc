@@ -3,6 +3,7 @@
     <file>Icons/logo.png</file>
   </qresource>
   <qresource prefix="newPrefix">
+    <file>Images/viejito-01.png</file>
     <file>Images/Fondo.png</file>
   </qresource>
 </RCC>

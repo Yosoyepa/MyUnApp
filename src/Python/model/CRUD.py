@@ -1,7 +1,7 @@
 import datetime
 import traceback
 import mysql.connector
-from Usuario import Usuario
+from Python.model.Usuario import Usuario
 
 
 

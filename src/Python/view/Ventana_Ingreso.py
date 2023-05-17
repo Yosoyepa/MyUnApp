@@ -67,7 +67,7 @@ class Ui_Window_Inicio(object):
         self.Label_Imagen.setGeometry(QtCore.QRect(-10, -10, 831, 501))
         self.Label_Imagen.setAutoFillBackground(False)
         self.Label_Imagen.setText("")
-        self.Label_Imagen.setPixmap(QtGui.QPixmap("../../../../../Fondo.png"))
+        self.Label_Imagen.setPixmap(QtGui.QPixmap(":/newPrefix/Images/Fondo.png"))
         self.Label_Imagen.setScaledContents(True)
         self.Label_Imagen.setObjectName("Label_Imagen")
         self.Label_Usuario = QtWidgets.QLabel(self.centralwidget)
@@ -113,7 +113,6 @@ class Ui_Window_Inicio(object):
         self.statusbar = QtWidgets.QStatusBar(Window_Inicio)
         self.statusbar.setObjectName("statusbar")
         Window_Inicio.setStatusBar(self.statusbar)
-
         self.retranslateUi(Window_Inicio)
         QtCore.QMetaObject.connectSlotsByName(Window_Inicio)
 
