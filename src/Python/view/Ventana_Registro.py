@@ -36,7 +36,7 @@ class Ui_Window_Registro(object):
         self.Laber_Imagen.setGeometry(QtCore.QRect(-10, -10, 831, 501))
         self.Laber_Imagen.setAutoFillBackground(False)
         self.Laber_Imagen.setText("")
-        self.Laber_Imagen.setPixmap(QtGui.QPixmap("resources\Fondo.png"))
+        self.Laber_Imagen.setPixmap(QtGui.QPixmap("resources/Fondo.png"))
         self.Laber_Imagen.setScaledContents(True)
         self.Laber_Imagen.setObjectName("Laber_Imagen")
         self.Label_Fonodo_Monocromatico = QtWidgets.QLabel(self.centralwidget)

@@ -7,7 +7,7 @@ from random import randint
 
 #librerias para PYQT5
 from PyQt5 import QtWidgets, uic, QtGui
-from Python.view.Ventana_Ingreso import Ui_Window_Inicio
+from Python.view.xyz import Ui_Window_Inicio
 from Python.view.Ventana_Registro import Ui_Window_Registro
 from Python.view.Ventana_Menu import Ui_Ventana_Menu
 from Python.view.Ventana_Cambio_Rec_Contra import Ui_Ventana_Cambio_Rec_contra
@@ -31,11 +31,8 @@ class Entrada(QtWidgets.QMainWindow):
     def __init__(self):
         super(Entrada, self).__init__()
         self.ui = Ui_Window_Inicio()
-        self.ui.setupUi(self)
-        #Fondo
-        #self.ui.Label_Imagen.setPixmap(QtGui.QPixmap(rsc.resource_path("resources/viejito-01.png")))
-        self.ui.set_image_opacity(0.44)
-        ##self.ui.label_logo.setPixmap(QtGui.QPixmap("resources/Iconos/logo.png"))
+        self.ui.setupUi(self)             
+        self.ui.set_image_opacity(0.44)        
 
 class Creacion_Usuario(QtWidgets.QMainWindow):
     def __init__(self):

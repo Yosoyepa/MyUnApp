@@ -85,6 +85,9 @@
     <property name="maxLength">
      <number>12</number>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
     <property name="readOnly">
      <bool>false</bool>
     </property>

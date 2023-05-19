@@ -1,11 +1,13 @@
 
-from Usuario import Usuario
+from Python.model.Usuario import Usuario
 
 
-class MiembroGrupo():
-    def __init__(self):
-        self.idGrupo
-        self.correoUsuario
-        self.dentroGrupo:bool
-        self.creadorGrupo:bool
-        self.adminGrupo:bool
+class MiembroGrupo(Usuario):
+    def __init__(self, usuario:Usuario, idGrupo: int, dentroGrupo: bool, creadorGrupo: bool, adminGrupo: bool):
+        super().__init__(usuario.contrasena, usuario.nombre, usuario.apellido, usuario.contrasena, usuario.fechaNacimiento, usuario.fechaNacimiento)
+        self.idGrupo: int = idGrupo
+        self.dentroGrupo:bool = dentroGrupo
+        self.creadorGrupo:bool = creadorGrupo
+        self.adminGrupo:bool = adminGrupo
+        
+    
