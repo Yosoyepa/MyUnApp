@@ -16,7 +16,7 @@ from resources.QRC import images
 class controllerRegistro(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        uic.loadUi('src\\resources\\interface\\Ventana_Registro.ui', self)
+        uic.loadUi('src/resources/interface/Ventana_Registro.ui', self)
         self.set_image_opacity(0.44)
         #Boton_Registro
         #self.Ingresar.clicked.connect(self.abrirMenu)
