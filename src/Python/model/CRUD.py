@@ -1,8 +1,10 @@
 import datetime
+from random import randint
+import smtplib
 import traceback
 import mysql.connector
 from Python.model.Usuario import Usuario
-
+from PyQt5.QtWidgets import QMessageBox
 
 
 class CRUD:
@@ -47,9 +49,10 @@ class CRUD:
                     user.setContrasenaConHash(result[3])
                     return user
                 else:
-                    print("La contrasena es incorrecta")
+                    self.mostrarCajaDeMensaje("ADVERTENCIA", "La contraseña digitada es incorrecta.", QMessageBox.Critical)
+                    
             else:
-                print('El correo ingresado no esta registrado')
+                self.mostrarCajaDeMensaje("ADVERTENCIA", "El correo ingresado no es de la UNAL o no está registrado.", QMessageBox.Critical)
         except:
             traceback.print_exc()
         
@@ -58,4 +61,32 @@ class CRUD:
 
 
 
-      
+    def mostrarCajaDeMensaje(self,Titulo,Cuerpo, icono):
+        msg = QMessageBox()
+        msg.setIcon(icono)
+        msg.setText(Titulo)
+        msg.setInformativeText(Cuerpo)
+        msg.setWindowTitle("Error")
+        msg.exec_()
+
+    def mandarCodigoVerificacion(self, correo):
+        try:
+            Codigo = ""
+            for i in range(5):
+                Codigo += str(randint(0,9))
+            print(Codigo)
+
+            message = "Hola, tu codigo es: " + Codigo
+            subject = "Envio de Codigo"
+            message = 'Subject: {}\n\n{}'.format(subject,message)
+
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            password = "tsmicpleanexdnsm" #contraseña ocultada en env/.env
+            server.starttls()
+            server.login("myunapp3@gmail.com", password)
+            server.sendmail ('myunapp3@gmail.com', correo, message) 
+            server.quit()
+        except:
+            print(traceback.format_exc())
+
+        return Codigo

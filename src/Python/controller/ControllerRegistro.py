@@ -17,6 +17,7 @@ class controllerRegistro(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Registro.ui', self)
+        self.crd = CRUD()
         self.set_image_opacity(0.44)
         #Boton_Registro
         #self.Ingresar.clicked.connect(self.abrirMenu)
@@ -27,13 +28,14 @@ class controllerRegistro(QMainWindow):
         self.Label_Fondo.setGraphicsEffect(graphics_effect)
 
     def registrar(self):
-        crd = CRUD()
+        
         user:Usuario = None
         if(self.Line_Nombre.text() == '' or self.Line_Apellido.text() == '' or self.Line_Email.text() == '' or self.Line_Contrasena.text() == '' or self.Line_ConfirmarContrasena.text() == ''):
+            self.crd.mostrarCajaDeMensaje("ADVERTENCIA", 'No deje campos de texto vacíos', QtWidgets.QMessageBox.Warning)
             print("no deje campos vacíos")
         else:
             try:
-                correoUnalArr = self.Line_Email.text().split("@")
+                correoUnalArr = self.Line_Email.text().split("@", 1)
                 correo_Unal = correoUnalArr[1]
                 if correo_Unal == "unal.edu.co":
                     if self.Line_Contrasena.text() == self.Line_ConfirmarContrasena.text():
@@ -44,7 +46,7 @@ class controllerRegistro(QMainWindow):
                  
                         
                         user.mostrar()
-                        crd.createUsuario(user)
+                        self.crd.createUsuario(user)
                         
                     else:
                         print("La contraseña y la confirmación no coinciden")

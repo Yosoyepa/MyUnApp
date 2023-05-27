@@ -83,6 +83,8 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="layoutDirection">
@@ -104,10 +106,16 @@
        <property name="font">
         <font>
          <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px</string>
+        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
+       </property>
+       <property name="placeholderText">
+        <string>Nombre</string>
        </property>
       </widget>
      </item>
@@ -116,6 +124,8 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
@@ -134,10 +144,16 @@
        <property name="font">
         <font>
          <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px</string>
+        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
+       </property>
+       <property name="placeholderText">
+        <string>Apellido</string>
        </property>
       </widget>
      </item>
@@ -146,6 +162,8 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
@@ -164,10 +182,16 @@
        <property name="font">
         <font>
          <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px</string>
+        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
+       </property>
+       <property name="placeholderText">
+        <string>Email</string>
        </property>
       </widget>
      </item>
@@ -176,6 +200,8 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
@@ -194,10 +220,13 @@
        <property name="font">
         <font>
          <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px</string>
+        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
@@ -212,6 +241,8 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
@@ -230,10 +261,13 @@
        <property name="font">
         <font>
          <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px</string>
+        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
@@ -248,6 +282,8 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
@@ -272,7 +308,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px</string>
+        <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
        </property>
        <property name="buttonSymbols">
         <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -318,7 +355,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>13</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -383,10 +420,10 @@ opacity: 0.5</string>
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>80</y>
+      <x>50</x>
+      <y>30</y>
       <width>304</width>
-      <height>401</height>
+      <height>463</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">

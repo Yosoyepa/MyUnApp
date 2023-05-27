@@ -98,7 +98,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="textoCodigo">
+      <widget class="QLineEdit" name="textoEmail">
        <property name="maximumSize">
         <size>
          <width>16777215</width>
@@ -121,7 +121,10 @@
        </property>
        <property name="styleSheet">
         <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:15px;
-padding-left: 10px</string>
+padding-left: 8px</string>
+       </property>
+       <property name="placeholderText">
+        <string>Correo</string>
        </property>
       </widget>
      </item>
@@ -146,51 +149,6 @@ padding-left: 10px</string>
         <number>50</number>
        </property>
        <item>
-        <widget class="QPushButton" name="okButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
-	background-color:#FFFFFF; 
-	color:#01233C; 
-	border-radius:15px;
-}
-
-QPushButton:hover{
-	background-color:#01233C; 
-	color:#FFFFFF; 
-	border-radius:15px;
-}</string>
-         </property>
-         <property name="text">
-          <string>OK</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="atrasButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -201,12 +159,12 @@ QPushButton:hover{
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>30</height>
+           <height>35</height>
           </size>
          </property>
          <property name="font">
           <font>
-           <pointsize>10</pointsize>
+           <pointsize>12</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -235,10 +193,74 @@ QPushButton:hover{
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="continuarButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+	background-color:#FFFFFF; 
+	color:#01233C; 
+	border-radius:15px;
+}
+
+QPushButton:hover{
+	background-color:#01233C; 
+	color:#FFFFFF; 
+	border-radius:15px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Continuar</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="labelcolorfondo">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>536</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:#01233C</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>labelcolorfondo</zorder>
+   <zorder>label_fondo</zorder>
+   <zorder>verticalLayoutWidget</zorder>
   </widget>
  </widget>
  <resources>
