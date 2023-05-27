@@ -174,26 +174,8 @@ class Ui_MainWindow(object):
         font.setBold(True)
         self.listWidget.setFont(font)
         self.listWidget.setStyleSheet("QListWidget {color: #01233C;}")
-        ##Boton con el icono para seleccionar un grupo
-        # self.pushButton_5 = QtWidgets.QPushButton(self.widget_3)
-        # self.pushButton_5.setGeometry(QtCore.QRect(20, 10, 376, 100))
-        # self.pushButton_5.setObjectName("pushButton_5")
-        # icon5 = QIcon()
-        # icon5.addPixmap(QPixmap("MyUnApp/resources/Iconos/R2-D2.png"), QIcon.Normal, QIcon.Off)
-        # self.pushButton_5.setIcon(icon5)
-        # self.pushButton_5.setIconSize(QtCore.QSize(100, 100))
         
-        # Aumenta el tamaño del texto del botón
-        # font = QtGui.QFont()
-        # font.setPointSize(20) # Ajusta el tamaño del texto
-        # self.pushButton_5.setFont(font)
         
-        # # Ajusta la política de tamaño para que el botón sea redimensionable
-        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        # sizePolicy.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
-        # self.pushButton_5.setSizePolicy(sizePolicy)
-
-        ##Widget para la lista de miembros de un grupo seleccionado
         self.widget_4 = QtWidgets.QWidget(self.frame_3)
         self.widget_4.setGeometry(QtCore.QRect(60, 450, 619, 274))
         self.widget_4.setObjectName("widget_4")
