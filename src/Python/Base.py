@@ -179,10 +179,10 @@ class Aplicacion(QtWidgets.QMainWindow):
 
 
     def Conexion_BD(self):
-        self.HostBD = "localhost"
-        self.UsuarioBD = "usuario"
-        self.ContraseñaBD = "userpass"
-        self.DataBase = "myundb"
+        self.HostBD = "34.68.234.58"
+        self.UsuarioBD = "myunmasterserver"
+        self.ContraseñaBD = "cm<\PbV#1PN"#k4T"
+        self.DataBase = "myunbd"
         self.PortBD = "3306"
         self.conexion = mysql.connector.connect(user=self.UsuarioBD,password=self.ContraseñaBD,host=self.HostBD,database=self.DataBase,port=self.PortBD)
         self.cur = self.conexion.cursor()
