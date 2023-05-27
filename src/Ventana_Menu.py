@@ -114,3 +114,121 @@ if __name__ == "__main__":
     ui.setupUi(Ventana_Menu)
     Ventana_Menu.show()
     sys.exit(app.exec_())
+
+
+# from PyQt5 import QtCore, QtGui, QtWidgets
+# from PyQt5.QtGui import QIcon, QPixmap
+
+
+# class Ui_Ventana_Menu(object):
+#     def setupUi(self, Ventana_Menu):
+#         Ventana_Menu.setObjectName("Ventana_Menu")
+#         Ventana_Menu.resize(1000, 600)
+#         self.centralwidget = QtWidgets.QWidget(Ventana_Menu)
+#         self.centralwidget.setObjectName("centralwidget")
+#         # Crear un diseño de cuadrícula para el widget central
+#         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+#         self.gridLayout.setObjectName("gridLayout")
+
+#         # Crear un widget de etiqueta para el menú lateral
+#         self.label = QtWidgets.QLabel(self.centralwidget)
+#         self.label.setStyleSheet("background-color: rgb(1, 35, 60);")
+#         self.label.setObjectName("label")
+#         self.gridLayout.addWidget(self.label, 0, 0, 2, 1)
+#         self.label.setFixedSize(200, 600) # Establecer un tamaño fijo para la etiqueta
+
+#         # Crear un widget de etiqueta para el encabezado
+#         self.label_3 = QtWidgets.QLabel(self.centralwidget)
+#         self.label_3.setStyleSheet("background-color: rgb(1, 35, 60);")
+#         self.label_3.setObjectName("label_3")
+#         self.gridLayout.addWidget(self.label_3, 0, 1, 1, 2)
+#         self.label_3.setFixedSize(800, 100) # Establecer un tamaño fijo para la etiqueta
+
+#         # Crear un widget de etiqueta para el contenido principal
+#         self.label_4 = QtWidgets.QLabel(self.centralwidget)
+#         self.label_4.setStyleSheet("background-color: rgb(192, 225, 236);")
+#         self.label_4.setObjectName("label_4")
+#         self.gridLayout.addWidget(self.label_4, 1, 1, 1, 2)
+#         self.label_4.setFixedSize(800, 500) # Establecer un tamaño fijo para la etiqueta
+#         self.label_4.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding) # Hacer que la etiqueta sea reescalable
+
+#         # Crear un widget de etiqueta para el icono de la izquierda
+#         self.label_5 = QtWidgets.QLabel(self.centralwidget)
+#         self.label_5.setObjectName("label_5")
+#         self.gridLayout.addWidget(self.label_5, 1, 1, 1, 1)
+#         pixmap = QPixmap("MyUnApp/resources/Iconos/Exterior.png")
+#         pixmap = pixmap.scaled(100, 100, QtCore.Qt.KeepAspectRatio) # Establecer un tamaño fijo para el icono
+#         self.label_5.setPixmap(pixmap)
+
+#         # Crear un widget de etiqueta para el icono de la derecha
+#         self.label_6 = QtWidgets.QLabel(self.centralwidget)
+#         self.label_6.setObjectName("label_6")
+#         self.gridLayout.addWidget(self.label_6, 1, 2, 1, 1)
+#         pixmap2 = QPixmap("MyUnApp/resources/Iconos/User_Groups_Icon.png")
+#         pixmap2 = pixmap2.scaled(100, 100, QtCore.Qt.KeepAspectRatio) # Establecer un tamaño fijo para el icono
+#         self.label_6.setPixmap(pixmap2)
+
+#         # Crear un widget de etiqueta para la línea vertical
+#         self.label_7 = QtWidgets.QLabel(self.centralwidget)
+#         self.label_7.setStyleSheet("background-color: rgb(102, 173, 204);")
+#         self.label_7.setObjectName("label_7")
+#         self.gridLayout.addWidget(self.label_7, 1, 1, 1, 1)
+
+#         # Crear un widget de etiqueta para el contenido de la derecha
+#         self.label_8 = QtWidgets.QLabel(self.centralwidget)
+#         self.label_8.setStyleSheet("background-color: rgb(0, 75, 115);")
+#         self.label_8.setObjectName("label_8")
+#         self.gridLayout.addWidget(self.label_8, 1, 2, 1, 1)
+
+#         # Crear un widget de botón para el botón de la izquierda
+#         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+#         self.pushButton.setObjectName("pushButton")
+#         icon = QIcon()
+#         icon.addPixmap(QPixmap("MyUnApp/resources/Iconos/Exterior.png"), QIcon.Normal, QIcon.Off)
+#         self.pushButton.setIcon(icon)
+#         self.pushButton.setFlat(True)
+#         self.pushButton.setStyleSheet("background-color: transparent;")
+#         self.pushButton.setIconSize(QtCore.QSize(50, 50))
+#         self.gridLayout.addWidget(self.pushButton, 0, 3, 1, 1)
+
+#         # Crear un widget de botón para el botón de la derecha
+#         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+#         self.pushButton_2.setObjectName("pushButton_2")
+#         icon2 = QIcon()
+#         icon2.addPixmap(QPixmap("MyUnApp/resources/Iconos/User_Groups_Icon.png"), QIcon.Normal, QIcon.Off)
+#         self.pushButton_2.setIcon(icon2)
+#         self.pushButton_2.setFlat(True)
+#         self.pushButton_2.setStyleSheet("background-color: transparent;")
+#         self.pushButton_2.setIconSize(QtCore.QSize(50, 50))
+#         self.gridLayout.addWidget(self.pushButton_2, 0, 4, 1, 1)
+
+#         Ventana_Menu.setCentralWidget(self.centralwidget)
+#         self.menubar = QtWidgets.QMenuBar(Ventana_Menu)
+#         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 21))
+#         self.menubar.setObjectName("menubar")
+#         Ventana_Menu.setMenuBar(self.menubar)
+#         self.statusbar = QtWidgets.QStatusBar(Ventana_Menu)
+#         self.statusbar.setObjectName("statusbar")
+#         Ventana_Menu.setStatusBar(self.statusbar)
+
+#         self.retranslateUi(Ventana_Menu)
+#         QtCore.QMetaObject.connectSlotsByName(Ventana_Menu)
+
+#     def retranslateUi(self, Ventana_Menu):
+#         _translate = QtCore.QCoreApplication.translate
+#         Ventana_Menu.setWindowTitle(_translate("Ventana_Menu", "Ventana_Menu"))
+
+
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Ventana_Menu = QtWidgets.QMainWindow()
+#     ui = Ui_Ventana_Menu()
+#     ui.setupUi(Ventana_Menu)
+
+#     # Establecer el diseño de cuadrícula como el diseño principal
+#     layout = QtWidgets.QGridLayout()
+#     layout.addWidget(ui.centralwidget)
+#     Ventana_Menu.setLayout(layout)
+#     Ventana_Menu.show()
+#     sys.exit(app.exec_())
