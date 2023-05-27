@@ -7,7 +7,7 @@ from random import randint
 
 #librerias para PYQT5
 from PyQt5 import QtWidgets, uic, QtGui
-from Python.view.xyz import Ui_Window_Inicio
+from Python.view.Ventana_Ingreso import Ui_Window_Inicio
 from Python.view.Ventana_Registro import Ui_Window_Registro
 from Python.view.Ventana_Menu import Ui_Ventana_Menu
 from Python.view.Ventana_Cambio_Rec_Contra import Ui_Ventana_Cambio_Rec_contra

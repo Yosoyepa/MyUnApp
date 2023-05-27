@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon, QPixmap
 
 
-import view.resource as rsc
+import Python.view.resource as rsc
 
 class Ui_Ventana_Menu(object):
     def setupUi(self, Ventana_Menu):
@@ -74,7 +74,7 @@ class Ui_Ventana_Menu(object):
         self.pushButton.setText("")
         self.pushButton.setObjectName("pushButton")
         icon = QIcon()
-        icon.addPixmap(QPixmap(rsc.resource_path("resources/Iconos/Exterior.png")), QIcon.Normal, QIcon.Off)
+        icon.addPixmap(QPixmap(rsc.resource_path("src\\resources\\QRC\\Icons\\Exterior.png")), QIcon.Normal, QIcon.Off)
         self.pushButton.setIcon(icon)
         self.pushButton.setFlat(True)
         self.pushButton.setStyleSheet("background-color: transparent;")
@@ -86,7 +86,7 @@ class Ui_Ventana_Menu(object):
         self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
         icon2 = QIcon()
-        icon2.addPixmap(QPixmap(rsc.resource_path("resources/Iconos/User_Groups_Icon.png")), QIcon.Normal, QIcon.Off)
+        icon2.addPixmap(QPixmap(rsc.resource_path("src\\resources\\QRC\\Icons\\User_Groups_Icon.png")), QIcon.Normal, QIcon.Off)
         self.pushButton_2.setIcon(icon2)
         self.pushButton_2.setFlat(True)
         self.pushButton_2.setStyleSheet("background-color: transparent;")
@@ -115,4 +115,4 @@ if __name__ == "__main__":
     ui = Ui_Ventana_Menu()
     ui.setupUi(Ventana_Menu)
     Ventana_Menu.show()
-    sys.exit(app.exec_())
+    app.exec_()

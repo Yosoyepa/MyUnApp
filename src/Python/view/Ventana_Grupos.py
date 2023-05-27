@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon, QPixmap
 
 
-import view.resource as rsc
+import Python.view.resource as rsc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):

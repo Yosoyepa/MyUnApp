@@ -8,10 +8,10 @@ from Python.model.Usuario import Usuario
 class CRUD:
     
     def __init__(self):
-        self.__hostBD = "localhost"
-        self.__usuarioBD = "usuario"
-        self.__contraseñaBD = "userpass"
-        self.__dataBase = "myundb"
+        self.__hostBD = "34.68.234.58"
+        self.__usuarioBD = "root"
+        self.__contraseñaBD = 'cm<\PbV#1PN"#k4T'
+        self.__dataBase = "myunbd"
         self.__portBD = "3306"
         
         try:
@@ -41,7 +41,11 @@ class CRUD:
                 
                 if(Usuario.verificarContrasena(contrasena, result[3])):
                     print('inicio de sesion exitoso')
-                    return Usuario(result[0], result[1], result[2], result[3], result[4], result[5])
+                    user = Usuario(result[0], result[1], result[2], result[5])                    
+                    user.setFechaNacimiento(str(result[4]), '-')
+                    
+                    user.setContrasenaConHash(result[3])
+                    return user
                 else:
                     print("La contrasena es incorrecta")
             else:
