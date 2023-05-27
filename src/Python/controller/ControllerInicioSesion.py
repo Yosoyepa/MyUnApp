@@ -19,7 +19,7 @@ class controllerInicioSesion(QMainWindow):
         uic.loadUi('src/resources/interface/Ventana_Ingreso.ui', self)
         self.set_image_opacity(0.44)
     	
-
+        self.crd = CRUD()
         #ventanas
         self.menu = controllerMenu()
 
@@ -28,15 +28,24 @@ class controllerInicioSesion(QMainWindow):
         graphics_effect.setOpacity(value)
         self.Label_Imagen.setGraphicsEffect(graphics_effect)
 
-    def abrirMenu(self):
-        crd = CRUD()
-        usr: Usuario = crd.readUsuario(self.Line_Usuario.text(), self.Line_Contrasena.text())
-        print(usr)
-        if(usr != None):
-            usr.mostrar()
-        self.menu.show()
-        self.close()
+    def abrirMenu(self) -> bool: ###RETORNA BOOLEANO PARA COMPROBAR QUE EL INICIO DE SESION FUE CORRECTO
+        if self.Line_Usuario.text() == '' or self.Line_Contrasena.text() == '':
+            self.crd.mostrarCajaDeMensaje("ADVERTENCIA", "no deje campos de texto vacíos.", QtWidgets.QMessageBox.Warning) 
+            return False
+        else:
+        
+            usr: Usuario = self.crd.readUsuario(self.Line_Usuario.text(), self.Line_Contrasena.text())
+            print(usr)
+            if(usr != None):
+                usr.mostrar()
+                self.menu.show()        
+                return True
+            else: 
+                return False
 
+    
+
+    
     
 '''
 

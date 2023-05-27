@@ -9,6 +9,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from Python.controller.ControllerMenu import controllerMenu
 from Python.controller.ControllerInicioSesion import controllerInicioSesion
 from Python.controller.ControllerRegistro import controllerRegistro
+from Python.controller.ControllerCambioContrasena import controllerCambio
 
 class app(QMainWindow):
     def __init__(self) :
@@ -18,9 +19,11 @@ class app(QMainWindow):
         self.inicioSesion = controllerInicioSesion()
         self.registro = controllerRegistro()
         self.menuC = controllerMenu()
+        self.cambioContrasena = controllerCambio()
 
         self.pilaWidgets.addWidget(self.inicioSesion)
         self.pilaWidgets.addWidget(self.registro)
+        self.pilaWidgets.addWidget(self.cambioContrasena)
 
 
         self.setCentralWidget(self.pilaWidgets)
@@ -37,23 +40,46 @@ class app(QMainWindow):
         self.setWindowTitle("Iniciar Sesion")
 
     def conexiones(self):
-        self.inicioSesion.Boton_Cracion_Usuario.clicked.connect(self.cambioRegistro)
-        self.registro.boton_Iniciar_sesion.clicked.connect(self.cambioInicioSesion)
-        self.inicioSesion.Ingresar.clicked.connect(self.cambioMenu)
-        self.registro.Boton_Registro.clicked.connect(self.registrar)
+        self.inicioSesion.Boton_Cracion_Usuario.clicked.connect(self.cambioRegistroFromInicioSesion)
+        self.inicioSesion.Ingresar.clicked.connect(self.botonIniciarSesion)
+        self.inicioSesion.Boton_Cambio_Contra.clicked.connect(self.CambioRecuperacionContrasenaFromInicioSesion)
 
-    def cambioInicioSesion(self):
-        self.pilaWidgets.setCurrentWidget(self.inicioSesion)
 
-    def cambioRegistro(self):
+        self.registro.boton_Iniciar_sesion.clicked.connect(self.cambioInicioSesionFromRegistro)
+        self.registro.Boton_Registro.clicked.connect(self.botonRegistrar)
+
+        self.cambioContrasena.atrasButton.clicked.connect(self.CambioInicioSesionFromRecuperacionContrasena)
+        
+
+####CAMBIOS
+    def cambioInicioSesionFromRegistro(self):
+        self.setWindowTitle("Iniciar sesion")
+        self.pilaWidgets.setCurrentWidget(self.inicioSesion)        
+
+    def cambioRegistroFromInicioSesion(self):
+        self.setWindowTitle("Registro")
         self.pilaWidgets.setCurrentWidget(self.registro)
 
-    def cambioMenu(self):
-        self.inicioSesion.abrirMenu()
-        #self.close()
+    def CambioRecuperacionContrasenaFromInicioSesion(self):
+        self.setWindowTitle("Recuperación contraseña")
+        self.pilaWidgets.setCurrentWidget(self.cambioContrasena)
+
+    def CambioInicioSesionFromRecuperacionContrasena(self):
+        self.setWindowTitle("Iniciar sesion")
+        self.pilaWidgets.setCurrentWidget(self.inicioSesion)
+########FUNCIONES
+
+    def botonIniciarSesion(self):
+        if(self.inicioSesion.abrirMenu()):
+
+            self.close()
+
        
-    def registrar(self):
+    def botonRegistrar(self):
         self.registro.registrar()
+
+
+    
     
 
 if __name__ == '__main__':

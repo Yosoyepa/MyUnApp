@@ -40,14 +40,15 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>9</pointsize>
-      <weight>50</weight>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px</string>
+     <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
     </property>
     <property name="text">
      <string/>
@@ -59,7 +60,7 @@
      <bool>false</bool>
     </property>
     <property name="placeholderText">
-     <string> Correo</string>
+     <string>Correo</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="Line_Contrasena">
@@ -73,11 +74,14 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>9</pointsize>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px</string>
+     <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
     </property>
     <property name="inputMask">
      <string/>
@@ -92,7 +96,7 @@
      <bool>false</bool>
     </property>
     <property name="placeholderText">
-     <string notr="true"> Contraseña</string>
+     <string notr="true">Contraseña</string>
     </property>
    </widget>
    <widget class="QPushButton" name="Ingresar">
@@ -315,15 +319,25 @@ QPushButton:hover{
      <font>
       <family>Microsoft YaHei UI</family>
       <pointsize>10</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #FFFFFF; background-color: transparent; border-radius:10px</string>
+     <string notr="true">QPushButton{
+	color: #FFFFFF; 
+	background-color: transparent; 
+	border-radius:10px;
+}
+QPushButton:hover{
+	color: #00EEFF; 
+	background-color: transparent; 
+	border-radius:10px;
+}
+</string>
     </property>
     <property name="text">
      <string>¿Olvidaste tu contraseña?</string>
