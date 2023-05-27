@@ -2,7 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
-
+from resources.QRC import images
 from Python.model.Usuario import Usuario
 
 

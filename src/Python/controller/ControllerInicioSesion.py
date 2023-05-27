@@ -16,7 +16,7 @@ from Python.model.Usuario import Usuario
 class controllerInicioSesion(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        uic.loadUi('src\\resources\\interface\\Ventana_Ingreso.ui', self)
+        uic.loadUi('src/resources/interface/Ventana_Ingreso.ui', self)
         self.set_image_opacity(0.44)
     	
 

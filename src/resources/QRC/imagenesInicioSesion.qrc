@@ -3,6 +3,18 @@
     <file>Icons/logo.png</file>
   </qresource>
   <qresource prefix="newPrefix">
+    <file>Icons/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png</file>
+    <file>Icons/back.png</file>
+    <file>Icons/Conferencia.png</file>
+    <file>Icons/Exterior.png</file>
+    <file>Icons/logo.png</file>
+    <file>Icons/Punisher.png</file>
+    <file>Icons/R2-D2 2.png</file>
+    <file>Icons/R2-D2.png</file>
+    <file>Icons/Superman.png</file>
+    <file>Icons/User_Groups_Icon.png</file>
+    <file>Icons/Usuario Masculino 5.png</file>
+    <file>Icons/Usuario Masculino 6.png</file>
     <file>Images/viejito-01.png</file>
     <file>Images/Fondo.png</file>
   </qresource>
