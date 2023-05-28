@@ -10,6 +10,8 @@ from Python.controller.ControllerMenu import controllerMenu
 from Python.controller.ControllerInicioSesion import controllerInicioSesion
 from Python.controller.ControllerRegistro import controllerRegistro
 from Python.controller.ControllerCambioContrasena import controllerCambio
+from Python.controller.ControllerChat import controllerChat
+
 
 class app(QMainWindow):
     def __init__(self) :
@@ -20,10 +22,13 @@ class app(QMainWindow):
         self.registro = controllerRegistro()
         self.menuC = controllerMenu()
         self.cambioContrasena = controllerCambio()
+        self.chat = controllerChat()
 
         self.pilaWidgets.addWidget(self.inicioSesion)
         self.pilaWidgets.addWidget(self.registro)
         self.pilaWidgets.addWidget(self.cambioContrasena)
+        self.pilaWidgets.addWidget(self.menuC)
+        self.pilaWidgets.addWidget(self.chat)
 
 
         self.setCentralWidget(self.pilaWidgets)
@@ -51,6 +56,8 @@ class app(QMainWindow):
         self.cambioContrasena.atrasButton.clicked.connect(self.CambioInicioSesionFromRecuperacionContrasena)
         
 
+        self.menuC.Boton_Chat.clicked.connect(self.CambioChat)
+
 ####CAMBIOS
     def cambioInicioSesionFromRegistro(self):
         self.setWindowTitle("Iniciar sesion")
@@ -67,6 +74,12 @@ class app(QMainWindow):
     def CambioInicioSesionFromRecuperacionContrasena(self):
         self.setWindowTitle("Iniciar sesion")
         self.pilaWidgets.setCurrentWidget(self.inicioSesion)
+
+#Cambios a Chat
+    def CambioChat(self):
+        self.setWindowTitle("Grupo y chat")
+        self.pilaWidgets.setCurrentWidget(self.chat)
+
 ########FUNCIONES
 
     def botonIniciarSesion(self):
