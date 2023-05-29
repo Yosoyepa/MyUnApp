@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1279</width>
-    <height>945</height>
+    <width>1153</width>
+    <height>695</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -407,8 +407,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset>
-                          <normaloff>:/inicioSesion/Icons/back.png</normaloff>:/inicioSesion/Icons/back.png</iconset>
+                         <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+                          <normaloff>:/newPrefix/Icons/back.png</normaloff>:/newPrefix/Icons/back.png</iconset>
                         </property>
                         <property name="iconSize">
                          <size>
@@ -565,8 +565,8 @@ background-color: rgb(0, 75, 115);</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>246</width>
-                                 <height>325</height>
+                                 <width>240</width>
+                                 <height>207</height>
                                 </rect>
                                </property>
                                <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -586,7 +586,7 @@ background-color: rgb(0, 75, 115);</string>
                                  <number>0</number>
                                 </property>
                                 <item>
-                                 <widget class="QListWidget" name="listWidget">
+                                 <widget class="QListWidget" name="List_Integrantes">
                                   <property name="styleSheet">
                                    <string notr="true">background-color: rgb(255, 255, 255);</string>
                                   </property>
@@ -606,7 +606,7 @@ background-color: rgb(0, 75, 115);</string>
                               </property>
                               <layout class="QVBoxLayout" name="verticalLayout_11">
                                <item>
-                                <widget class="QPushButton" name="pushButton_6">
+                                <widget class="QPushButton" name="Boton_DarAdmin">
                                  <property name="font">
                                   <font>
                                    <pointsize>14</pointsize>
@@ -618,7 +618,7 @@ background-color: rgb(0, 75, 115);</string>
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QPushButton" name="pushButton_7">
+                                <widget class="QPushButton" name="Boton_QuitarAdmin">
                                  <property name="font">
                                   <font>
                                    <pointsize>14</pointsize>
@@ -630,14 +630,14 @@ background-color: rgb(0, 75, 115);</string>
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QPushButton" name="pushButton_8">
+                                <widget class="QPushButton" name="Boton_Eliminar">
                                  <property name="font">
                                   <font>
                                    <pointsize>14</pointsize>
                                   </font>
                                  </property>
                                  <property name="text">
-                                  <string>PushButton</string>
+                                  <string>Eliminar Integrante</string>
                                  </property>
                                 </widget>
                                </item>
@@ -779,8 +779,8 @@ background-color: rgb(0, 75, 115);</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>245</width>
-                                 <height>329</height>
+                                 <width>220</width>
+                                 <height>233</height>
                                 </rect>
                                </property>
                                <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -800,7 +800,7 @@ background-color: rgb(0, 75, 115);</string>
                                  <number>0</number>
                                 </property>
                                 <item>
-                                 <widget class="QListWidget" name="listWidget_2">
+                                 <widget class="QListWidget" name="List_Solicitudes">
                                   <property name="styleSheet">
                                    <string notr="true">background-color: rgb(255, 255, 255);</string>
                                   </property>
@@ -820,7 +820,7 @@ background-color: rgb(0, 75, 115);</string>
                               </property>
                               <layout class="QVBoxLayout" name="verticalLayout_12">
                                <item>
-                                <widget class="QPushButton" name="pushButton_9">
+                                <widget class="QPushButton" name="Boton_Aceptar">
                                  <property name="font">
                                   <font>
                                    <pointsize>14</pointsize>
@@ -832,7 +832,7 @@ background-color: rgb(0, 75, 115);</string>
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QPushButton" name="pushButton_10">
+                                <widget class="QPushButton" name="Boton_Denegar">
                                  <property name="font">
                                   <font>
                                    <pointsize>14</pointsize>
@@ -1016,7 +1016,7 @@ background-color: rgb(0, 75, 115);</string>
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QLineEdit" name="lineEdit">
+                                <widget class="QLineEdit" name="Line_NewNombre">
                                  <property name="styleSheet">
                                   <string notr="true">background-color: rgb(255, 255, 255);</string>
                                  </property>
@@ -1056,7 +1056,7 @@ background-color: rgb(0, 75, 115);</string>
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QTextEdit" name="textEdit">
+                                <widget class="QTextEdit" name="Text_Descripcion">
                                  <property name="styleSheet">
                                   <string notr="true">background-color: rgb(255, 255, 255);</string>
                                  </property>
@@ -1069,7 +1069,7 @@ background-color: rgb(0, 75, 115);</string>
                              <widget class="QWidget" name="widget" native="true">
                               <layout class="QVBoxLayout" name="verticalLayout_17">
                                <item>
-                                <widget class="QPushButton" name="pushButton_11">
+                                <widget class="QPushButton" name="Boton_Actualizar">
                                  <property name="font">
                                   <font>
                                    <pointsize>14</pointsize>
@@ -1081,7 +1081,7 @@ background-color: rgb(0, 75, 115);</string>
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QPushButton" name="pushButton_12">
+                                <widget class="QPushButton" name="Boton_Limpiar">
                                  <property name="font">
                                   <font>
                                    <pointsize>14</pointsize>
