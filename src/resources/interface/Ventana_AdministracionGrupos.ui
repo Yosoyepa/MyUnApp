@@ -85,7 +85,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="Boton_Menu">
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -96,7 +96,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/newPrefix/Icons/Exterior.png</normaloff>:/newPrefix/Icons/Exterior.png</iconset>
             </property>
             <property name="iconSize">
@@ -111,7 +111,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="Boton_Grupos">
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -122,7 +122,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/newPrefix/Icons/User_Groups_Icon.png</normaloff>:/newPrefix/Icons/User_Groups_Icon.png</iconset>
             </property>
             <property name="iconSize">
@@ -137,7 +137,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="Boton_Chat">
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -148,7 +148,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/inicioSesion/Icons/Chat.png</normaloff>:/inicioSesion/Icons/Chat.png</iconset>
             </property>
             <property name="iconSize">
@@ -163,7 +163,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="Boton_Eventos">
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -174,7 +174,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/inicioSesion/Icons/Events_Icon.png</normaloff>:/inicioSesion/Icons/Events_Icon.png</iconset>
             </property>
             <property name="iconSize">
@@ -189,7 +189,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_5">
+           <widget class="QPushButton" name="Boton_Ajustes">
             <property name="minimumSize">
              <size>
               <width>80</width>
@@ -200,7 +200,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/inicioSesion/Icons/Adjust_Icon.png</normaloff>:/inicioSesion/Icons/Adjust_Icon.png</iconset>
             </property>
             <property name="iconSize">
@@ -407,7 +407,7 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+                         <iconset resource="../QRC/imagenesInicioSesion.qrc">
                           <normaloff>:/newPrefix/Icons/back.png</normaloff>:/newPrefix/Icons/back.png</iconset>
                         </property>
                         <property name="iconSize">
@@ -538,6 +538,8 @@ background-color: rgb(0, 75, 115);</string>
                               <property name="font">
                                <font>
                                 <pointsize>16</pointsize>
+                                <weight>75</weight>
+                                <bold>true</bold>
                                </font>
                               </property>
                               <property name="text">
@@ -565,7 +567,7 @@ background-color: rgb(0, 75, 115);</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>240</width>
+                                 <width>247</width>
                                  <height>207</height>
                                 </rect>
                                </property>
@@ -752,6 +754,8 @@ background-color: rgb(0, 75, 115);</string>
                               <property name="font">
                                <font>
                                 <pointsize>16</pointsize>
+                                <weight>75</weight>
+                                <bold>true</bold>
                                </font>
                               </property>
                               <property name="text">
@@ -779,7 +783,7 @@ background-color: rgb(0, 75, 115);</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>220</width>
+                                 <width>225</width>
                                  <height>233</height>
                                 </rect>
                                </property>
@@ -965,6 +969,8 @@ background-color: rgb(0, 75, 115);</string>
                                  <property name="font">
                                   <font>
                                    <pointsize>16</pointsize>
+                                   <weight>75</weight>
+                                   <bold>true</bold>
                                   </font>
                                  </property>
                                  <property name="text">
@@ -1192,7 +1198,7 @@ background-color: rgb(0, 75, 115);</string>
   </widget>
  </widget>
  <resources>
-  <include location="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc"/>
+  <include location="../QRC/imagenesInicioSesion.qrc"/>
  </resources>
  <connections/>
 </ui>
