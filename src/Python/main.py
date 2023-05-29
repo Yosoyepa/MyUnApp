@@ -22,13 +22,11 @@ class app(QMainWindow):
         self.registro = controllerRegistro()
         self.menuC = controllerMenu()
         self.cambioContrasena = controllerCambio()
-        self.chat = controllerChat()
 
         self.pilaWidgets.addWidget(self.inicioSesion)
         self.pilaWidgets.addWidget(self.registro)
         self.pilaWidgets.addWidget(self.cambioContrasena)
         self.pilaWidgets.addWidget(self.menuC)
-        self.pilaWidgets.addWidget(self.chat)
 
 
         self.setCentralWidget(self.pilaWidgets)
@@ -56,8 +54,6 @@ class app(QMainWindow):
         self.cambioContrasena.atrasButton.clicked.connect(self.CambioInicioSesionFromRecuperacionContrasena)
         
 
-        self.menuC.Boton_Chat.clicked.connect(self.CambioChat)
-
 ####CAMBIOS
     def cambioInicioSesionFromRegistro(self):
         self.setWindowTitle("Iniciar sesion")
@@ -76,9 +72,6 @@ class app(QMainWindow):
         self.pilaWidgets.setCurrentWidget(self.inicioSesion)
 
 #Cambios a Chat
-    def CambioChat(self):
-        self.setWindowTitle("Grupo y chat")
-        self.pilaWidgets.setCurrentWidget(self.chat)
 
 ########FUNCIONES
 
