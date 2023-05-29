@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Ventana_AdminGrupos</class>
+ <widget class="QMainWindow" name="Ventana_AdminGrupos">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -55,7 +55,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="Boton_CrearGrupo">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -87,8 +87,8 @@
     <widget class="QPushButton" name="Boton_Chat">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>380</y>
+       <x>30</x>
+       <y>390</y>
        <width>100</width>
        <height>100</height>
       </rect>
@@ -116,8 +116,8 @@
     <widget class="QPushButton" name="Boton_Eventos">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>570</y>
+       <x>30</x>
+       <y>580</y>
        <width>100</width>
        <height>100</height>
       </rect>
@@ -194,7 +194,7 @@
      </property>
      <property name="icon">
       <iconset resource="../QRC/imagenesInicioSesion.qrc">
-       <normaloff>:/newPrefix/Icons/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png</normaloff>:/newPrefix/Icons/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png</iconset>
+       <normaloff>:/inicioSesion/Icons/Chat.png</normaloff>:/inicioSesion/Icons/Chat.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -242,7 +242,7 @@
         <x>50</x>
         <y>50</y>
         <width>514</width>
-        <height>64</height>
+        <height>431</height>
        </rect>
       </property>
       <property name="font">
@@ -256,103 +256,6 @@
       <property name="text">
        <string/>
       </property>
-     </widget>
-     <widget class="QLabel" name="label_Añadir_Miembros">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>130</y>
-        <width>1000</width>
-        <height>50</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>20</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: #01233C;</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QWidget" name="widget_CheckBox" native="true">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>180</y>
-        <width>514</width>
-        <height>300</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: #66ADCC;</string>
-      </property>
-      <widget class="QCheckBox" name="checkBox_1">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>500</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: #01233C;</string>
-       </property>
-       <property name="text">
-        <string>Usuario disponible</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>80</y>
-         <width>500</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: #01233C;</string>
-       </property>
-       <property name="text">
-        <string>Usuario disponible</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_3">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>150</y>
-         <width>500</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: #01233C;</string>
-       </property>
-       <property name="text">
-        <string>Usuario disponible</string>
-       </property>
-      </widget>
      </widget>
     </widget>
    </widget>
@@ -374,18 +277,18 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pushButton_4">
+    <widget class="QPushButton" name="Boton_AgregarEvento">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>40</y>
-       <width>100</width>
-       <height>100</height>
+       <x>40</x>
+       <y>20</y>
+       <width>121</width>
+       <height>101</height>
       </rect>
      </property>
      <property name="icon">
       <iconset resource="../QRC/imagenesInicioSesion.qrc">
-       <normaloff>:/newPrefix/Icons/Conferencia.png</normaloff>:/newPrefix/Icons/Conferencia.png</iconset>
+       <normaloff>:/inicioSesion/Icons/Evento-removebg-preview.png</normaloff>:/inicioSesion/Icons/Evento-removebg-preview.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -400,7 +303,7 @@
        <x>60</x>
        <y>140</y>
        <width>619</width>
-       <height>274</height>
+       <height>71</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -436,18 +339,58 @@
        </property>
       </widget>
      </widget>
+     <widget class="QLabel" name="Label_NombreGrupo">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>581</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="widget_4" native="true">
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>450</y>
+       <y>253</y>
        <width>619</width>
-       <height>274</height>
+       <height>471</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string>background-color: #C0E1EC; border-radius: 0px;</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Boton_AjustesGrupo">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>30</y>
+       <width>100</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="icon">
+      <iconset resource="../QRC/imagenesInicioSesion.qrc">
+       <normaloff>:/inicioSesion/Icons/Ajustes.png</normaloff>:/inicioSesion/Icons/Ajustes.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
      </property>
     </widget>
    </widget>

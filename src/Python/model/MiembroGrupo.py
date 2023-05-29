@@ -10,4 +10,15 @@ class MiembroGrupo(Usuario):
         self.creadorGrupo:bool = creadorGrupo
         self.adminGrupo:bool = adminGrupo
         
+    def RevAdmnin(self):
+        if self.adminGrupo==False:
+            return False
+        else:
+            return True
+        
+    def RevDentroGrupo(self):
+        if self.dentroGrupo==False:
+            return False
+        else:
+            return True
     
