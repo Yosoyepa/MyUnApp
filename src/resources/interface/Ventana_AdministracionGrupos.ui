@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1269</width>
-    <height>908</height>
+    <width>1279</width>
+    <height>945</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -149,7 +149,7 @@
             </property>
             <property name="icon">
              <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
-              <normaloff>:/newPrefix/Icons/Chat_Room_Icon.png</normaloff>:/newPrefix/Icons/Chat_Room_Icon.png</iconset>
+              <normaloff>:/inicioSesion/Icons/Chat.png</normaloff>:/inicioSesion/Icons/Chat.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -507,7 +507,7 @@ background-color: rgb(0, 75, 115);</string>
                            <property name="frameShadow">
                             <enum>QFrame::Raised</enum>
                            </property>
-                           <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,10,1,80,25">
+                           <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,10,1,60,25">
                             <property name="spacing">
                              <number>0</number>
                             </property>
@@ -556,10 +556,44 @@ background-color: rgb(0, 75, 115);</string>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QListView" name="listView">
-                              <property name="styleSheet">
-                               <string notr="true">background-color: rgb(255, 255, 255);</string>
+                             <widget class="QScrollArea" name="scrollArea">
+                              <property name="widgetResizable">
+                               <bool>true</bool>
                               </property>
+                              <widget class="QWidget" name="scrollAreaWidgetContents_3">
+                               <property name="geometry">
+                                <rect>
+                                 <x>0</x>
+                                 <y>0</y>
+                                 <width>246</width>
+                                 <height>325</height>
+                                </rect>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_18">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QListWidget" name="listWidget">
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(255, 255, 255);</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
                              </widget>
                             </item>
                             <item>
@@ -687,7 +721,7 @@ background-color: rgb(0, 75, 115);</string>
                            <property name="frameShadow">
                             <enum>QFrame::Raised</enum>
                            </property>
-                           <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,10,1,80,30">
+                           <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,10,1,70,30">
                             <property name="spacing">
                              <number>0</number>
                             </property>
@@ -736,10 +770,44 @@ background-color: rgb(0, 75, 115);</string>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QListView" name="listView_5">
-                              <property name="styleSheet">
-                               <string notr="true">background-color: rgb(255, 255, 255);</string>
+                             <widget class="QScrollArea" name="scrollArea_2">
+                              <property name="widgetResizable">
+                               <bool>true</bool>
                               </property>
+                              <widget class="QWidget" name="scrollAreaWidgetContents_4">
+                               <property name="geometry">
+                                <rect>
+                                 <x>0</x>
+                                 <y>0</y>
+                                 <width>245</width>
+                                 <height>329</height>
+                                </rect>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_19">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QListWidget" name="listWidget_2">
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(255, 255, 255);</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
                              </widget>
                             </item>
                             <item>
