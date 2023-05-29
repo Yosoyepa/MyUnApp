@@ -1,50 +1,38 @@
-import sys
+
 import traceback
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
+
+
 
 from resources.QRC import images
 
 from model.CRUD import CRUD
 from Python.model.Usuario import Usuario
 
+class controllerCambioContrasena(QMainWindow):
+    def __init__(self, parent = None):
 
-class controllerCambio(QMainWindow):
-    def __init__(self):
         self.crd = CRUD()
+
         QMainWindow.__init__(self)
-        uic.loadUi('src/resources/interface/Ventana_Recuperacion.ui', self)
+        self.parent = parent
+        uic.loadUi('src/resources/interface/Ventana_Cambio_Contrasena.ui', self)
         self.set_image_opacity(0.44)
         
+        self.cambiarButton.clicked.connect(self.cambiaContrasena)
         
-        self.continuarButton.clicked.connect(self.enviarCodigo)
     
     def set_image_opacity(self, value):
         graphics_effect = QtWidgets.QGraphicsOpacityEffect(self.label_fondo)
         graphics_effect.setOpacity(value)
         self.label_fondo.setGraphicsEffect(graphics_effect)
 
+    def setCorreo(self, correo: str):
+        self.correo = correo
 
-    def enviarCodigo(self):
-        try:
-            correoUnalArr = self.textoEmail.text().split("@", 1)
-            correo_Unal = correoUnalArr[1]
-            if self.textoEmail.text() != "":
-                if correo_Unal != "unal.edu.co":
-                    self.crd.mandarCodigoVerificacion(self.textoEmail.text())
-                else:
-                    self.crd.mostrarCajaDeMensaje("ADVERTENCIA", "El correo escrito no es de la UNAL", QtWidgets.QMessageBox.Warning)
-            else:
-                self.crd.mostrarCajaDeMensaje("ADVERTENCIA", "No ha escrito ningún correo", QtWidgets.QMessageBox.Warning)
-        except:
-            print(traceback.format_exc())
-        self.crd.mandarCodigoVerificacion(self.textoEmail.text())
-
-'''
-app = QtWidgets.QApplication(sys.argv)
-controlador = controllerCambio()
-controlador.setWindowTitle("Recuperación contraseña")
-
-controlador.show()
-app.exec_()'''
+    def cambiaContrasena(self):
+        self.crd.cambiarContrasena(self.correo, self.textoContrasena.text())    
+        self.parent.habilitarVentana(True)    
+        self.close()

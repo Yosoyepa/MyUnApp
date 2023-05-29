@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Window_Codigo</class>
  <widget class="QMainWindow" name="Window_Codigo">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -50,7 +53,7 @@
      <rect>
       <x>160</x>
       <y>0</y>
-      <width>475</width>
+      <width>512</width>
       <height>552</height>
      </rect>
     </property>
@@ -90,18 +93,22 @@
         <string notr="true">color: #FFFFFF; background-color: transparent;</string>
        </property>
        <property name="text">
-        <string>Por favor indica el correo asociado a la cuenta:</string>
+        <string>Por favor digita el código
+que te enviamos al correo:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignHCenter">
       <widget class="QLineEdit" name="textoCodigo">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>100</width>
          <height>30</height>
         </size>
        </property>
@@ -121,12 +128,21 @@
        </property>
        <property name="styleSheet">
         <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:15px;
-padding-left: 10px</string>
+padding-left: 16px</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="maxLength">
+        <number>5</number>
+       </property>
+       <property name="placeholderText">
+        <string>00000</string>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
        <property name="spacing">
         <number>21</number>
        </property>
@@ -190,55 +206,29 @@ QPushButton:hover{
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QPushButton" name="atrasButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
-	background-color:#FFFFFF; 
-	color:#01233C; 
-	border-radius:15px;
-}
-
-QPushButton:hover{
-	background-color:#01233C; 
-	color:#FFFFFF; 
-	border-radius:15px;
-}</string>
-         </property>
-         <property name="text">
-          <string>Ir atrás</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="labelColor">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>536</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:#01233C</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>labelColor</zorder>
+   <zorder>label_fondo</zorder>
+   <zorder>verticalLayoutWidget</zorder>
   </widget>
  </widget>
  <resources>

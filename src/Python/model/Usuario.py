@@ -54,22 +54,5 @@ class Usuario:
         return check_password_hash(contrasenaHasheada, contrasenaSinEncriptar)
 
     @classmethod
-    def Mandar_Codigo(cls, correo):
-        Codigo = ""
-        for i in range(5):
-            Codigo += str(randint(0,9))
-        print(Codigo)
-
-        message = "Hola, tu codigo es: " + Codigo
-        subject = "Envio de Codigo"
-        message = 'Subject: {}\n\n{}'.format(subject,message)
-
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        password = "tsmicpleanexdnsm" #contraseña ocultada en env/.env
-        server.starttls()
-        server.login("myunapp3@gmail.com", password)
-        server.sendmail ('myunapp3@gmail.com', correo, message) 
-        server.quit()
-
-        return Codigo
-    
+    def hashearContrasena(cls, contrasena: str) -> str:
+        return generate_password_hash(contrasena, method="scrypt")

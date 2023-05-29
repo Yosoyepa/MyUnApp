@@ -58,8 +58,27 @@ class CRUD:
         
         return None
         
+    def cambiarContrasena(self, correo, contrasena):
+        try:
+            contrasena = Usuario.hashearContrasena(contrasena)
+            query = (f"UPDATE USUARIO SET CONTRASENA_USUARIO = '{contrasena}' WHERE CORREO_USUARIO = '{correo}'")
+            self.__cur.execute(query)
+            self.__conexion.commit()
+            self.mostrarCajaDeMensaje("COMPLETADO", "La contraseña ha sido cambiada con exito.", QMessageBox.Information)
+        except:
+            print(traceback.format_exc())
 
-
+    def usuarioExiste(self, correo):  
+        try:     
+            query = f"select CORREO_USUARIO from USUARIO WHERE CORREO_USUARIO= '{correo}'"
+            self.__cur.execute(query)
+            result = self.__cur.fetchone()
+            if result != None:
+                return True
+            else:
+                self.mostrarCajaDeMensaje("ADVERTENCIA", "El correo escrito no está registrado.", QMessageBox.Critical)
+        except:            
+            print(traceback.format_exc())         
 
     def mostrarCajaDeMensaje(self,Titulo,Cuerpo, icono):
         msg = QMessageBox()
