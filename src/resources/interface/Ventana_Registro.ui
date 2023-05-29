@@ -421,14 +421,35 @@ opacity: 0.5</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>30</y>
+      <y>2</y>
       <width>304</width>
-      <height>463</height>
+      <height>557</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>80</number>
+     </property>
+     <property name="bottomMargin">
+      <number>80</number>
+     </property>
+     <item alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label_logo">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>317</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>250</width>
+         <height>317</height>
+        </size>
+       </property>
        <property name="text">
         <string/>
        </property>

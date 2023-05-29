@@ -26,169 +26,12 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color:#01233C</string>
    </property>
-   <widget class="QLineEdit" name="Line_Usuario">
-    <property name="geometry">
-     <rect>
-      <x>215</x>
-      <y>300</y>
-      <width>370</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
-padding-left: 5px</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="cursorPosition">
-     <number>0</number>
-    </property>
-    <property name="readOnly">
-     <bool>false</bool>
-    </property>
-    <property name="placeholderText">
-     <string>Correo</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="Line_Contrasena">
-    <property name="geometry">
-     <rect>
-      <x>215</x>
-      <y>364</y>
-      <width>371</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
-padding-left: 5px</string>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="maxLength">
-     <number>12</number>
-    </property>
-    <property name="echoMode">
-     <enum>QLineEdit::Password</enum>
-    </property>
-    <property name="readOnly">
-     <bool>false</bool>
-    </property>
-    <property name="placeholderText">
-     <string notr="true">Contraseña</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Ingresar">
-    <property name="geometry">
-     <rect>
-      <x>324</x>
-      <y>404</y>
-      <width>146</width>
-      <height>45</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>13</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-      <underline>false</underline>
-      <strikeout>false</strikeout>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
-	background-color:#FFFFFF; 
-	color:#01233C; 
-	border-radius:20px;
-}
-
-QPushButton:hover{
-	background-color:#01233C; 
-	color:#FFFFFF; 
-	border-radius:20px;
-}</string>
-    </property>
-    <property name="text">
-     <string>Ingresar</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>16</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Boton_Cracion_Usuario">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>355</x>
-      <y>456</y>
-      <width>90</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="acceptDrops">
-     <bool>false</bool>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
-	color: #FFFFFF; 
-	background-color: transparent; 
-	border-radius:10px;
-}
-QPushButton:hover{
-	color: #00EEFF; 
-	background-color: transparent; 
-	border-radius:10px;
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Registrarse</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="Label_Imagen">
     <property name="enabled">
      <bool>true</bool>
@@ -220,114 +63,249 @@ QPushButton:hover{
      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
     </property>
    </widget>
-   <widget class="QLabel" name="Label_Usuario">
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>268</y>
-      <width>181</width>
-      <height>31</height>
+      <x>0</x>
+      <y>0</y>
+      <width>800</width>
+      <height>536</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
     <property name="styleSheet">
-     <string notr="true">color: #FFFFFF; background-color: transparent;</string>
+     <string notr="true">background-color: transparent</string>
     </property>
-    <property name="text">
-     <string>Correo </string>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
     </property>
-   </widget>
-   <widget class="QLabel" name="Label_Contrasena">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>332</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: #FFFFFF; background-color: transparent;</string>
-    </property>
-    <property name="text">
-     <string>Contraseña</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>-20</x>
-      <y>-20</y>
-      <width>831</width>
-      <height>535</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-      <horstretch>34</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="sizeIncrement">
-     <size>
-      <width>0</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/newPrefix/Fondo.png);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>:/newPrefix/Fondo.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Boton_Cambio_Contra">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>481</y>
-      <width>180</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Microsoft YaHei UI</family>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>80</y>
+       <width>801</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>200</number>
+      </property>
+      <property name="rightMargin">
+       <number>200</number>
+      </property>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="logo">
+        <property name="minimumSize">
+         <size>
+          <width>126</width>
+          <height>160</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>126</width>
+          <height>160</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: transparent;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../QRC/imagenesInicioSesion.qrc">:/inicioSesion/Icons/logo.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="Label_Usuario">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #FFFFFF; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string>Correo </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="Line_Usuario">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="cursorPosition">
+         <number>0</number>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="placeholderText">
+         <string>Correo</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="Label_Contrasena">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #FFFFFF; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string>Contraseña</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="Line_Contrasena">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:10px;
+padding-left: 5px</string>
+        </property>
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="maxLength">
+         <number>12</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Contraseña</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QPushButton" name="Ingresar">
+        <property name="minimumSize">
+         <size>
+          <width>170</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>170</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+          <weight>75</weight>
+          <italic>false</italic>
+          <bold>true</bold>
+          <underline>false</underline>
+          <strikeout>false</strikeout>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	background-color:#FFFFFF; 
+	color:#01233C; 
+	border-radius:15px;
+}
+
+QPushButton:hover{
+	background-color:#01233C; 
+	color:#FFFFFF; 
+	border-radius:15px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Ingresar</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>16</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Boton_Cracion_Usuario">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="acceptDrops">
+         <bool>false</bool>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
 	color: #FFFFFF; 
 	background-color: transparent; 
 	border-radius:10px;
@@ -338,46 +316,46 @@ QPushButton:hover{
 	border-radius:10px;
 }
 </string>
-    </property>
-    <property name="text">
-     <string>¿Olvidaste tu contraseña?</string>
-    </property>
+        </property>
+        <property name="text">
+         <string>Registrarse</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Boton_Cambio_Contra">
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei UI</family>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	color: #FFFFFF; 
+	background-color: transparent; 
+	border-radius:10px;
+}
+QPushButton:hover{
+	color: #00EEFF; 
+	background-color: transparent; 
+	border-radius:10px;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>¿Olvidaste tu contraseña?</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
-   <widget class="QLabel" name="logo">
-    <property name="geometry">
-     <rect>
-      <x>337</x>
-      <y>80</y>
-      <width>126</width>
-      <height>160</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: transparent;</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Box</enum>
-    </property>
-    <property name="lineWidth">
-     <number>0</number>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="../QRC/imagenesInicioSesion.qrc">:/inicioSesion/Icons/logo.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <zorder>label</zorder>
-   <zorder>Label_Imagen</zorder>
-   <zorder>Line_Usuario</zorder>
-   <zorder>Line_Contrasena</zorder>
-   <zorder>Ingresar</zorder>
-   <zorder>Boton_Cracion_Usuario</zorder>
-   <zorder>Label_Usuario</zorder>
-   <zorder>Label_Contrasena</zorder>
-   <zorder>Boton_Cambio_Contra</zorder>
-   <zorder>logo</zorder>
   </widget>
  </widget>
  <resources>
