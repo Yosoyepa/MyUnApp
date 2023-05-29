@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="inicioSesion">
+    <file>Icons/Adjust_Icon.png</file>
+    <file>Icons/Events_Icon.png</file>
     <file>Icons/Evento.png</file>
     <file>Icons/Chat.png</file>
     <file>Icons/Ajustes.png</file>
@@ -8,6 +10,7 @@
     <file>Icons/logo.png</file>
   </qresource>
   <qresource prefix="newPrefix">
+    <file>Icons/Chat_Room_Icon.png</file>
     <file>Icons/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png</file>
     <file>Icons/back.png</file>
     <file>Icons/Conferencia.png</file>
