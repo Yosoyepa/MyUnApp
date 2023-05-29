@@ -3,8 +3,10 @@ import sys
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
-#imports de vistas
+#imports de controladores
 from Python.controller.ControllerMenu import controllerMenu
+from controller.ControllerRecuperacionContrasena import controllerRecuperacion
+
 from resources.QRC import images
 
 #import de model
@@ -22,6 +24,10 @@ class controllerInicioSesion(QMainWindow):
         self.crd = CRUD()
         #ventanas
         self.menu = controllerMenu()
+        self.recuperacionContrasena = controllerRecuperacion(self)
+
+
+        self.Boton_Cambio_Contra.clicked.connect(self.abrirRecuperacion)
 
     def set_image_opacity(self, value):
         graphics_effect = QtWidgets.QGraphicsOpacityEffect(self.Label_Imagen)
@@ -44,8 +50,14 @@ class controllerInicioSesion(QMainWindow):
                 return False
 
     
+    def abrirRecuperacion(self):
+        self.habilitarVentana(False)
+        self.recuperacionContrasena.show()
+        
 
-    
+    def habilitarVentana(self, habilitar: bool):
+        self.frame.setEnabled(habilitar)
+        self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, habilitar)
     
 '''
 

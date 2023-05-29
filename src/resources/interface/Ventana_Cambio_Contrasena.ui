@@ -70,7 +70,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-10</x>
       <y>0</y>
       <width>801</width>
       <height>536</height>
@@ -127,7 +127,7 @@
          <string notr="true">color: #FFFFFF; background-color: transparent;</string>
         </property>
         <property name="text">
-         <string>Por favor indica el correo asociado a la cuenta:</string>
+         <string>Escribe la nueva contraseña:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -135,7 +135,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="textoEmail">
+       <widget class="QLineEdit" name="textoContrasena">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -160,13 +160,16 @@
          <string notr="true">background-color:#FFFFFF; color:#01233C; border-radius:15px;
 padding-left: 8px</string>
         </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
         <property name="placeholderText">
-         <string>Correo</string>
+         <string>Contraseña</string>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
         <property name="spacing">
          <number>21</number>
         </property>
@@ -186,52 +189,7 @@ padding-left: 8px</string>
          <number>50</number>
         </property>
         <item>
-         <widget class="QPushButton" name="atrasButton">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>35</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton{
-	background-color:#FFFFFF; 
-	color:#01233C; 
-	border-radius:15px;
-}
-
-QPushButton:hover{
-	background-color:#01233C; 
-	color:#FFFFFF; 
-	border-radius:15px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Ir atrás</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="continuarButton">
+         <widget class="QPushButton" name="cambiarButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -271,7 +229,7 @@ QPushButton:hover{
 }</string>
           </property>
           <property name="text">
-           <string>Continuar</string>
+           <string>Cambiar</string>
           </property>
          </widget>
         </item>
