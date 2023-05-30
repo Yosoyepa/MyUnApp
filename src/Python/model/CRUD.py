@@ -109,3 +109,31 @@ class CRUD:
             print(traceback.format_exc())
 
         return Codigo
+    
+    # def createGrupo(self, nombre, descripcion, usuario):
+    #     try:
+    #         query = (f"INSERT INTO GRUPO VALUES(NULL, '{nombre}', '{descripcion}', 1, '{usuario.correo}')")
+    #         self.__cur.execute(query)
+    #         self.__conexion.commit()
+    #         print("Grupo creado con exito")
+    #     except:
+    #         print(traceback.format_exc())
+
+    def obtener_nombres_grupo(self, correo):
+        try:    
+            query = (f"SELECT G.NOMBRE_GRUPO FROM GRUPO G INNER JOIN MIEMBRO_GRUPO_ MG ON G.ID_GRUPO = MG.ID_GRUPO WHERE MG.CORREO_USUARIO ='{correo}'")
+            self.__cur.execute(query)
+            self.Nombres_grupos = self.__cur.fetchall()
+            return self.Nombres_grupos
+        except:
+            print(traceback.format_exc())
+
+    def obtener_miembros_grupos(self, nombre_grupo):
+        try:    
+            query = (f"SELECT U.NOMBRE_USUARIO, U.APELLIDO_USUARIO FROM USUARIO U INNER JOIN MIEMBRO_GRUPO_ MG ON U.CORREO_USUARIO = MG.CORREO_USUARIO INNER JOIN GRUPO G ON G.ID_GRUPO = MG.ID_GRUPO WHERE G.NOMBRE_GRUPO ='{nombre_grupo}'")
+            self.__cur.execute(query)
+            self.Miembros_grupos = self.__cur.fetchall()
+            print(self.Miembros_grupos)
+            return self.Miembros_grupos
+        except:
+            print(traceback.format_exc())

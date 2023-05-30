@@ -9,7 +9,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from Python.controller.ControllerMenu import controllerMenu
 from Python.controller.ControllerInicioSesion import controllerInicioSesion
 from Python.controller.ControllerRegistro import controllerRegistro
-
+from Python.controller.Controller_Chat import controller_Chat
 
 class app(QMainWindow):
     def __init__(self) :
@@ -18,7 +18,7 @@ class app(QMainWindow):
 
         self.inicioSesion = controllerInicioSesion()
         self.registro = controllerRegistro(self)
-        self.menuC = controllerMenu()        
+        self.menuC = controller_Chat()        
         
 
         self.pilaWidgets.addWidget(self.inicioSesion)
@@ -48,6 +48,7 @@ class app(QMainWindow):
         self.registro.boton_Iniciar_sesion.clicked.connect(self.cambioInicioSesionFromRegistro)
         self.registro.Boton_Registro.clicked.connect(self.botonRegistrar) 
 
+        
 
 ####CAMBIOS
     def cambioInicioSesionFromRegistro(self):
@@ -71,7 +72,11 @@ class app(QMainWindow):
        
     def botonRegistrar(self):
         self.registro.registrar()
-        
+
+
+    def botonGrupos_Chat(self):
+        self.menuC.actualizar_lista_widget_grupos()
+
 
     
 

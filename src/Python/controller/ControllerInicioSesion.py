@@ -5,6 +5,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #imports de controladores
 from Python.controller.ControllerMenu import controllerMenu
+## Se añade el controlador de chat para probar la interfaz y controlador
+from Python.controller.Controller_Chat import controller_Chat
 from controller.ControllerRecuperacionContrasena import controllerRecuperacion
 
 from resources.QRC import images
@@ -23,11 +25,12 @@ class controllerInicioSesion(QMainWindow):
     	
         self.crd = CRUD()
         #ventanas
-        self.menu = controllerMenu()
+        self.menu = controller_Chat()
         self.recuperacionContrasena = controllerRecuperacion(self)
 
 
         self.Boton_Cambio_Contra.clicked.connect(self.abrirRecuperacion)
+        
 
     def set_image_opacity(self, value):
         graphics_effect = QtWidgets.QGraphicsOpacityEffect(self.Label_Imagen)
@@ -44,6 +47,7 @@ class controllerInicioSesion(QMainWindow):
             print(usr)
             if(usr != None):
                 usr.mostrar()
+                self.menu.set_usuario(usr)
                 self.menu.show()        
                 return True
             else: 
@@ -58,7 +62,8 @@ class controllerInicioSesion(QMainWindow):
     def habilitarVentana(self, habilitar: bool):
         self.frame.setEnabled(habilitar)
         self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, habilitar)
-    
+
+
 '''
 
 app = QtWidgets.QApplication(sys.argv)

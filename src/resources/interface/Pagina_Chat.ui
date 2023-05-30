@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1050</width>
-    <height>692</height>
+    <width>1095</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -88,8 +88,8 @@
            <widget class="QPushButton" name="pushButton">
             <property name="minimumSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="text">
@@ -101,8 +101,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="flat">
@@ -114,8 +114,8 @@
            <widget class="QPushButton" name="pushButton_2">
             <property name="minimumSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="text">
@@ -127,8 +127,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="flat">
@@ -140,8 +140,8 @@
            <widget class="QPushButton" name="pushButton_3">
             <property name="minimumSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="text">
@@ -153,8 +153,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="flat">
@@ -166,8 +166,8 @@
            <widget class="QPushButton" name="pushButton_4">
             <property name="minimumSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="text">
@@ -179,8 +179,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="flat">
@@ -192,8 +192,8 @@
            <widget class="QPushButton" name="pushButton_5">
             <property name="minimumSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="text">
@@ -205,8 +205,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>80</width>
-              <height>80</height>
+              <width>100</width>
+              <height>100</height>
              </size>
             </property>
             <property name="flat">
@@ -256,6 +256,9 @@
           </item>
           <item>
            <widget class="QFrame" name="frame_4">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -334,7 +337,10 @@
                 <item>
                  <widget class="QFrame" name="frame_chat">
                   <property name="styleSheet">
-                   <string notr="true">background-color: rgb(0, 75, 115);</string>
+                   <string notr="true">background-color: rgb(0, 75, 115);
+
+border-radius: 20px
+</string>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::StyledPanel</enum>
@@ -387,7 +393,7 @@
                         <property name="minimumSize">
                          <size>
                           <width>80</width>
-                          <height>70</height>
+                          <height>80</height>
                          </size>
                         </property>
                         <property name="text">
@@ -400,7 +406,7 @@
                         <property name="iconSize">
                          <size>
                           <width>80</width>
-                          <height>70</height>
+                          <height>80</height>
                          </size>
                         </property>
                         <property name="flat">
@@ -427,7 +433,9 @@
                    <item>
                     <widget class="QFrame" name="frame_14">
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(192, 225, 236);</string>
+                      <string notr="true">background-color: rgb(192, 225, 236);
+
+border-radius: 0px</string>
                      </property>
                      <property name="frameShape">
                       <enum>QFrame::StyledPanel</enum>
@@ -458,8 +466,8 @@
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>273</width>
-                           <height>257</height>
+                           <width>294</width>
+                           <height>274</height>
                           </rect>
                          </property>
                          <property name="styleSheet">
@@ -488,9 +496,16 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QFrame" name="frame_12">
+                 <widget class="QFrame" name="frame_grupos">
                   <property name="styleSheet">
-                   <string notr="true">background-color: rgb(0, 75, 115);</string>
+                   <string notr="true">background-color: rgb(0, 75, 115);
+
+
+
+
+
+
+</string>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::StyledPanel</enum>
@@ -498,6 +513,186 @@
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_7" stretch="4,5,20">
+                   <property name="leftMargin">
+                    <number>30</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>30</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>40</number>
+                   </property>
+                   <item>
+                    <widget class="QFrame" name="frame_16">
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,10">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QPushButton" name="pushButton_7">
+                        <property name="minimumSize">
+                         <size>
+                          <width>50</width>
+                          <height>50</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="../QRC/imagenesInicioSesion.qrc">
+                          <normaloff>:/newPrefix/Icons/Conferencia.png</normaloff>:/newPrefix/Icons/Conferencia.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>50</width>
+                          <height>50</height>
+                         </size>
+                        </property>
+                        <property name="flat">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QFrame" name="frame_12">
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="frameShape">
+                         <enum>QFrame::StyledPanel</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Raised</enum>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QScrollArea" name="scrollArea_2">
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(192, 225, 236);
+
+</string>
+                     </property>
+                     <property name="widgetResizable">
+                      <bool>true</bool>
+                     </property>
+                     <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                      <property name="geometry">
+                       <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>313</width>
+                        <height>73</height>
+                       </rect>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">.</string>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_9">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QListWidget" name="lista_grupos">
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                         <property name="horizontalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAlwaysOff</enum>
+                         </property>
+                         <property name="itemAlignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QScrollArea" name="scrollArea_3">
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(192, 225, 236);
+
+</string>
+                     </property>
+                     <property name="widgetResizable">
+                      <bool>true</bool>
+                     </property>
+                     <widget class="QWidget" name="scrollAreaWidgetContents_3">
+                      <property name="geometry">
+                       <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>330</width>
+                        <height>261</height>
+                       </rect>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_8">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QListWidget" name="lista_miembros"/>
+                       </item>
+                      </layout>
+                     </widget>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                 <item>
