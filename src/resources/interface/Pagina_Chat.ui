@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1095</width>
-    <height>717</height>
+    <width>1227</width>
+    <height>776</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -461,18 +461,57 @@ border-radius: 0px</string>
                         <property name="widgetResizable">
                          <bool>true</bool>
                         </property>
-                        <widget class="QWidget" name="scrollAreaWidgetContents">
+                        <widget class="QWidget" name="widget_2">
                          <property name="geometry">
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>294</width>
-                           <height>274</height>
+                           <width>343</width>
+                           <height>304</height>
                           </rect>
                          </property>
                          <property name="styleSheet">
                           <string notr="true">background-color: rgb(121, 184, 211);</string>
                          </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,8">
+                          <property name="spacing">
+                           <number>5</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>10</number>
+                          </property>
+                          <item>
+                           <widget class="QWidget" name="widget_chat" native="true"/>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="line_text_chat">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>30</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">
+background-color: rgb(192, 225, 236);
+
+border-radius: 10px </string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </widget>
                       </item>
@@ -607,7 +646,7 @@ border-radius: 0px</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>313</width>
+                        <width>362</width>
                         <height>73</height>
                        </rect>
                       </property>
@@ -671,8 +710,8 @@ border-radius: 0px</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>330</width>
-                        <height>261</height>
+                        <width>379</width>
+                        <height>290</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_8">
