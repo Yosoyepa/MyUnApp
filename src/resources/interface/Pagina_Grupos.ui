@@ -96,7 +96,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/newPrefix/Icons/Exterior.png</normaloff>:/newPrefix/Icons/Exterior.png</iconset>
             </property>
             <property name="iconSize">
@@ -122,7 +122,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/newPrefix/Icons/User_Groups_Icon.png</normaloff>:/newPrefix/Icons/User_Groups_Icon.png</iconset>
             </property>
             <property name="iconSize">
@@ -148,7 +148,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/newPrefix/Icons/Chat_Room_Icon.png</normaloff>:/newPrefix/Icons/Chat_Room_Icon.png</iconset>
             </property>
             <property name="iconSize">
@@ -174,7 +174,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/newPrefix/Icons/Events_Icon.png</normaloff>:/newPrefix/Icons/Events_Icon.png</iconset>
             </property>
             <property name="iconSize">
@@ -200,7 +200,7 @@
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+             <iconset resource="../QRC/imagenesInicioSesion.qrc">
               <normaloff>:/newPrefix/Icons/Adjust_Icon.png</normaloff>:/newPrefix/Icons/Adjust_Icon.png</iconset>
             </property>
             <property name="iconSize">
@@ -443,7 +443,7 @@
                             <string/>
                            </property>
                            <property name="icon">
-                            <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+                            <iconset resource="../QRC/imagenesInicioSesion.qrc">
                              <normaloff>:/newPrefix/Icons/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png</normaloff>:/newPrefix/Icons/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png</iconset>
                            </property>
                            <property name="iconSize">
@@ -799,7 +799,7 @@
                             <string/>
                            </property>
                            <property name="icon">
-                            <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+                            <iconset resource="../QRC/imagenesInicioSesion.qrc">
                              <normaloff>:/newPrefix/Icons/User_Groups_Icon.png</normaloff>:/newPrefix/Icons/User_Groups_Icon.png</iconset>
                            </property>
                            <property name="iconSize">
@@ -836,7 +836,7 @@
                             <string/>
                            </property>
                            <property name="icon">
-                            <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+                            <iconset resource="../QRC/imagenesInicioSesion.qrc">
                              <normaloff>:/newPrefix/Icons/Adjust_Icon.png</normaloff>:/newPrefix/Icons/Adjust_Icon.png</iconset>
                            </property>
                            <property name="iconSize">
@@ -881,7 +881,7 @@
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QListWidget" name="listWidget"/>
+                           <widget class="QListWidget" name="List_MisGrupos"/>
                           </item>
                          </layout>
                         </widget>
@@ -903,9 +903,9 @@
                           <number>0</number>
                          </property>
                          <item>
-                          <widget class="QPushButton" name="pushButton_7">
+                          <widget class="QPushButton" name="Boton_BusGrupo">
                            <property name="enabled">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </property>
                            <property name="minimumSize">
                             <size>
@@ -917,7 +917,7 @@
                             <string/>
                            </property>
                            <property name="icon">
-                            <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+                            <iconset resource="../QRC/imagenesInicioSesion.qrc">
                              <normaloff>:/newPrefix/Icons/Conferencia.png</normaloff>:/newPrefix/Icons/Conferencia.png</iconset>
                            </property>
                            <property name="iconSize">
@@ -959,7 +959,7 @@
                            <height>194</height>
                           </rect>
                          </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_12">
+                         <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,10,2">
                           <property name="spacing">
                            <number>0</number>
                           </property>
@@ -976,7 +976,63 @@
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QListWidget" name="listWidget_2"/>
+                           <widget class="QLineEdit" name="lineEdit">
+                            <property name="font">
+                             <font>
+                              <pointsize>14</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: rgb(0, 107, 161);</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QListWidget" name="List_BuscGrupos"/>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_20">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_9">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <widget class="QPushButton" name="pushButton">
+                               <property name="font">
+                                <font>
+                                 <pointsize>14</pointsize>
+                                 <weight>75</weight>
+                                 <bold>true</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(0, 101, 152);</string>
+                               </property>
+                               <property name="text">
+                                <string>Mandar solicitud</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
                           </item>
                          </layout>
                         </widget>
@@ -1040,7 +1096,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc"/>
+  <include location="../QRC/imagenesInicioSesion.qrc"/>
  </resources>
  <connections/>
 </ui>
