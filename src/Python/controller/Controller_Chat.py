@@ -15,7 +15,18 @@ class controller_Chat(QMainWindow):
         self.pushButton_7.clicked.connect(self.actualizar_lista_widget_grupos)
         self.lista_grupos.itemClicked.connect(self.mostrar_miembros_grupos)
     
+    ##Metodo para chats grupales
 
+    def chat_grupal(self, nombre_grupo):
+        #Limpiar el contenido existente en el area del chat
+        self.widget_chat.clear()
+        #Obtener los mensajes del grupo
+        self.crd.obtener_mensajes_grupo(nombre_grupo)
+        pass
+
+
+
+    ##Metodos para saber los grupos a los que pertenece el usuario y los miembros de cada grupo
     def actualizar_lista_widget_grupos(self):
         self.crd = CRUD()
         self.crd.obtener_nombres_grupo(self.usuario.correo) 
@@ -38,7 +49,7 @@ class controller_Chat(QMainWindow):
         self.lista_miembros.clear()
         for miembro in self.crd.Miembros_grupos:
             item = QtWidgets.QListWidgetItem()
-            item.setText(str(miembro[0]))
+            item.setText(str(miembro[0])+ " " + str(miembro[1]))
             self.lista_miembros.addItem(item)
 
     

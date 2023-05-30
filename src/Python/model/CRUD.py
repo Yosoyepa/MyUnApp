@@ -137,3 +137,12 @@ class CRUD:
             return self.Miembros_grupos
         except:
             print(traceback.format_exc())
+
+    def obtener_mensajes_grupo(self, nombre_grupo):
+        try:    
+            query = (f"SELECT M.CUERPO_MENSAJE, M.FECHA_MENSAJE, U.NOMBRE_USUARIO, U.APELLIDO_USUARIO FROM MENSAJE M INNER JOIN USUARIO U ON M.CORREO_USUARIO = U.CORREO_USUARIO INNER JOIN GRUPO G ON G.ID_GRUPO = M.ID_GRUPO WHERE G.NOMBRE_GRUPO ='{nombre_grupo}'")
+            self.__cur.execute(query)
+            self.Mensajes_grupo = self.__cur.fetchall()
+            return self.Mensajes_grupo
+        except:
+            print(traceback.format_exc())

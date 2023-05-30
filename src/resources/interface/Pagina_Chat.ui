@@ -641,8 +641,14 @@ border-radius: 0px</string>
                          <property name="horizontalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
                          </property>
+                         <property name="movement">
+                          <enum>QListView::Static</enum>
+                         </property>
+                         <property name="viewMode">
+                          <enum>QListView::ListMode</enum>
+                         </property>
                          <property name="itemAlignment">
-                          <set>Qt::AlignCenter</set>
+                          <set>Qt::AlignLeading</set>
                          </property>
                         </widget>
                        </item>
