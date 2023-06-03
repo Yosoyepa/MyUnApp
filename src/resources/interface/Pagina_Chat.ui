@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1227</width>
-    <height>776</height>
+    <width>726</width>
+    <height>593</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -466,14 +466,14 @@ border-radius: 0px</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>343</width>
-                           <height>304</height>
+                           <width>146</width>
+                           <height>194</height>
                           </rect>
                          </property>
                          <property name="styleSheet">
                           <string notr="true">background-color: rgb(121, 184, 211);</string>
                          </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,8">
+                         <layout class="QVBoxLayout" name="verticalLayout_10" stretch="0">
                           <property name="spacing">
                            <number>5</number>
                           </property>
@@ -490,25 +490,132 @@ border-radius: 0px</string>
                            <number>10</number>
                           </property>
                           <item>
-                           <widget class="QWidget" name="widget_chat" native="true"/>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="line_text_chat">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>30</height>
-                             </size>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">
-background-color: rgb(192, 225, 236);
-
-border-radius: 10px </string>
-                            </property>
-                            <property name="text">
+                           <widget class="QGroupBox" name="groupBox">
+                            <property name="title">
                              <string/>
                             </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_11">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <widget class="QGroupBox" name="groupBox_3">
+                               <property name="title">
+                                <string/>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_13">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1">
+                                  <property name="spacing">
+                                   <number>0</number>
+                                  </property>
+                                  <property name="topMargin">
+                                   <number>0</number>
+                                  </property>
+                                  <item>
+                                   <widget class="QWidget" name="widget" native="true">
+                                    <layout class="QVBoxLayout" name="verticalLayout_14">
+                                     <property name="spacing">
+                                      <number>0</number>
+                                     </property>
+                                     <property name="leftMargin">
+                                      <number>0</number>
+                                     </property>
+                                     <property name="topMargin">
+                                      <number>0</number>
+                                     </property>
+                                     <property name="rightMargin">
+                                      <number>0</number>
+                                     </property>
+                                     <property name="bottomMargin">
+                                      <number>0</number>
+                                     </property>
+                                     <item>
+                                      <widget class="QListWidget" name="chat_listWidget">
+                                       <property name="sizeAdjustPolicy">
+                                        <enum>QAbstractScrollArea::AdjustToContents</enum>
+                                       </property>
+                                       <property name="isWrapping" stdset="0">
+                                        <bool>false</bool>
+                                       </property>
+                                       <property name="resizeMode">
+                                        <enum>QListView::Adjust</enum>
+                                       </property>
+                                       <property name="uniformItemSizes">
+                                        <bool>false</bool>
+                                       </property>
+                                       <property name="wordWrap">
+                                        <bool>true</bool>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                    </layout>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QGroupBox" name="groupBox_2">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="title">
+                                <string/>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                                <item>
+                                 <widget class="QLineEdit" name="message_line_edit">
+                                  <property name="styleSheet">
+                                   <string notr="true">border-color: rgb(0, 75, 115);
+background-color: rgb(192, 225, 236);
+border-radius: 5px;</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="send_button">
+                                  <property name="text">
+                                   <string>Enviar</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                            </layout>
                            </widget>
                           </item>
                          </layout>
@@ -646,7 +753,7 @@ border-radius: 10px </string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>362</width>
+                        <width>165</width>
                         <height>73</height>
                        </rect>
                       </property>
@@ -710,8 +817,8 @@ border-radius: 10px </string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>379</width>
-                        <height>290</height>
+                        <width>182</width>
+                        <height>182</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_8">

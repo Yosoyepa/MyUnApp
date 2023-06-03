@@ -146,3 +146,21 @@ class CRUD:
             return self.Mensajes_grupo
         except:
             print(traceback.format_exc())
+
+    def enviar_mensaje_grupo(self, id_grupo, correo, mensaje):
+        try:
+            query = (f"INSERT INTO MENSAJE VALUES(NULL, '{id_grupo}', '{correo}', '{mensaje} , NOW(),')")
+            self.__cur.execute(query)
+            self.__conexion.commit()
+            print("Mensaje enviado con exito")
+        except:
+            print(traceback.format_exc())
+
+    def obtener_id_grupo(self, nombre_grupo):
+        try:
+            query = (f"SELECT ID_GRUPO FROM GRUPO WHERE NOMBRE_GRUPO = '{nombre_grupo}'")
+            self.__cur.execute(query)
+            self.id_grupo = self.__cur.fetchone()
+            return self.id_grupo
+        except:
+            print(traceback.format_exc())
