@@ -10,9 +10,9 @@ from Python.model.Usuario import Usuario
 class controllerMenu(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        uic.loadUi('src/resources/interface/Ventana_Grupos.ui', self)
+        uic.loadUi('src/resources/interface/Ventana_Menu.ui', self)
 
-        #self.Ingresar.clicked.connect(self.abrirMenu)
+
        
 '''
 app = QtWidgets.QApplication(sys.argv)

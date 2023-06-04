@@ -54,12 +54,13 @@ class controllerRegistro(QMainWindow):
                         
                         user.mostrar()
                         self.controllerCodigo.generarCodigo(user.correo)
-                        self.controllerCodigo.setUsuario(user)
-                        self.limpiarCampos()
-                        self.habilitarVentana(False)
+                        if self.controllerCodigo.codigo != None:
+                            self.controllerCodigo.setUsuario(user)
+                            self.limpiarCampos()
+                            self.habilitarVentana(False)
                    
-                        self.controllerCodigo.show()
-                        
+                            self.controllerCodigo.show()
+                                            
                             
                         
                     else:

@@ -85,7 +85,7 @@ class CRUD:
         msg.setIcon(icono)
         msg.setText(Titulo)
         msg.setInformativeText(Cuerpo)
-        msg.setWindowTitle("Error")
+        msg.setWindowTitle(Titulo)
         msg.exec_()
 
     def mandarCodigoVerificacion(self, correo):
@@ -100,12 +100,15 @@ class CRUD:
             message = 'Subject: {}\n\n{}'.format(subject,message)
 
             server = smtplib.SMTP('smtp.gmail.com', 587)
-            password = "tsmicpleanexdnsm" #contraseña ocultada en env/.env
+            password = "svwazwubbdybkswa" #contraseña ocultada en env/.env
             server.starttls()
             server.login("myunapp3@gmail.com", password)
             server.sendmail ('myunapp3@gmail.com', correo, message) 
             server.quit()
+            return Codigo
         except:
             print(traceback.format_exc())
+            self.mostrarCajaDeMensaje("Error", "No se pudo enviar el correo.", QMessageBox.Critical)
+            return None
 
-        return Codigo
+        
