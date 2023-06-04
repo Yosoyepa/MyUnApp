@@ -5,26 +5,26 @@ credentials_path = "src\Python\controller\exalted-summer-387903-263021af32c1.jso
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
 
-def recibir_mensajes():
-    # Configurar el suscriptor de Pub/Sub
-    project_id = 'exalted-summer-387903'
-    subscription_name = 'chat_myun-sub'
+def recibir_mensajes(usuario):
+    # Configurar el cliente de Pub/Sub
+    project_id = 'chat_myun'
     subscriber = pubsub_v1.SubscriberClient()
+
+    # Obtener la suscripción del usuario
+    subscription_name = f'{usuario}_subscription'
     subscription_path = subscriber.subscription_path(project_id, subscription_name)
 
     def callback(message):
-        # Procesar el mensaje recibido
-        print("Mensaje recibido:", message.data.decode())
+    # Obtener el remitente del mensaje
+        remitente = message.attributes.get('remitente')
 
-        # Aceptar el mensaje para que no se reenvíe
+    # Verificar si el remitente no es el usuario actual
+        if remitente != usuario:
+        # Procesar el mensaje recibido y mostrarlo en la interfaz de usuario
+            print(f"Mensaje recibido para {usuario}: {message.data.decode()}")
+
+    # Aceptar el mensaje para que no se reenvíe
         message.ack()
 
-    # Iniciar la recepción de mensajes
+    # Iniciar la escucha de mensajes
     subscriber.subscribe(subscription_path, callback=callback)
-
-    # Mantener el programa en ejecución
-    while True:
-        pass
-
-# Iniciar el servidor
-recibir_mensajes()

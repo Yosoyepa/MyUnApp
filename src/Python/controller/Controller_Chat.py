@@ -22,18 +22,6 @@ class controller_Chat(QMainWindow):
         #Cargar Receptor.ui
         self.receptor_widget = QtWidgets.QWidget()
         uic.loadUi('src/resources/interface/Receptor.ui', self.receptor_widget)
-    ##Metodo para chats grupales
-
-    # def Mostrar_chat_grupal(self, nombre_grupo):
-    #     #Toma el nombre del grupo
-    #     nombre_grupo = self.lista_grupos.currentItem().text()
-    #     #Limpiar el contenido existente en el area del chat
-    #     ##Pendiente de implementar.
-    #     #Obtener los mensajes del grupo
-    #     self.crd.obtener_mensajes_grupo(nombre_grupo)
-    #     #Mostrar los mensajes en el area del chat
-    #     for mensaje in self.crd.Mensajes_grupo:
-    #         self.widget_chat.append(mensaje[0] + "a las " + mensaje[1] + "de:" + mensaje[2])
 
     # Metodo para tomar el texto que digita el usuario y enviarlo al chat grupal mediante el line_text_chat
     def enviar_mensaje(self):
@@ -96,4 +84,4 @@ class controller_Chat(QMainWindow):
             item.setText(str(miembro[0])+ " " + str(miembro[1]))
             self.lista_miembros.addItem(item)
 
-    
+

@@ -1,19 +1,58 @@
 import os
+from google.pubsub_v1 import PubsubMessage
 from google.cloud import pubsub_v1
+
+
+from Python.model.CRUD import CRUD
+
 
 credentials_path = "src\Python\controller\exalted-summer-387903-263021af32c1.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
-def enviar_mensaje(mensaje):
+crd = CRUD()
+
+id_grupo = 8
+mensaje = 'WAZAAAAAAAAAAAAA'
+
+usuario = "Juan_Andrade"
+
+def crear_suscripcion(usuario,topic_name):
     # Configurar el cliente de Pub/Sub
     project_id = 'exalted-summer-387903'
-    topic_name = 'chat_myun'
+    subscriber = pubsub_v1.SubscriberClient()
+    topic_name = crd.obtener_topic_grupo(topic_name)
+
+    # Crear el nombre de la suscripción
+    subscription_name = f'{usuario}_subscription'
+
+     #Crear la suscripción
+    topic_path = f'projects/{project_id}/topics/{topic_name}'
+    subscription_path = f'projects/{project_id}/subscriptions/{subscription_name}'
+
+
+    subscription = pubsub_v1.Subscription(name=subscription_path, topic=topic_path)
+    subscriber.create_subscription(request=subscription)
+
+def enviar_mensaje(topic_name,mensaje):
+    # Configurar el cliente de Pub/Sub
+    project_id = 'exalted-summer-387903'
     publisher = pubsub_v1.PublisherClient()
-    topic_path = publisher.topic_path(project_id, topic_name)
+    topic_name = crd.obtener_topic_grupo(topic_name)
+    # Obtener el topic del chat grupal
+    topic_path = f'projects/{project_id}/topics/{topic_name}'
 
-    # Publicar el mensaje en el topic
-    future = publisher.publish(topic_path, mensaje.encode())
-    future.result()  # Esperar a que se complete la publicación
+    # Publicar el mensaje en el topic del chat grupal
+    future = publisher.publish(topic_path,mensaje.encode())
+    future.result()
 
-# Ejemplo de uso
-enviar_mensaje("Hola, este es un tercer mensaje desde el cliente")
+
+
+##crear_suscripcion(usuario,id_grupo)
+#crear_suscripcion()
+enviar_mensaje(id_grupo,mensaje)
+# mensaje_dict = {
+# 'remitente': usuario,
+# 'mensaje': mensaje
+# }
+# mensaje_json = json.dumps(mensaje_dict)
+# enviar_mensaje(mensaje_json, chat_grupal)
