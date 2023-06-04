@@ -70,9 +70,7 @@
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(121, 184, 211);
-border-radius: 10px
-</string>
+           <string notr="true">background-color: rgb(192, 225, 236);</string>
           </property>
           <property name="title">
            <string/>

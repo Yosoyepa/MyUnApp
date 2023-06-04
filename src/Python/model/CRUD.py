@@ -170,6 +170,6 @@ class CRUD:
             query = (f"SELECT TEMA_GRUPO FROM GRUPO WHERE ID_GRUPO = '{id_grupo}'")
             self.__cur.execute(query)
             self.topic_grupo = self.__cur.fetchone()
-            return self.topic_grupo[0]
+            return self.topic_grupo
         except:
             print(traceback.format_exc())

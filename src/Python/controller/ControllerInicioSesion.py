@@ -53,7 +53,7 @@ class controllerInicioSesion(QMainWindow):
             else: 
                 return False
 
-    
+
     def abrirRecuperacion(self):
         self.habilitarVentana(False)
         self.recuperacionContrasena.show()
