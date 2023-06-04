@@ -6,12 +6,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 #imports de controladores
 from Python.controller.ControllerMenu import controllerMenu
 from controller.ControllerRecuperacionContrasena import controllerRecuperacion
+from Python.controller.ControllerBusquedaGrupos import controllerbusquedaGrupo
 
 from resources.QRC import images
 
 #import de model
 from Python.model.CRUD import CRUD
 from Python.model.Usuario import Usuario
+
 
 
 
@@ -23,7 +25,7 @@ class controllerInicioSesion(QMainWindow):
     	
         self.crd = CRUD()
         #ventanas
-        self.menu = controllerMenu()
+        self.menu = controllerbusquedaGrupo()
         self.recuperacionContrasena = controllerRecuperacion(self)
 
 

@@ -5,6 +5,7 @@ import traceback
 import mysql.connector
 from Python.model.Usuario import Usuario
 from PyQt5.QtWidgets import QMessageBox
+from Python.model.Grupo import grupo
 
 
 class CRUD:
@@ -110,5 +111,12 @@ class CRUD:
             print(traceback.format_exc())
             self.mostrarCajaDeMensaje("Error", "No se pudo enviar el correo.", QMessageBox.Critical)
             return None
-
-        
+    
+    def createGrupo(self, grupo:grupo):
+        query = (f"insert into GRUPO values (null,'{grupo.nombre}',1,'{grupo.descripcion}','esperando tema' )")
+        try:            
+            self.__cur.execute(query)
+            self.__conexion.commit()
+            self.mostrarCajaDeMensaje("COMPLETADO", "El grupo ha sido creado con exito.", QMessageBox.Information)
+        except :
+            traceback.print_exc()

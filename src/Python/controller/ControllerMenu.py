@@ -10,7 +10,7 @@ from Python.model.Usuario import Usuario
 class controllerMenu(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        uic.loadUi('src/resources/interface/Ventana_Menu.ui', self)
+        uic.loadUi('src/resources/interface/Pagina_Grupos.ui', self)
 
 
        
