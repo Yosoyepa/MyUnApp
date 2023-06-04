@@ -48,11 +48,5 @@ def enviar_mensaje(topic_name,mensaje):
 
 
 ##crear_suscripcion(usuario,id_grupo)
-#crear_suscripcion()
+
 enviar_mensaje(id_grupo,mensaje)
-# mensaje_dict = {
-# 'remitente': usuario,
-# 'mensaje': mensaje
-# }
-# mensaje_json = json.dumps(mensaje_dict)
-# enviar_mensaje(mensaje_json, chat_grupal)
