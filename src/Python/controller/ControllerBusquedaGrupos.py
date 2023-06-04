@@ -18,7 +18,7 @@ from Python.model.Grupo import grupo
 class controllerbusquedaGrupo(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        uic.loadUi('src/resources/interface/Pagina_Grupos.ui',self)
+        uic.loadUi('src/resources/interface/Ventana_Grupos.ui',self)
         self.crd = CRUD()
         self.botoncreargrupo.clicked.connect(self.creargrupo)
 
