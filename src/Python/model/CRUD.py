@@ -206,5 +206,18 @@ class CRUD:
         except:
             traceback.print_exc()
 
-    def removerAdmin(correo,grupo):
-        query = (f"UPDATE MIEMBRO_GRUPO SET ADMIN_GRUPO = 0 WHERE ID_GRUPO = 28;")
+    def removerAdmin(self,correo,grupo):
+        query = (f"UPDATE MIEMBRO_GRUPO MG INNER JOIN GRUPO G SET MG.ADMIN_GRUPO = 0 WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.GRUPO = '{grupo}'")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()
+
+    def ascenderAdmin(self,correo,grupo):
+        query = (f"UPDATE MIEMBRO_GRUPO MG INNER JOIN GRUPO G SET MG.ADMIN_GRUPO = 1 WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.GRUPO = '{grupo}'")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()

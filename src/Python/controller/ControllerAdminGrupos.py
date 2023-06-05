@@ -25,6 +25,8 @@ class ControllerAdminGrupo(QMainWindow):
     def conexiones(self):
         self.Boton_Re1.clicked.connect(self.mostrarIntegrantes)
         self.Boton_Re2.clicked.connect(self.mostrarSolicitudes)
+        self.Boton_QuitarAdmin.clicked.connect(self.dscIntegranteAdmin)
+        self.Boton_DarAdmin.clicked.connect(self.ascIntegranteAdmin)
 
 
     def abrirAjustes(self, usuario, nombreGrupo):
@@ -32,7 +34,7 @@ class ControllerAdminGrupo(QMainWindow):
             self.grupoEntrado = nombreGrupo
             return True
         else:
-            self.crd.mostrarCajaDeMensaje("Error", "Usted no es administrador del grupo.", QMessageBox.Information)
+            self.crd.mostrarCajaDeMensaje("Error", "Usted no es administrador del grupo.", QMessageBox.critical)
 
     def mostrarIntegrantes(self):
         lista = self.crd.mostrarMiembrosGrupo(self.grupoEntrado)
@@ -46,7 +48,7 @@ class ControllerAdminGrupo(QMainWindow):
         lista = self.crd.mostrarSolicitudes(self.grupoEntrado)
         self.List_Solicitudes.clear()
         if lista==None:
-            self.crd.mostrarCajaDeMensaje("Advertencia", "No hay solicitudes de ingreso.", QMessageBox.Critical)
+            self.crd.mostrarCajaDeMensaje("Advertencia", "No hay solicitudes de ingreso.", QMessageBox.Information)
         else:
             for nombre in lista:
                 item = QtWidgets.QListWidgetItem()
@@ -56,4 +58,11 @@ class ControllerAdminGrupo(QMainWindow):
     def dscIntegranteAdmin(self):
         Usuario = self.List_Integrantes.currentItem().text()
         self.crd.removerAdmin(Usuario,self.grupoEntrado)
+        self.crd.mostrarCajaDeMensaje("Advertencia", "Usuario degradado.", QMessageBox.Information)
+        self.mostrarIntegrantes
+
+    def ascIntegranteAdmin(self):
+        Usuario = self.List_Integrantes.currentItem().text()
+        self.crd.ascenderAdmin(Usuario,self.grupoEntrado)
+        self.crd.mostrarCajaDeMensaje("Advertencia", "Usuario ascendido.", QMessageBox.Information)
         self.mostrarIntegrantes
