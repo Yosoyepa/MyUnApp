@@ -177,8 +177,6 @@ class CRUD:
 
 
     def admin(self,usuario,nombreGrupo):
-        print(usuario)
-        print(nombreGrupo)
         query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}' and MG.CORREO_USUARIO = '{usuario}'")
         try:
             self.__cur.execute(query)
@@ -189,3 +187,24 @@ class CRUD:
                 return False
         except:
             traceback.print_exc()
+
+    def mostrarMiembrosGrupo(self,nombreGrupo):
+        query = (f"SELECT MG.CORREO_USUARIO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}'")
+        try:
+            self.__cur.execute(query)
+            Lista = self.__cur.fetchall()
+            return Lista
+        except:
+            traceback.print_exc()
+
+    def mostrarSolicitudes(self,grupoEntrado):
+        query =  (f"SELECT S.CORREO_USUARIO FROM SOLICITUD S INNER JOIN GRUPO G WHERE G.ID_GRUPO = S.ID=GRUPO AND G.NOMBRE_GRUPO='{grupoEntrado}'")
+        try:
+            self.__cur.execute(query)
+            Lista = self.__cur.fetchall()
+            return Lista
+        except:
+            traceback.print_exc()
+
+    def removerAdmin(correo,grupo):
+        query = (f"UPDATE MIEMBRO_GRUPO SET ADMIN_GRUPO = 0 WHERE ID_GRUPO = 28;")

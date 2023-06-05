@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="inicioSesion">
+    <file>imagenesInicioSesion.qrc</file>
     <file>Icons/Adjust_Icon.png</file>
     <file>Icons/Events_Icon.png</file>
     <file>Icons/Evento.png</file>
