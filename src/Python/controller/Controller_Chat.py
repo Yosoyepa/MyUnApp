@@ -94,9 +94,11 @@ class controller_Chat(QMainWindow):
     def set_usuario(self, usr: Usuario):
         self.usuario = usr
 
-    def setear_usuario(self):
-        self.crd_usuario = self.usuario
+    def setear_usuario(self, usr: Usuario):
+        self.crd_usuario = usr
         nombre_usuario = str(self.crd_usuario.nombre + " " + self.crd_usuario.apellido)
+        nombre_usuario = nombre_usuario.replace(" ", "_")
+        print(nombre_usuario)
         return  nombre_usuario
     
 
@@ -122,9 +124,9 @@ class controller_Chat(QMainWindow):
         print(topic_name)
 
         #Comprobar que el usuario no tiene una suscripción al topic
-        
+        nombre_user = self.setear_usuario(self.usuario)
         # Crear el nombre de la suscripción
-        subscription_name = f'{self.setear_usuario}_subscription'
+        subscription_name = f'{nombre_user}_subscription'
         print(subscription_name)
         #Crear la suscripción
         topic_path = f'projects/{project_id}/topics/{topic_name}'
@@ -170,3 +172,4 @@ class controller_Chat(QMainWindow):
             future.result()
         except KeyboardInterrupt:
             future.cancel()
+

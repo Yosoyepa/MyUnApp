@@ -160,7 +160,7 @@ class CRUD:
         try:
             query = (f"SELECT ID_GRUPO FROM GRUPO WHERE NOMBRE_GRUPO = '{nombre_grupo}'")
             self.__cur.execute(query)
-            self.id_grupo = self.__cur.fetchone()
+            self.id_grupo = self.__cur.fetchone()[0]
             return self.id_grupo
         except:
             print(traceback.format_exc())
@@ -169,7 +169,7 @@ class CRUD:
         try:
             query = (f"SELECT TEMA_GRUPO FROM GRUPO WHERE ID_GRUPO = '{id_grupo}'")
             self.__cur.execute(query)
-            self.topic_grupo = self.__cur.fetchone()
+            self.topic_grupo = self.__cur.fetchone()[0]
             return self.topic_grupo
         except:
             print(traceback.format_exc())
