@@ -7,6 +7,7 @@ from Python.model.Usuario import Usuario
 
 
 from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
+from controller.ControllerAdminGrupos import ControllerAdminGrupo
 
 
 class ControllerMenu(QMainWindow):
@@ -22,11 +23,13 @@ class selectorMenu(QMainWindow):
         ##controladores
         self.controllerGrupos = ControllerBusquedaGrupo()  
         self.controllerMenu = ControllerMenu()
+        self.controllerAdminGrupos = ControllerAdminGrupo()
 
         self.pilaWidget = QtWidgets.QStackedWidget(self)
 
         self.pilaWidget.addWidget(self.controllerMenu)
         self.pilaWidget.addWidget(self.controllerGrupos)
+        self.pilaWidget.addWidget(self.controllerAdminGrupos)
         
         self.setCentralWidget(self.pilaWidget)
 
@@ -45,6 +48,7 @@ class selectorMenu(QMainWindow):
     def conexiones(self):
         self.controllerMenu.botonGrupos.clicked.connect(self.cambioBusquedaGruposFromMenu)
         self.controllerGrupos.Boton_Menu.clicked.connect(self.cambioMenuFromBusquedaGrupos)
+        self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.AbrirAdministracionGrupos)
 
     def cambioBusquedaGruposFromMenu(self):
         self.setWindowTitle("Busqueda Grupos")
@@ -53,6 +57,10 @@ class selectorMenu(QMainWindow):
     def cambioMenuFromBusquedaGrupos(self):
         self.setWindowTitle("Menu")
         self.pilaWidget.setCurrentWidget(self.controllerMenu)
+
+    def AbrirAdministracionGrupos(self):
+        self.setWindowTitle("Ajustes grupo")
+        self.pilaWidget.setCurrentWidget(self.controllerAdminGrupos)
 '''
 app = QtWidgets.QApplication(sys.argv)
 controlador = controllerMenu()
