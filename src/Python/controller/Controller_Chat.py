@@ -5,11 +5,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from resources.QRC import images
 from Python.model.Usuario import Usuario
 from Python.model.CRUD import CRUD
-
+from google.cloud import pubsub_v1
 import os
-from google.pubsub_v1 import PubsubMessage
 from google import pubsub_v1
-
 
 
 
