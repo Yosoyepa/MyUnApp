@@ -43,7 +43,7 @@ class selectorMenu(QMainWindow):
 
     def setUsuario(self, usuario):
         self.usuario = usuario
-        self.controllerGrupos.setUsuario(self.usuario)
+
 
     def conexiones(self):
         self.controllerMenu.botonGrupos.clicked.connect(self.cambioBusquedaGruposFromMenu)
@@ -60,8 +60,9 @@ class selectorMenu(QMainWindow):
         self.pilaWidget.setCurrentWidget(self.controllerMenu)
 
     def AbrirAdministracionGrupos(self):
-        self.setWindowTitle("Ajustes grupo")
-        self.pilaWidget.setCurrentWidget(self.controllerAdminGrupos)
+        if self.controllerAdminGrupos.abrirAjustes() == True:
+            self.setWindowTitle("Ajustes grupo")
+            self.pilaWidget.setCurrentWidget(self.controllerAdminGrupos)
 '''
 app = QtWidgets.QApplication(sys.argv)
 controlador = controllerMenu()

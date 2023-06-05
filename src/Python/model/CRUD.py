@@ -175,3 +175,16 @@ class CRUD:
         except:
             traceback.print_exc()
 
+
+    def admin(self,usuario,nombreGrupo):
+        query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{usuario}' and MG.CORREO_USUARIO = '{nombreGrupo}';")
+        try:
+            self.__cur.execute(query)
+            Lista = self.__cur.fetchone()
+            self.__conexion.commit()
+            if Lista[0]==True:
+                return True
+            else:
+                return False
+        except:
+            traceback.print_exc()

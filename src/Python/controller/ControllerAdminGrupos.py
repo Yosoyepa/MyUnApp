@@ -17,3 +17,8 @@ class ControllerAdminGrupo(QMainWindow):
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_AdministracionGrupos.ui',self)
         self.crd = CRUD()
+
+    def abrirAjustes(self):
+        self.clicked = self.List_MisGrupos.currentRow()
+        print(self.clicked)
+        return True
