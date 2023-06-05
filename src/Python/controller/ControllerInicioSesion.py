@@ -4,16 +4,16 @@ from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #imports de controladores
-from Python.controller.ControllerMenu import controllerMenu
-## Se añade el controlador de chat para probar la interfaz y controlador
-from Python.controller.Controller_Chat import controller_Chat
+from Python.controller.ControllerMenu import selectorMenu
 from controller.ControllerRecuperacionContrasena import controllerRecuperacion
+
 
 from resources.QRC import images
 
 #import de model
 from Python.model.CRUD import CRUD
 from Python.model.Usuario import Usuario
+
 
 
 
@@ -47,7 +47,7 @@ class controllerInicioSesion(QMainWindow):
             print(usr)
             if(usr != None):
                 usr.mostrar()
-                self.menu.set_usuario(usr)
+                self.menu.setUsuario(usr)
                 self.menu.show()        
                 return True
             else: 

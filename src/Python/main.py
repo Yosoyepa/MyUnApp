@@ -1,12 +1,11 @@
 
 import sys
-import typing
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from resources.QRC import images
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
-from Python.controller.ControllerMenu import controllerMenu
+from Python.controller.ControllerMenu import selectorMenu
 from Python.controller.ControllerInicioSesion import controllerInicioSesion
 from Python.controller.ControllerRegistro import controllerRegistro
 from Python.controller.Controller_Chat import controller_Chat
@@ -18,7 +17,7 @@ class app(QMainWindow):
 
         self.inicioSesion = controllerInicioSesion()
         self.registro = controllerRegistro(self)
-        self.menuC = controller_Chat()        
+        self.menu = selectorMenu()        
         
 
         self.pilaWidgets.addWidget(self.inicioSesion)
@@ -60,23 +59,16 @@ class app(QMainWindow):
         self.pilaWidgets.setCurrentWidget(self.registro)
 
 
-
-
 ########FUNCIONES
 
     def botonIniciarSesion(self):
         if(self.inicioSesion.abrirMenu()):
-
+            self.pilaWidgets.setCurrentWidget(self.menu)            
             self.close()
-
-       
+      
     def botonRegistrar(self):
         self.registro.registrar()
-
-
-    def botonGrupos_Chat(self):
-        self.menuC.actualizar_lista_widget_grupos()
-
+        
 
     
 
