@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
-
+from PyQt5.QtWidgets import QMessageBox
 
 
 #import de model
@@ -25,4 +25,4 @@ class ControllerAdminGrupo(QMainWindow):
         if self.crd.admin(usuario,nombreGrupo) == True:
             return True
         else:
-            print("No")
+            self.crd.mostrarCajaDeMensaje("Error", "Usted no es administrador del grupo.", QMessageBox.Critical)
