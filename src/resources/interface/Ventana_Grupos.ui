@@ -932,7 +932,7 @@ QPushButton::pressed{
                          <item>
                           <widget class="QPushButton" name="pushButton_8">
                            <property name="enabled">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </property>
                            <property name="minimumSize">
                             <size>

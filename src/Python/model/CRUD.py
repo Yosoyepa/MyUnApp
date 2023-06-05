@@ -1,4 +1,5 @@
 import datetime
+import os
 from random import randint
 import smtplib
 import traceback
@@ -6,6 +7,9 @@ import mysql.connector
 from Python.model.Usuario import Usuario
 from PyQt5.QtWidgets import QMessageBox
 from Python.model.Grupo import grupo
+from google.cloud import pubsub_v1
+credentials_path = "src\Python\controller\exalted-summer-387903-263021af32c1.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
 
 class CRUD:
@@ -113,10 +117,50 @@ class CRUD:
             return None
     
     def createGrupo(self, grupo:grupo):
-        query = (f"insert into GRUPO values (null,'{grupo.nombre}',1,'{grupo.descripcion}','esperando tema' )")
+        query = (f"insert into GRUPO values (null,'{grupo.nombre}',1,'{grupo.descripcion}','esperando topic' )")
         try:            
             self.__cur.execute(query)
             self.__conexion.commit()
+            self.creacion_de_topic(grupo)
             self.mostrarCajaDeMensaje("COMPLETADO", "El grupo ha sido creado con exito.", QMessageBox.Information)
         except :
             traceback.print_exc()
+
+    def obtener_nombres_grupo(self, correo):
+        try:    
+            query = (f"SELECT G.NOMBRE_GRUPO FROM GRUPO G INNER JOIN MIEMBRO_GRUPO MG ON G.ID_GRUPO = MG.ID_GRUPO WHERE MG.CORREO_USUARIO ='{correo}'")
+            self.__cur.execute(query)
+            self.Nombres_grupos = self.__cur.fetchall()
+            return self.Nombres_grupos
+        except:
+            print(traceback.format_exc())
+
+    def obtener_ultimo_ID_grupo(self):
+        try:
+            query = (f"SELECT MAX(ID_GRUPO) FROM GRUPO")
+            self.__cur.execute(query)
+            self.ultima_id_grupos = str(self.__cur.fetchone()[0])
+            return self.ultima_id_grupos
+        except:
+            print(traceback.format_exc())
+
+    def creacion_de_topic(self,grupo: grupo):
+        grupo.id = self.obtener_ultimo_ID_grupo()
+        project_id = 'exalted-summer-387903'
+        nombre_grupo_modificado = f'{grupo.nombre}_{grupo.id}'
+        nombre_grupo_modificado = nombre_grupo_modificado.replace(' ','-')
+        self.añadir_topic(grupo,nombre_grupo_modificado)
+        topic_id = nombre_grupo_modificado
+        publisher = pubsub_v1.PublisherClient()
+        topic_path = publisher.topic_path(project_id,topic_id)
+        topic = publisher.create_topic(request={"name":topic_path})
+        print(f"created_topic:{topic.name}")
+
+    def añadir_topic(self,grupo:grupo,topic_name):
+        query = (f"update GRUPO SET TEMA_GRUPO = '{topic_name}' WHERE ID_GRUPO = {grupo.id}")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()
+

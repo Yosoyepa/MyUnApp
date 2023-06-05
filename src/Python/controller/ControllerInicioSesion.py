@@ -46,6 +46,7 @@ class controllerInicioSesion(QMainWindow):
             print(usr)
             if(usr != None):
                 usr.mostrar()
+                self.menu.set_usuario(usr)
                 self.menu.show()        
                 return True
             else: 
