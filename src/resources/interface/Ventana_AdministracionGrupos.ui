@@ -236,7 +236,7 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="pushButton_13">
+                       <widget class="QPushButton" name="Boton_Atras">
                         <property name="minimumSize">
                          <size>
                           <width>50</width>
@@ -247,7 +247,7 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset resource="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc">
+                         <iconset resource="../QRC/imagenesInicioSesion.qrc">
                           <normaloff>:/newPrefix/Icons/back.png</normaloff>:/newPrefix/Icons/back.png</iconset>
                         </property>
                         <property name="iconSize">
@@ -1032,7 +1032,7 @@ background-color: rgb(0, 75, 115);</string>
   </widget>
  </widget>
  <resources>
-  <include location="MYUNAPP/MyUnApp/src/resources/QRC/imagenesInicioSesion.qrc"/>
+  <include location="../QRC/imagenesInicioSesion.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -49,6 +49,7 @@ class selectorMenu(QMainWindow):
         self.controllerMenu.botonGrupos.clicked.connect(self.cambioBusquedaGruposFromMenu)
         self.controllerGrupos.Boton_Menu.clicked.connect(self.cambioMenuFromBusquedaGrupos)
         self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.AbrirAdministracionGrupos)
+        self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGruposFromMenu)
 
     def cambioBusquedaGruposFromMenu(self):
         self.setWindowTitle("Busqueda Grupos")
