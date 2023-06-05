@@ -177,12 +177,11 @@ class CRUD:
 
 
     def admin(self,usuario,nombreGrupo):
-        query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{usuario}' and MG.CORREO_USUARIO = '{nombreGrupo}';")
+        query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = 'Su madre' and MG.CORREO_USUARIO = 'jhernandezoc@unal.edu.co'")
         try:
             self.__cur.execute(query)
-            Lista = self.__cur.fetchone()
-            self.__conexion.commit()
-            if Lista[0]==True:
+            Lista = self.__cur.fetchone()[0]
+            if Lista==True:
                 return True
             else:
                 return False

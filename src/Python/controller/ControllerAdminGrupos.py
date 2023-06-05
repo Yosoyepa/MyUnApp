@@ -7,8 +7,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from Python.model.CRUD import CRUD
 from Python.model.Usuario import Usuario
 
-from resources.QRC import images
-from Python.model.Grupo import grupo
+
+from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
+
 
 
 class ControllerAdminGrupo(QMainWindow):
@@ -17,8 +18,11 @@ class ControllerAdminGrupo(QMainWindow):
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_AdministracionGrupos.ui',self)
         self.crd = CRUD()
+        self.grupos = ControllerBusquedaGrupo()
 
-    def abrirAjustes(self):
-        self.clicked = self.List_MisGrupos.currentRow()
-        print(self.clicked)
-        return True
+
+    def abrirAjustes(self, usuario, nombreGrupo):
+        if self.crd.admin(usuario,nombreGrupo) == True:
+            return True
+        else:
+            print("No")

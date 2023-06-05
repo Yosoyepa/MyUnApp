@@ -36,19 +36,20 @@ class selectorMenu(QMainWindow):
         self.pilaWidget.setCurrentWidget(self.controllerMenu)
 
         self.inicializar()
-        
+   
     def inicializar(self):
         self.resize(1280, 720)        
         self.conexiones()        
 
     def setUsuario(self, usuario):
         self.usuario = usuario
+        self.controllerGrupos.setUsuario(self.usuario)
 
 
     def conexiones(self):
         self.controllerMenu.botonGrupos.clicked.connect(self.cambioBusquedaGruposFromMenu)
         self.controllerGrupos.Boton_Menu.clicked.connect(self.cambioMenuFromBusquedaGrupos)
-        self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.AbrirAdministracionGrupos)
+        self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.ComprovarAdmin)
         self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGruposFromMenu)
 
     def cambioBusquedaGruposFromMenu(self):
@@ -59,10 +60,14 @@ class selectorMenu(QMainWindow):
         self.setWindowTitle("Menu")
         self.pilaWidget.setCurrentWidget(self.controllerMenu)
 
+    def ComprovarAdmin(self):
+        nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()
+        if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG):
+            self.AbrirAdministracionGrupos()
+
     def AbrirAdministracionGrupos(self):
-        if self.controllerAdminGrupos.abrirAjustes() == True:
-            self.setWindowTitle("Ajustes grupo")
-            self.pilaWidget.setCurrentWidget(self.controllerAdminGrupos)
+        self.setWindowTitle("Ajustes grupo")
+        self.pilaWidget.setCurrentWidget(self.controllerAdminGrupos)
 '''
 app = QtWidgets.QApplication(sys.argv)
 controlador = controllerMenu()
