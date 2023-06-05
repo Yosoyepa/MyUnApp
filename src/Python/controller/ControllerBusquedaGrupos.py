@@ -16,8 +16,9 @@ from resources.QRC import images
 from Python.model.Grupo import grupo
 
 
-class controllerbusquedaGrupo(QMainWindow):
+class ControllerBusquedaGrupo(QMainWindow):
     def __init__(self):
+        
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Grupos.ui',self)
         self.crd = CRUD()
@@ -35,8 +36,10 @@ class controllerbusquedaGrupo(QMainWindow):
         self.Line_NombreGrupo.clear()
         self.Text_DescripcionGrupo.clear()
 
-    def set_usuario(self, usr: Usuario):
+    def setUsuario(self, usr: Usuario):
         self.usuario = usr
+
+
     def actualizar_lista_mis_grupos(self):
         self.crd.obtener_nombres_grupo(self.usuario.correo)
         print(self.crd.Nombres_grupos)
@@ -46,6 +49,6 @@ class controllerbusquedaGrupo(QMainWindow):
             item.setText(str(nombre[0]))
             self.List_MisGrupos.addItem(item)
 
-
+  
 
     
