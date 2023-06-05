@@ -8,6 +8,7 @@ from Python.model.Usuario import Usuario
 from PyQt5.QtWidgets import QMessageBox
 from Python.model.Grupo import grupo
 from google.cloud import pubsub_v1
+from Python.model.MiembroGrupo import MiembroGrupo
 credentials_path = "src\Python\controller\exalted-summer-387903-263021af32c1.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
@@ -116,12 +117,14 @@ class CRUD:
             self.mostrarCajaDeMensaje("Error", "No se pudo enviar el correo.", QMessageBox.Critical)
             return None
     
-    def createGrupo(self, grupo:grupo):
+    def createGrupo(self, grupo:grupo, usuario:Usuario):
         query = (f"insert into GRUPO values (null,'{grupo.nombre}',1,'{grupo.descripcion}','esperando topic' )")
         try:            
             self.__cur.execute(query)
             self.__conexion.commit()
             self.creacion_de_topic(grupo)
+            miembroTemp = MiembroGrupo(usuario, self.obtener_ultimo_ID_grupo(), True, True, True)
+            self.crearMiembroGrupo(miembroTemp)
             self.mostrarCajaDeMensaje("COMPLETADO", "El grupo ha sido creado con exito.", QMessageBox.Information)
         except :
             traceback.print_exc()
@@ -158,6 +161,14 @@ class CRUD:
 
     def añadir_topic(self,grupo:grupo,topic_name):
         query = (f"update GRUPO SET TEMA_GRUPO = '{topic_name}' WHERE ID_GRUPO = {grupo.id}")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()
+
+    def crearMiembroGrupo(self,miembro:MiembroGrupo):
+        query = (f"INSERT INTO MIEMBRO_GRUPO VALUES({miembro.idGrupo}, '{miembro.correo}', {miembro.dentroGrupo}, {miembro.creadorGrupo}, {miembro.adminGrupo},'TEXTO');")
         try:
             self.__cur.execute(query)
             self.__conexion.commit()

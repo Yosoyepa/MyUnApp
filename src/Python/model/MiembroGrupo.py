@@ -4,7 +4,7 @@ from Python.model.Usuario import Usuario
 
 class MiembroGrupo(Usuario):
     def __init__(self, usuario:Usuario, idGrupo: int, dentroGrupo: bool, creadorGrupo: bool, adminGrupo: bool):
-        super().__init__(usuario.contrasena, usuario.nombre, usuario.apellido, usuario.contrasena, usuario.fechaNacimiento, usuario.fechaNacimiento)
+        super().__init__(usuario.correo, usuario.nombre, usuario.apellido, usuario.fechaRegistro)
         self.idGrupo: int = idGrupo
         self.dentroGrupo:bool = dentroGrupo
         self.creadorGrupo:bool = creadorGrupo

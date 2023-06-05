@@ -29,7 +29,7 @@ class ControllerBusquedaGrupo(QMainWindow):
     def creargrupo(self):
         if self.Line_NombreGrupo.text() and self.Text_DescripcionGrupo.toPlainText() :
             grupotemporal=grupo(0,self.Line_NombreGrupo.text(),1,self.Text_DescripcionGrupo.toPlainText())
-            self.crd.createGrupo(grupotemporal)
+            self.crd.createGrupo(grupotemporal,self.usuario)
             self.crd.obtener_ultimo_ID_grupo()
         else:
             self.crd.mostrarCajaDeMensaje("Advertencia","No debe dejar espacios en blanco",QtWidgets.QMessageBox.Warning)
