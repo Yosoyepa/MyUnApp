@@ -40,7 +40,6 @@ def enviar_mensaje(topic_name,mensaje):
     topic_name = crd.obtener_topic_grupo(topic_name)
     # Obtener el topic del chat grupal
     topic_path = f'projects/{project_id}/topics/{topic_name}'
-
     # Publicar el mensaje en el topic del chat grupal
     future = publisher.publish(topic_path,mensaje.encode())
     future.result()
