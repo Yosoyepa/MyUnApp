@@ -70,16 +70,19 @@ class ControllerAdminGrupo(QMainWindow):
     def dscIntegranteAdmin(self):
         Usuario = self.List_Integrantes.currentItem().text()
         cantidaAdmin = self.crd.buscarSiHayAdmin(self.grupoEntrado)
-        if cantidaAdmin > 1:
-            if self.crd.admin(Usuario,self.grupoEntrado)==True:
-                self.crd.removerAdmin(Usuario,self.grupoEntrado)
-                texto = "El usuario "+Usuario+" ya no es administrador"
-                self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
-                self.mostrarIntegrantes
-            else:
-                self.crd.mostrarCajaDeMensaje("Informacion", "El usuario no es administrador", QMessageBox.Information)
+        if self.usuarioDentro == Usuario:
+            self.crd.mostrarCajaDeMensaje("Informacion", "No te puedes quitar tu mismo el administrador", QMessageBox.Information)
         else:
-            self.crd.mostrarCajaDeMensaje("Advertencia", "El grupo no puede quedar sin administradores", QMessageBox.Critical)
+            if cantidaAdmin > 1:
+                if self.crd.admin(Usuario,self.grupoEntrado)==True:
+                    self.crd.removerAdmin(Usuario,self.grupoEntrado)
+                    texto = "El usuario "+Usuario+" ya no es administrador"
+                    self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
+                    self.mostrarIntegrantes
+                else:
+                    self.crd.mostrarCajaDeMensaje("Informacion", "El usuario no es administrador", QMessageBox.Information)
+            else:
+                self.crd.mostrarCajaDeMensaje("Advertencia", "El grupo no puede quedar sin administradores", QMessageBox.Critical)
 
     def ascIntegranteAdmin(self):
         Usuario = self.List_Integrantes.currentItem().text()
@@ -135,6 +138,7 @@ class ControllerAdminGrupo(QMainWindow):
             self.crd.mostrarCajaDeMensaje("Informacion", "Nombre actualizado correctamente", QMessageBox.Information)
         else:
             self.crd.mostrarCajaDeMensaje("Advertencia", "Rellene alguno de los espacios", QMessageBox.Critical)
+        self.limpiar2()
 
     def limpiar2(self):
         self.Line_NewNombre.clear()
