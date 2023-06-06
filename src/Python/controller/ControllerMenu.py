@@ -90,7 +90,7 @@ class selectorMenu(QMainWindow):
     def comprobarAdmin(self):
         nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()
         if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG)==True:
-            self.AbrirAdministracionGrupos()
+            self.abrirAdministracionGrupos()
 
     def abrirAdministracionGrupos(self):
         self.setWindowTitle("Ajustes grupo")
