@@ -512,7 +512,7 @@ background-color: rgb(0, 75, 115);</string>
                                   </font>
                                  </property>
                                  <property name="text">
-                                  <string>Rebocar administrador</string>
+                                  <string>Revocar administrador</string>
                                  </property>
                                 </widget>
                                </item>

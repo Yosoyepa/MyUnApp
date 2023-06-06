@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>898</width>
-    <height>637</height>
+    <width>1188</width>
+    <height>825</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -913,7 +913,7 @@ QPushButton::pressed{
                         <property name="frameShadow">
                          <enum>QFrame::Raised</enum>
                         </property>
-                        <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="3,20,3">
+                        <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="3,20,0,3">
                          <property name="spacing">
                           <number>5</number>
                          </property>
@@ -987,6 +987,29 @@ QPushButton::pressed{
                           </widget>
                          </item>
                          <item>
+                          <widget class="QPushButton" name="pushButton_2">
+                           <property name="minimumSize">
+                            <size>
+                             <width>60</width>
+                             <height>60</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="icon">
+                            <iconset resource="../QRC/imagenesInicioSesion.qrc">
+                             <normaloff>:/newPrefix/Icons/Punisher.png</normaloff>:/newPrefix/Icons/Punisher.png</iconset>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>50</width>
+                             <height>50</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
                           <widget class="QPushButton" name="Boton_AjustesGrupo">
                            <property name="minimumSize">
                             <size>
@@ -1039,8 +1062,8 @@ QPushButton::pressed{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>262</width>
-                           <height>109</height>
+                           <width>376</width>
+                           <height>169</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -1151,8 +1174,8 @@ QPushButton::pressed{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>245</width>
-                           <height>135</height>
+                           <width>376</width>
+                           <height>169</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,10,2">

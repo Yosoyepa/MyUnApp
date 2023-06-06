@@ -198,7 +198,7 @@ class CRUD:
             traceback.print_exc()
 
     def mostrarSolicitudes(self,grupoEntrado):
-        query =  (f"SELECT S.CORREO_USUARIO FROM SOLICITUD S INNER JOIN GRUPO G WHERE G.ID_GRUPO = S.ID=GRUPO AND G.NOMBRE_GRUPO='{grupoEntrado}'")
+        query =  (f"SELECT S.CORREO_USUARIO FROM SOLICITUD S INNER JOIN GRUPO G WHERE G.ID_GRUPO = S.ID_GRUPO AND G.NOMBRE_GRUPO='{grupoEntrado}' AND S.SOLICITUD_ACEPTADA=0")
         try:
             self.__cur.execute(query)
             Lista = self.__cur.fetchall()
@@ -219,5 +219,47 @@ class CRUD:
         try:
             self.__cur.execute(query)
             self.__conexion.commit()
+        except:
+            traceback.print_exc()
+
+    def eliminarPersona(self,correo,nombreGrupo):
+        query = (f"DELETE FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.NOMBRE_GRUPO = '{nombreGrupo}'")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()
+            
+    def buscarSiHayAdmin(self,nombreGrupo):
+        conteo = 0
+        query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}''")
+        try:
+            self.__cur.execute(query)
+            Lista = self.__cur.fetchall()
+            for persona in Lista:
+                if persona == 1:
+                    conteo+=1
+            if conteo>1:
+                return True
+            else:
+                return False
+        except:
+            traceback.print_exc()
+
+    def aceptarSolicitud(self,correo,nombreGrupo):
+        idTemp = self.sacarID(nombreGrupo)
+        query = (f"UPDATE SOLICITUD SET FECHA_HORA_ACEPTACION = now(), SOLICITUD_ACEPTADA = 1 WHERE CORREO_USUARIO = '{correo}' AND ID_GRUPO = '{idTemp}';")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()
+
+    def sacarID(self,nombreGrupo):
+        query = (f"SELECT ID_GRUPO FROM GRUPO WHERE NOMBRE_GRUPO = '{nombreGrupo}'")
+        try:
+            self.__cur.execute(query)
+            Lista = self.__cur.fetchone()
+            return Lista[0]
         except:
             traceback.print_exc()

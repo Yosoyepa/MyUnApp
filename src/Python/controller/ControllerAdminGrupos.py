@@ -20,6 +20,7 @@ class ControllerAdminGrupo(QMainWindow):
         self.crd = CRUD()
         self.grupos = ControllerBusquedaGrupo()
         self.grupoEntrado = ""
+        self.usuarioDentro = ""
         self.conexiones()
 
     def conexiones(self):
@@ -27,6 +28,8 @@ class ControllerAdminGrupo(QMainWindow):
         self.Boton_Re2.clicked.connect(self.mostrarSolicitudes)
         self.Boton_QuitarAdmin.clicked.connect(self.dscIntegranteAdmin)
         self.Boton_DarAdmin.clicked.connect(self.ascIntegranteAdmin)
+        self.Boton_Eliminar.clicked.connect(self.eliminarUser)
+        self.Boton_Aceptar.clicked.connect(self.aceptarSolicitud)
 
 
     def limpiar(self):
@@ -36,6 +39,7 @@ class ControllerAdminGrupo(QMainWindow):
 
     def abrirAjustes(self, usuario, nombreGrupo):
         if self.crd.admin(usuario,nombreGrupo) == True:
+            self.usuarioDentro = usuario
             self.grupoEntrado = nombreGrupo
             return True
         else:
@@ -62,12 +66,39 @@ class ControllerAdminGrupo(QMainWindow):
 
     def dscIntegranteAdmin(self):
         Usuario = self.List_Integrantes.currentItem().text()
-        self.crd.removerAdmin(Usuario,self.grupoEntrado)
-        self.crd.mostrarCajaDeMensaje("Advertencia", "Usuario degradado.", QMessageBox.Information)
-        self.mostrarIntegrantes
+        if self.crd.buscarSiHayAdmin==True:
+            self.crd.removerAdmin(Usuario,self.grupoEntrado)
+            texto = "El usuario "+Usuario+" ya no es administrador"
+            self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
+            self.mostrarIntegrantes
+        else:
+            self.crd.mostrarCajaDeMensaje("Advertencia", "El grupo no puede quedar sin administradores", QMessageBox.Critical)
 
     def ascIntegranteAdmin(self):
         Usuario = self.List_Integrantes.currentItem().text()
-        self.crd.ascenderAdmin(Usuario,self.grupoEntrado)
-        self.crd.mostrarCajaDeMensaje("Advertencia", "Usuario ascendido.", QMessageBox.Information)
-        self.mostrarIntegrantes
+        if Usuario == self.usuarioDentro:
+            self.crd.mostrarCajaDeMensaje("Informacion", "Usted ya es administrador", QMessageBox.Information)
+        else:
+            self.crd.ascenderAdmin(Usuario,self.grupoEntrado)
+            texto = "El usuario "+Usuario+" ahora es administrador"
+            self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
+            self.mostrarIntegrantes
+
+    def eliminarUser(self):
+        Usuario = self.List_Integrantes.currentItem().text()
+        if Usuario == self.usuarioDentro:
+            self.crd.mostrarCajaDeMensaje("Advertencia", "No se puede eliminar a usted mismo", QMessageBox.Critical)
+        else:
+            if self.crd.buscarSiHayAdmin==True:
+                self.crd.eliminarPersona(Usuario)
+                texto = "El usuario "+Usuario+" ha sido eleminido del grupo"
+                self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
+            else: 
+                self.crd.mostrarCajaDeMensaje("Advertencia", "El grupo no puede quedar sin administradores", QMessageBox.Critical)
+
+    def aceptarSolicitud(self):
+        Usuario = self.List_Solicitudes.currentItem().text()
+        self.crd.aceptarSolicitud(Usuario,self.grupoEntrado)
+        texto = "El usuario "+Usuario+" a sido aceptado en el grupo"
+        self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
+        self.mostrarSolicitudes
