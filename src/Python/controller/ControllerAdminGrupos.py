@@ -31,6 +31,8 @@ class ControllerAdminGrupo(QMainWindow):
         self.Boton_Eliminar.clicked.connect(self.eliminarUser)
         self.Boton_Aceptar.clicked.connect(self.aceptarSolicitud)
         self.Boton_Denegar.clicked.connect(self.rechazarSolicitud)
+        self.Boton_Actualizar.clicked.connect(self.actualizarNombre)
+        self.Boton_Limpiar.clicked.connect(self.limpiar2)
 
 
     def limpiar(self):
@@ -67,11 +69,15 @@ class ControllerAdminGrupo(QMainWindow):
 
     def dscIntegranteAdmin(self):
         Usuario = self.List_Integrantes.currentItem().text()
-        if self.crd.buscarSiHayAdmin(self.grupoEntrado)==True:
-            self.crd.removerAdmin(Usuario,self.grupoEntrado)
-            texto = "El usuario "+Usuario+" ya no es administrador"
-            self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
-            self.mostrarIntegrantes
+        cantidaAdmin = self.crd.buscarSiHayAdmin(self.grupoEntrado)
+        if cantidaAdmin > 1:
+            if self.crd.admin(Usuario,self.grupoEntrado)==True:
+                self.crd.removerAdmin(Usuario,self.grupoEntrado)
+                texto = "El usuario "+Usuario+" ya no es administrador"
+                self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
+                self.mostrarIntegrantes
+            else:
+                self.crd.mostrarCajaDeMensaje("Informacion", "El usuario no es administrador", QMessageBox.Information)
         else:
             self.crd.mostrarCajaDeMensaje("Advertencia", "El grupo no puede quedar sin administradores", QMessageBox.Critical)
 
@@ -87,11 +93,12 @@ class ControllerAdminGrupo(QMainWindow):
 
     def eliminarUser(self):
         Usuario = self.List_Integrantes.currentItem().text()
+        cantidaAdmin = self.crd.buscarSiHayAdmin(self.grupoEntrado)
         if Usuario == self.usuarioDentro:
             self.crd.mostrarCajaDeMensaje("Advertencia", "No se puede eliminar a usted mismo", QMessageBox.Critical)
         else:
-            if self.crd.buscarSiHayAdmin==True:
-                self.crd.eliminarPersona(Usuario)
+            if cantidaAdmin > 1 or (cantidaAdmin == 1 and self.crd.admin(Usuario,self.grupoEntrado)==False):
+                self.crd.eliminarPersona(Usuario,self.grupoEntrado)
                 texto = "El usuario "+Usuario+" ha sido eleminido del grupo"
                 self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
             else: 
@@ -110,3 +117,25 @@ class ControllerAdminGrupo(QMainWindow):
         texto = "El usuario "+Usuario+" no ha entrado al grupo"
         self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
         self.mostrarSolicitudes
+
+    def actualizarNombre(self):
+        nuevoNombre = self.Line_NewNombre.text()
+        nuevaDescripcion = self.Text_Descripcion.toPlainText()
+        if nuevoNombre != "" and nuevaDescripcion != "" :
+            self.crd.cambiarDescripcionGrupo(self.grupoEntrado,nuevaDescripcion)
+            self.crd.cambiarNombreGrupo(self.grupoEntrado,nuevoNombre)
+            self.grupoEntrado = nuevoNombre
+            self.crd.mostrarCajaDeMensaje("Informacion", "Nombre y descripcion actualizados correctamente", QMessageBox.Information)
+        elif nuevoNombre == "" and nuevaDescripcion != "" :
+            self.crd.cambiarDescripcionGrupo(self.grupoEntrado,nuevaDescripcion)
+            self.crd.mostrarCajaDeMensaje("Informacion", "Descripcion actualizada correctamente", QMessageBox.Information)
+        elif nuevoNombre != "" and nuevaDescripcion == "" :
+            self.crd.cambiarNombreGrupo(self.grupoEntrado,nuevoNombre)
+            self.grupoEntrado = nuevoNombre
+            self.crd.mostrarCajaDeMensaje("Informacion", "Nombre actualizado correctamente", QMessageBox.Information)
+        else:
+            self.crd.mostrarCajaDeMensaje("Advertencia", "Rellene alguno de los espacios", QMessageBox.Critical)
+
+    def limpiar2(self):
+        self.Line_NewNombre.clear()
+        self.Text_Descripcion.clear()

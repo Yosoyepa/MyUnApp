@@ -24,6 +24,7 @@ class ControllerBusquedaGrupo(QMainWindow):
         self.crd = CRUD()
         self.botoncreargrupo.clicked.connect(self.creargrupo)
         self.pushButton_8.clicked.connect(self.actualizar_lista_mis_grupos)
+        self.Boton_Eliminar.clicked.connect(self.salirGrupo)
 
 
     def creargrupo(self):
@@ -48,6 +49,21 @@ class ControllerBusquedaGrupo(QMainWindow):
             item = QtWidgets.QListWidgetItem()
             item.setText(str(nombre[0]))
             self.List_MisGrupos.addItem(item)
+    
+    def salirGrupo(self):
+        grupoTemp = self.List_MisGrupos.currentItem().text()
+        usuarios = self.crd.mostrarMiembrosGrupo(grupoTemp)
+        cantidaAdmin = self.crd.buscarSiHayAdmin(grupoTemp)
+        if cantidaAdmin > 1 or (cantidaAdmin == 1 and self.crd.admin(self.usuario.correo,grupoTemp)==False):
+            self.crd.eliminarPersona(self.usuario.correo,grupoTemp)
+            self.crd.mostrarCajaDeMensaje("Informacion", "Usted ha salido del grupo "+grupoTemp+" satisfactoriamente", QtWidgets.QMessageBox.Information)
+        else:
+            if len(usuarios) == 1:
+                self.crd.eliminarPersona(self.usuario.correo,grupoTemp)
+                self.crd.mostrarCajaDeMensaje("Informacion", "Usted ha salido del grupo "+grupoTemp+" satisfactoriamente", QtWidgets.QMessageBox.Information)
+                self.crd.eliminarGrupo(grupoTemp)
+            else:
+                self.crd.mostrarCajaDeMensaje("Advertencia","El grupo no puede quedar sin administradores",QtWidgets.QMessageBox.Warning)
 
   
 
