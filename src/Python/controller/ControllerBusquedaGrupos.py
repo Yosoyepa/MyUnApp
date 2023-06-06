@@ -52,7 +52,7 @@ class ControllerBusquedaGrupo(QMainWindow):
             item.setText(str(nombre[0]))
             self.List_MisGrupos.addItem(item)
 
-<<<<<<< HEAD
+
     def actualizar_lista_todoslosgrupos(self):
         self.crd.obtener_nombres_todoslosgrupos()
         print(self.crd.Nombres_todosgrupos)
@@ -76,8 +76,5 @@ class ControllerBusquedaGrupo(QMainWindow):
 
 
 
-=======
-  
->>>>>>> b8bf3a0170b65d6654e85948bf90fd03a1ef1daf
 
     
