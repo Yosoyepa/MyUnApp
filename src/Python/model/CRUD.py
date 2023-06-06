@@ -232,12 +232,13 @@ class CRUD:
             
     def buscarSiHayAdmin(self,nombreGrupo):
         conteo = 0
-        query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}''")
+        query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}'")
         try:
             self.__cur.execute(query)
             Lista = self.__cur.fetchall()
-            for persona in Lista:
-                if persona == 1:
+            print(Lista)
+            for i in range(len(Lista)):
+                if Lista[i][0] == 1:
                     conteo+=1
             if conteo>1:
                 return True
@@ -252,6 +253,9 @@ class CRUD:
         try:
             self.__cur.execute(query)
             self.__conexion.commit()
+            query = (f"INSERT INTO MIEMBRO_GRUPO VALUES('{idTemp}','{correo}',1,0,0,'TEXTO')")
+            self.__cur.execute(query)
+            self.__conexion.commit()
         except:
             traceback.print_exc()
 
@@ -261,5 +265,14 @@ class CRUD:
             self.__cur.execute(query)
             Lista = self.__cur.fetchone()
             return Lista[0]
+        except:
+            traceback.print_exc()
+
+    def rechazarSolicitud(self,correo,nombreGrupo):
+        idTemp = self.sacarID(nombreGrupo)
+        query = (f"DELETE FROM SOLICITUD WHERE CORREO_USUARIO = '{correo}' AND ID_GRUPO = '{idTemp}';")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
         except:
             traceback.print_exc()

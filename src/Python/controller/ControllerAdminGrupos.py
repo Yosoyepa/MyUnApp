@@ -30,6 +30,7 @@ class ControllerAdminGrupo(QMainWindow):
         self.Boton_DarAdmin.clicked.connect(self.ascIntegranteAdmin)
         self.Boton_Eliminar.clicked.connect(self.eliminarUser)
         self.Boton_Aceptar.clicked.connect(self.aceptarSolicitud)
+        self.Boton_Denegar.clicked.connect(self.rechazarSolicitud)
 
 
     def limpiar(self):
@@ -66,7 +67,7 @@ class ControllerAdminGrupo(QMainWindow):
 
     def dscIntegranteAdmin(self):
         Usuario = self.List_Integrantes.currentItem().text()
-        if self.crd.buscarSiHayAdmin==True:
+        if self.crd.buscarSiHayAdmin(self.grupoEntrado)==True:
             self.crd.removerAdmin(Usuario,self.grupoEntrado)
             texto = "El usuario "+Usuario+" ya no es administrador"
             self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
@@ -100,5 +101,12 @@ class ControllerAdminGrupo(QMainWindow):
         Usuario = self.List_Solicitudes.currentItem().text()
         self.crd.aceptarSolicitud(Usuario,self.grupoEntrado)
         texto = "El usuario "+Usuario+" a sido aceptado en el grupo"
+        self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
+        self.mostrarSolicitudes
+
+    def rechazarSolicitud(self):
+        Usuario = self.List_Solicitudes.currentItem().text()
+        self.crd.rechazarSolicitud(Usuario,self.grupoEntrado)
+        texto = "El usuario "+Usuario+" no ha entrado al grupo"
         self.crd.mostrarCajaDeMensaje("Informacion", texto, QMessageBox.Information)
         self.mostrarSolicitudes

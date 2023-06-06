@@ -30,7 +30,7 @@ class app(QMainWindow):
 
         self.pilaWidgets.setCurrentWidget(self.inicioSesion)
 
-        self.inicializar()
+        self.inicializar()       
 
     def inicializar(self):
         self.resize(800, 536)
