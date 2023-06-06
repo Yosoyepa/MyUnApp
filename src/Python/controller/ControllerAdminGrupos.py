@@ -29,12 +29,17 @@ class ControllerAdminGrupo(QMainWindow):
         self.Boton_DarAdmin.clicked.connect(self.ascIntegranteAdmin)
 
 
+    def limpiar(self):
+        self.List_Integrantes.clear()
+        self.List_Solicitudes.clear()
+
+
     def abrirAjustes(self, usuario, nombreGrupo):
         if self.crd.admin(usuario,nombreGrupo) == True:
             self.grupoEntrado = nombreGrupo
             return True
         else:
-            self.crd.mostrarCajaDeMensaje("Error", "Usted no es administrador del grupo.", QMessageBox.critical)
+            self.crd.mostrarCajaDeMensaje("Error", "Usted no es administrador del grupo.", QMessageBox.Critical)
 
     def mostrarIntegrantes(self):
         lista = self.crd.mostrarMiembrosGrupo(self.grupoEntrado)

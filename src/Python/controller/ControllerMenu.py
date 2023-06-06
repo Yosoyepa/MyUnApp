@@ -53,6 +53,7 @@ class selectorMenu(QMainWindow):
         self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGruposFromMenu)
 
     def cambioBusquedaGruposFromMenu(self):
+        self.controllerAdminGrupos.limpiar()
         self.setWindowTitle("Busqueda Grupos")
         self.pilaWidget.setCurrentWidget(self.controllerGrupos)
 
@@ -62,7 +63,7 @@ class selectorMenu(QMainWindow):
 
     def ComprovarAdmin(self):
         nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()
-        if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG):
+        if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG)==True:
             self.AbrirAdministracionGrupos()
 
     def AbrirAdministracionGrupos(self):
