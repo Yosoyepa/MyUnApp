@@ -23,6 +23,9 @@ class controllerbusquedaGrupo(QMainWindow):
         self.crd = CRUD()
         self.botoncreargrupo.clicked.connect(self.creargrupo)
         self.pushButton_8.clicked.connect(self.actualizar_lista_mis_grupos)
+        self.Boton_BusGrupo.clicked.connect(self.actualizar_lista_todoslosgrupos)
+        self.solButton.clicked.connect(self.enviar_solicitud)
+        self.List_BuscGrupos.itemClicked.connect(self.sel_grupo)
 
 
     def creargrupo(self):
@@ -45,6 +48,28 @@ class controllerbusquedaGrupo(QMainWindow):
             item = QtWidgets.QListWidgetItem()
             item.setText(str(nombre[0]))
             self.List_MisGrupos.addItem(item)
+
+    def actualizar_lista_todoslosgrupos(self):
+        self.crd.obtener_nombres_todoslosgrupos()
+        print(self.crd.Nombres_todosgrupos)
+        self.List_BuscGrupos.clear()
+        for nombre in self.crd.Nombres_todosgrupos:
+            item = QtWidgets.QListWidgetItem()
+            item.setText(str(nombre[0]))
+            self.List_BuscGrupos.addItem(item)
+
+    def sel_grupo(self, item):
+        grupo_seleccionado=item.text()
+        self.idgrupo=self.crd.obtener_id(grupo_seleccionado)
+        print(self.idgrupo)
+
+
+    def enviar_solicitud(self):
+        self.crd.Enviar_sol(self.usuario , self.idgrupo)
+
+            
+            
+
 
 
 

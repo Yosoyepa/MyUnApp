@@ -164,3 +164,28 @@ class CRUD:
         except:
             traceback.print_exc()
 
+    def obtener_nombres_todoslosgrupos(self):
+        try:    
+            query = (f"select nombre_grupo from GRUPO")
+            self.__cur.execute(query)
+            self.Nombres_todosgrupos = self.__cur.fetchall()
+            return self.Nombres_todosgrupos
+        except:
+            print(traceback.format_exc())
+
+    def Enviar_sol(self, usuario: Usuario, id_grupo):
+        query = (f"insert into SOLICITUD values(null,'{usuario.correo}','{id_grupo}', NOW() ,null,0)") 
+        try:            
+            self.__cur.execute(query)
+            self.__conexion.commit()
+            self.mostrarCajaDeMensaje("COMPLETADO", "La solicitud ha sido enviada.", QMessageBox.Information)
+        except :
+            traceback.print_exc()
+
+    def obtener_id(self, nombre_grupo):
+        try:
+            query = (f"SELECT ID_GRUPO FROM GRUPO WHERE NOMBRE_GRUPO = '{nombre_grupo}'")
+            self.__cur.execute(query)
+            return self.__cur.fetchone()[0]
+        except:
+            print(traceback.format_exc())
