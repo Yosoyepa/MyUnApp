@@ -1195,7 +1195,7 @@ QPushButton::pressed{
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QLineEdit" name="lineEdit">
+                           <widget class="QLineEdit" name="lineSG">
                             <property name="font">
                              <font>
                               <pointsize>14</pointsize>
@@ -1234,7 +1234,7 @@ QPushButton::pressed{
                               <number>0</number>
                              </property>
                              <item>
-                              <widget class="QPushButton" name="pushButton">
+                              <widget class="QPushButton" name="solButton">
                                <property name="font">
                                 <font>
                                  <pointsize>14</pointsize>
