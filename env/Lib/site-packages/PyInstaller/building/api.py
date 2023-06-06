@@ -24,7 +24,7 @@ from operator import itemgetter
 from PyInstaller import HOMEPATH, PLATFORM
 from PyInstaller import log as logging
 from PyInstaller.archive.writers import CArchiveWriter, ZlibArchiveWriter
-from PyInstaller.building.datastruct import TOC, Target, _check_guts_eq
+from PyInstaller.building.datastruct import Target, _check_guts_eq, normalize_pyz_toc, normalize_toc
 from PyInstaller.building.utils import (
     _check_guts_toc, _make_clean_directory, _rmtree, checkCache, get_code_object, strip_paths_in_code, compile_pymodule
 )
@@ -51,7 +51,7 @@ class PYZ(Target):
     def __init__(self, *tocs, **kwargs):
         """
         tocs
-            One or more TOCs (Tables of Contents), usually an `Analysis.pure` and an `Analysis.zipped_data`.
+            One or more TOC (Table of Contents) lists, usually an `Analysis.pure` and an `Analysis.zipped_data`.
 
             If the passed TOC has an attribute `_code_cache`, it is expected to be a dictionary of module code objects
             from ModuleGraph.
@@ -103,10 +103,14 @@ class PYZ(Target):
         # Merge input TOC(s) and their code object dictionaries (if available). Skip the bootstrap modules, which will
         # be passed on to CArchive.
         bootstrap_module_names = set(name for name, _, typecode in self.dependencies if typecode == 'PYMODULE')
-        self.toc = TOC()
+        self.toc = []
         self.code_dict = {}
         for toc in tocs:
-            self.code_dict.update(getattr(toc, '_code_cache', {}))
+            # Check if code cache association exists for the given TOC list
+            code_cache = CONF['code_cache'].get(id(toc))
+            if code_cache is not None:
+                self.code_dict.update(code_cache)
+
             for entry in toc:
                 name, _, typecode = entry
                 # PYZ expects PYMODULE entries (python code objects) and DATA entries (data collected from zipped eggs).
@@ -115,6 +119,9 @@ class PYZ(Target):
                 if typecode == 'PYMODULE' and name in bootstrap_module_names:
                     continue
                 self.toc.append(entry)
+
+        # Normalize TOC
+        self.toc = normalize_pyz_toc(self.toc)
 
         # Alphabetically sort the TOC to enable reproducible builds.
         self.toc.sort()
@@ -187,7 +194,7 @@ class PKG(Target):
     ):
         """
         toc
-            A TOC (Table of Contents)
+            A TOC (Table of Contents) list.
         name
             An optional filename for the PKG.
         cdict
@@ -203,7 +210,7 @@ class PKG(Target):
         """
         super().__init__()
 
-        self.toc = toc
+        self.toc = normalize_toc(toc)  # Ensure guts contain normalized TOC
         self.cdict = cdict
         self.name = name
         if name is None:
@@ -322,7 +329,7 @@ class EXE(Target):
     def __init__(self, *args, **kwargs):
         """
         args
-            One or more arguments that are either instances of TOC or Target.
+            One or more arguments that are either an instance of `Target` or an iterable representing TOC list.
         kwargs
             Possible keyword arguments:
 
@@ -469,42 +476,22 @@ class EXE(Target):
         # file already exists.
         self.pkgname = os.path.join(CONF['workpath'], base_name + '.pkg')
 
-        self.toc = TOC()
-
-        _deps_toc = TOC()  # See the note below
+        self.toc = []
 
         for arg in args:
-            # Valid arguments: PYZ object, Splash object, and TOC-like iterables
+            # Valid arguments: PYZ object, Splash object, and TOC-list iterables
             if isinstance(arg, (PYZ, Splash)):
                 # Add object as an entry to the TOC, and merge its dependencies TOC
                 if isinstance(arg, PYZ):
                     self.toc.append((os.path.basename(arg.name), arg.name, "PYZ"))
                 else:
                     self.toc.append((os.path.basename(arg.name), arg.name, "SPLASH"))
-                # See the note below (and directly extend self.toc once this workaround is not necessary anymore).
-                # self.toc.extend(arg.dependencies)
-                for entry in arg.dependencies:
-                    _, _, typecode = entry
-                    if typecode in ('EXTENSION', 'BINARY', 'DATA'):
-                        _deps_toc.append(entry)
-                    else:
-                        self.toc.append(entry)
+                self.toc.extend(arg.dependencies)
             elif miscutils.is_iterable(arg):
                 # TOC-like iterable
                 self.toc.extend(arg)
             else:
                 raise TypeError(f"Invalid argument type for EXE: {type(arg)!r}")
-
-        # NOTE: this is an ugly work-around that ensures that when MERGE is used, the EXE's TOC is first populated with
-        # MERGE'd `binaries` and `datas` entries (which should be DEPENDENCY references for shared resources, and BINARY
-        # or DATA entries for non-shared resources), and that `PYZ.dependencies` is merged last. The latter may contain
-        # entries for `_struct` and `zlib` extensions, and if they end up in the TOC first, they will block the
-        # corresponding DEPENDENCY entries (if they are available) from being added to TOC. Which will in turn result in
-        # missing extensions with certain onefile/onedir referencing combinations. And even if not, the result would be
-        # but sub-optimal, as the extensions could be shared via DEPENDENCY mechanism. This work-around can be removed
-        # once we replace the TOC class with mechanism that implements a typecode-based priority system for the entries.
-        self.toc.extend(_deps_toc)
-        del _deps_toc
 
         if self.runtime_tmpdir is not None:
             self.toc.append(("pyi-runtime-tmpdir " + self.runtime_tmpdir, "", "OPTION"))
@@ -573,6 +560,9 @@ class EXE(Target):
                 else:
                     raise TypeError(f"Unsupported type for version info argument: {type(self.versrsrc)!r}")
 
+        # Normalize TOC
+        self.toc = normalize_toc(self.toc)
+
         self.pkg = PKG(
             self.toc,
             name=self.pkgname,
@@ -589,7 +579,7 @@ class EXE(Target):
 
         # Get the path of the bootloader and store it in a TOC, so it can be checked for being changed.
         exe = self._bootloader_file('run', '.exe' if is_win or is_cygwin else '')
-        self.exefiles = TOC([(os.path.basename(exe), exe, 'EXECUTABLE')])
+        self.exefiles = [(os.path.basename(exe), exe, 'EXECUTABLE')]
 
         self.__postinit__()
 
@@ -879,7 +869,7 @@ class COLLECT(Target):
     def __init__(self, *args, **kwargs):
         """
         args
-            One or more arguments that are either TOCs or Targets.
+            One or more arguments that are either an instance of `Target` or an iterable representing TOC list.
         kwargs
             Possible keyword arguments:
 
@@ -906,7 +896,7 @@ class COLLECT(Target):
         # DISTPATH). Old .spec formats included parent path, so strip it away.
         self.name = os.path.join(CONF['distpath'], os.path.basename(kwargs.get('name')))
 
-        self.toc = TOC()
+        self.toc = []
         for arg in args:
             # Valid arguments: EXE object and TOC-like iterables
             if isinstance(arg, EXE):
@@ -930,6 +920,9 @@ class COLLECT(Target):
                 self.toc.extend(arg)
             else:
                 raise TypeError(f"Invalid argument type for COLLECT: {type(arg)!r}")
+
+        # Normalize TOC
+        self.toc = normalize_toc(self.toc)
 
         self.__postinit__()
 
@@ -1035,8 +1028,8 @@ class MERGE:
             # onedir, `a.datas` and `a.binaries` need to be passed to `COLLECT` (as they were before the MERGE), while
             # `a.dependencies` needs to be passed to `EXE`. This split requires DEPENDENCY entries to be in a separate
             # TOC.
-            analysis.binaries = TOC(binaries)
-            analysis.datas = TOC(datas)
+            analysis.binaries = normalize_toc(binaries)
+            analysis.datas = normalize_toc(datas)
             analysis.dependencies += binaries_refs + datas_refs
 
     def _process_toc(self, toc, path_to_exe):

@@ -10,6 +10,8 @@
 #-----------------------------------------------------------------------------
 
 import os
+import pathlib
+import warnings
 
 from PyInstaller import log as logging
 from PyInstaller.building.utils import _check_guts_eq
@@ -37,8 +39,9 @@ def unique_name(entry):
     return name
 
 
+# This class is deprecated and has been replaced by plain lists with explicit normalization (de-duplication) via
+# `normalize_toc` and `normalize_pyz_toc` helper functions.
 class TOC(list):
-    # TODO: simplify the representation and use directly Modulegraph objects.
     """
     TOC (Table of Contents) class is a list of tuples of the form (name, path, typecode).
 
@@ -58,6 +61,14 @@ class TOC(list):
     """
     def __init__(self, initlist=None):
         super().__init__()
+
+        # Deprecation warning
+        warnings.warn(
+            "TOC class is deprecated. Use a plain list of 3-element tuples instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
         self.filenames = set()
         if initlist:
             for entry in initlist:
@@ -146,7 +157,7 @@ class Target:
         self.__class__.invcnum += 1
         self.tocfilename = os.path.join(CONF['workpath'], '%s-%02d.toc' % (self.__class__.__name__, self.invcnum))
         self.tocbasename = os.path.basename(self.tocfilename)
-        self.dependencies = TOC()
+        self.dependencies = []
 
     def __postinit__(self):
         """
@@ -198,9 +209,9 @@ class Target:
         misc.save_py_data_struct(self.tocfilename, data)
 
 
-class Tree(Target, TOC):
+class Tree(Target, list):
     """
-    This class is a way of creating a TOC (Table of Contents) that describes some or all of the files within a
+    This class is a way of creating a TOC (Table of Contents) list that describes some or all of the files within a
     directory.
     """
     def __init__(self, root=None, prefix=None, excludes=None, typecode='DATA'):
@@ -221,7 +232,7 @@ class Tree(Target, TOC):
                 the typcodes.
         """
         Target.__init__(self)
-        TOC.__init__(self)
+        list.__init__(self)
         self.root = root
         self.prefix = prefix
         self.excludes = excludes
@@ -293,3 +304,60 @@ class Tree(Target, TOC):
                 else:
                     result.append((resfilename, fullfilename, self.typecode))
         self[:] = result
+
+
+def normalize_toc(toc):
+    # Default priority: 0
+    _TOC_TYPE_PRIORITIES = {
+        # DEPENDENCY entries need to replace original entries, so they need the highest priority.
+        'DEPENDENCY': 2,
+        # BINARY/EXTENSION entries undergo additional processing, so give them precedence over DATA and other entries.
+        'BINARY': 1,
+        'EXTENSION': 1,
+    }
+
+    def _type_case_normalization_fcn(typecode):
+        # Case-normalize all entries except OPTION.
+        return typecode not in {
+            "OPTION",
+        }
+
+    return _normalize_toc(toc, _TOC_TYPE_PRIORITIES, _type_case_normalization_fcn)
+
+
+def normalize_pyz_toc(toc):
+    # Default priority: 0
+    _TOC_TYPE_PRIORITIES = {
+        # Ensure that modules are never shadowed by PYZ-embedded data files.
+        'PYMODULE': 1,
+    }
+
+    return _normalize_toc(toc, _TOC_TYPE_PRIORITIES)
+
+
+def _normalize_toc(toc, toc_type_priorities, type_case_normalization_fcn=lambda typecode: False):
+    tmp_toc = dict()
+    for dest_name, src_name, typecode in toc:
+        # Always sanitize the dest_name with `os.path.normpath` to remove any local loops with parent directory path
+        # components. `pathlib` does not seem to offer equivalent functionality.
+        dest_name = os.path.normpath(dest_name)
+
+        # Normalize the destination name for uniqueness. Use `pathlib.PurePath` to ensure that keys are both
+        # case-normalized (on OSes where applicable) and directory-separator normalized (just in case).
+        if type_case_normalization_fcn(typecode):
+            entry_key = pathlib.PurePath(dest_name)
+        else:
+            entry_key = dest_name
+
+        existing_entry = tmp_toc.get(entry_key)
+        if existing_entry is None:
+            # Entry does not exist - insert
+            tmp_toc[entry_key] = (dest_name, src_name, typecode)
+        else:
+            # Entry already exists - replace if its typecode has higher priority
+            _, _, existing_typecode = existing_entry
+            if toc_type_priorities.get(typecode, 0) > toc_type_priorities.get(existing_typecode, 0):
+                tmp_toc[entry_key] = (dest_name, src_name, typecode)
+
+    # Return the items as list. The order matches the original order due to python dict maintaining the insertion order.
+    return list(tmp_toc.values())
