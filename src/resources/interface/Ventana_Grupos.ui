@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1188</width>
-    <height>825</height>
+    <width>1153</width>
+    <height>747</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1062,8 +1062,8 @@ QPushButton::pressed{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>376</width>
-                           <height>169</height>
+                           <width>363</width>
+                           <height>144</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -1174,8 +1174,8 @@ QPushButton::pressed{
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>376</width>
-                           <height>169</height>
+                           <width>363</width>
+                           <height>143</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,10,2">
@@ -1195,7 +1195,7 @@ QPushButton::pressed{
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QLineEdit" name="lineEdit">
+                           <widget class="QLineEdit" name="lineSG">
                             <property name="font">
                              <font>
                               <pointsize>14</pointsize>
@@ -1234,7 +1234,7 @@ QPushButton::pressed{
                               <number>0</number>
                              </property>
                              <item>
-                              <widget class="QPushButton" name="pushButton">
+                              <widget class="QPushButton" name="solButton">
                                <property name="font">
                                 <font>
                                  <pointsize>14</pointsize>
