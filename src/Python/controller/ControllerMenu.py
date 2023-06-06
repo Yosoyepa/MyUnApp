@@ -8,6 +8,7 @@ from Python.model.Usuario import Usuario
 
 from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
 from controller.ControllerAdminGrupos import ControllerAdminGrupo
+from controller.ControllerEventos import controllerEventos
 
 
 class ControllerMenu(QMainWindow):
@@ -24,13 +25,14 @@ class selectorMenu(QMainWindow):
         self.controllerGrupos = ControllerBusquedaGrupo()  
         self.controllerMenu = ControllerMenu()
         self.controllerAdminGrupos = ControllerAdminGrupo()
+        self.controllerEventos = controllerEventos()
 
         self.pilaWidget = QtWidgets.QStackedWidget(self)
 
         self.pilaWidget.addWidget(self.controllerMenu)
         self.pilaWidget.addWidget(self.controllerGrupos)
         self.pilaWidget.addWidget(self.controllerAdminGrupos)
-        
+        self.pilaWidget.addWidget(self.controllerEventos)
         self.setCentralWidget(self.pilaWidget)
 
         self.pilaWidget.setCurrentWidget(self.controllerMenu)
@@ -44,6 +46,7 @@ class selectorMenu(QMainWindow):
     def setUsuario(self, usuario):
         self.usuario = usuario
         self.controllerGrupos.setUsuario(self.usuario)
+        self.controllerEventos.setUsuario(self.usuario)
 
 
     def conexiones(self):
@@ -51,11 +54,15 @@ class selectorMenu(QMainWindow):
         self.controllerGrupos.Boton_Menu.clicked.connect(self.cambioMenuFromBusquedaGrupos)
         self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.ComprovarAdmin)
         self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGruposFromMenu)
+        self.controllerMenu.botonCalendario.clicked.connect(self.cambioAEventos)
 
     def cambioBusquedaGruposFromMenu(self):
         self.controllerAdminGrupos.limpiar()
         self.setWindowTitle("Busqueda Grupos")
         self.pilaWidget.setCurrentWidget(self.controllerGrupos)
+
+    def cambioAEventos(self):
+        self.pilaWidget.setCurrentWidget(self.controllerEventos)
 
     def cambioMenuFromBusquedaGrupos(self):
         self.setWindowTitle("Menu")

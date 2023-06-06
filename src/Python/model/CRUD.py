@@ -122,7 +122,7 @@ class CRUD:
         try:            
             self.__cur.execute(query)
             self.__conexion.commit()
-            self.creacion_de_topic(grupo)
+            #self.creacion_de_topic(grupo)
             miembroTemp = MiembroGrupo(usuario, self.obtener_ultimo_ID_grupo(), True, True, True)
             self.crearMiembroGrupo(miembroTemp)
             self.mostrarCajaDeMensaje("COMPLETADO", "El grupo ha sido creado con exito.", QMessageBox.Information)
