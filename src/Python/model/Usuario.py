@@ -9,9 +9,7 @@ class Usuario:
 
         self.correo:str = correo
         self.nombre:str = nombre
-        self.apellido:str = apellido
-
-        
+        self.apellido:str = apellido      
         self.fechaRegistro:datetime.datetime = fechaRegistro
 
 
@@ -24,7 +22,6 @@ class Usuario:
             self.contrasena:str = generate_password_hash(contrasena, method="scrypt")
         except:
             print("error")
-
 
 
 

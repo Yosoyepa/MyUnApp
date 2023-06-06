@@ -6,6 +6,3 @@ class grupo:
         self.descripcion:str = descripcion
         
         self.listaMiembros= []
-    
-        
-        

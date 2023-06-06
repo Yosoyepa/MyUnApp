@@ -15,14 +15,15 @@ from controller.ControllerCodigo import controllerCodigo
 
 from resources.QRC import images
 class controllerRegistro(QMainWindow):
-    def __init__(self, parent = None):
+    def __init__(self, parent = None, crd = None):
+        
 
 
         self.parent = parent
 
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Registro.ui', self)
-        self.crd = CRUD()
+        self.crd = crd
         self.set_image_opacity(0.44)
         
         self.controllerCodigo = controllerCodigo(instruccion = False, parent = self.parent, parent2= self)

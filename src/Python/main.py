@@ -8,7 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from Python.controller.ControllerMenu import selectorMenu
 from Python.controller.ControllerInicioSesion import controllerInicioSesion
 from Python.controller.ControllerRegistro import controllerRegistro
-
+from Python.controller.Controller_Chat import controller_Chat
 
 class app(QMainWindow):
     def __init__(self) :
@@ -16,7 +16,7 @@ class app(QMainWindow):
         self.pilaWidgets = QtWidgets.QStackedWidget(self)
 
         self.inicioSesion = controllerInicioSesion()
-        self.registro = controllerRegistro(self)
+        self.registro = controllerRegistro(self, self.inicioSesion.crd)
         self.menu = selectorMenu()        
         
 
@@ -47,6 +47,7 @@ class app(QMainWindow):
         self.registro.boton_Iniciar_sesion.clicked.connect(self.cambioInicioSesionFromRegistro)
         self.registro.Boton_Registro.clicked.connect(self.botonRegistrar) 
 
+        
 
 ####CAMBIOS
     def cambioInicioSesionFromRegistro(self):
@@ -67,7 +68,12 @@ class app(QMainWindow):
       
     def botonRegistrar(self):
         self.registro.registrar()
-         
+        
+
+    
+
+    
+    
 
 if __name__ == '__main__':
     aplicacion = QtWidgets.QApplication(sys.argv)

@@ -30,6 +30,7 @@ class controllerInicioSesion(QMainWindow):
 
 
         self.Boton_Cambio_Contra.clicked.connect(self.abrirRecuperacion)
+        
 
     def set_image_opacity(self, value):
         graphics_effect = QtWidgets.QGraphicsOpacityEffect(self.Label_Imagen)
@@ -52,7 +53,7 @@ class controllerInicioSesion(QMainWindow):
             else: 
                 return False
 
-    
+
     def abrirRecuperacion(self):
         self.habilitarVentana(False)
         self.recuperacionContrasena.show()
@@ -61,7 +62,8 @@ class controllerInicioSesion(QMainWindow):
     def habilitarVentana(self, habilitar: bool):
         self.frame.setEnabled(habilitar)
         self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, habilitar)
-    
+
+
 '''
 
 app = QtWidgets.QApplication(sys.argv)
