@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1014</width>
+    <width>1017</width>
     <height>728</height>
    </rect>
   </property>
@@ -252,8 +252,8 @@ QPushButton::pressed{
             </property>
             <property name="iconSize">
              <size>
-              <width>100</width>
-              <height>100</height>
+              <width>90</width>
+              <height>90</height>
              </size>
             </property>
             <property name="checkable">
@@ -308,8 +308,8 @@ QPushButton::pressed{
             </property>
             <property name="iconSize">
              <size>
-              <width>100</width>
-              <height>100</height>
+              <width>90</width>
+              <height>90</height>
              </size>
             </property>
             <property name="checkable">
@@ -672,7 +672,7 @@ border-radius: 0px</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>310</width>
+                           <width>313</width>
                            <height>282</height>
                           </rect>
                          </property>

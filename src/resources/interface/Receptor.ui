@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>377</width>
-    <height>131</height>
+    <height>107</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,7 +70,8 @@
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(192, 225, 236);</string>
+           <string notr="true">background-color: rgb(192, 225, 236);
+border-radius: 10px</string>
           </property>
           <property name="title">
            <string/>
@@ -89,6 +90,9 @@
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
