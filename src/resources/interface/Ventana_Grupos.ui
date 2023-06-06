@@ -969,7 +969,7 @@ QPushButton::pressed{
                           </widget>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButton_2">
+                          <widget class="QPushButton" name="Boton_Eliminar">
                            <property name="minimumSize">
                             <size>
                              <width>60</width>

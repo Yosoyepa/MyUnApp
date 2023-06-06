@@ -203,7 +203,9 @@ class CRUD:
 
 
     def admin(self,usuario,nombreGrupo):
-        query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}' and MG.CORREO_USUARIO = '{usuario}'")
+        #query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}' and MG.CORREO_USUARIO = '{usuario}'")
+        idTemp = self.sacarID(nombreGrupo)
+        query = (f"SELECT ADMIN_GRUPO FROM MIEMBRO_GRUPO WHERE ID_GRUPO = '{idTemp}' AND CORREO_USUARIO = '{usuario}'")
         try:
             self.__cur.execute(query)
             Lista = self.__cur.fetchone()[0]
@@ -224,7 +226,9 @@ class CRUD:
             traceback.print_exc()
 
     def mostrarSolicitudes(self,grupoEntrado):
-        query =  (f"SELECT S.CORREO_USUARIO FROM SOLICITUD S INNER JOIN GRUPO G WHERE G.ID_GRUPO = S.ID_GRUPO AND G.NOMBRE_GRUPO='{grupoEntrado}' AND S.SOLICITUD_ACEPTADA=0")
+        #query =  (f"SELECT S.CORREO_USUARIO FROM SOLICITUD S INNER JOIN GRUPO G WHERE G.ID_GRUPO = S.ID_GRUPO AND G.NOMBRE_GRUPO='{grupoEntrado}' AND S.SOLICITUD_ACEPTADA=0")
+        idTemp = self.sacarID(grupoEntrado)
+        query = (f"SELECT CORREO_USUARIO FROM SOLICITUD WHERE ID_GRUPO = '{idTemp}' AND SOLICITUD_ACEPTADA = 0")
         try:
             self.__cur.execute(query)
             Lista = self.__cur.fetchall()
@@ -233,7 +237,9 @@ class CRUD:
             traceback.print_exc()
 
     def removerAdmin(self,correo,grupo):
-        query = (f"UPDATE MIEMBRO_GRUPO MG INNER JOIN GRUPO G SET MG.ADMIN_GRUPO = 0 WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.NOMBRE_GRUPO = '{grupo}'")
+        #query = (f"UPDATE MIEMBRO_GRUPO MG INNER JOIN GRUPO G SET MG.ADMIN_GRUPO = 0 WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.NOMBRE_GRUPO = '{grupo}'")
+        idTemp = self.sacarID(grupo)
+        query = (f"UPDATE MIEMBRO_GRUPO SET ADMIN_GRUPO = 0 WHERE ID_GRUPO = '{idTemp}' AND CORREO_USUARIO = '{correo}'")
         try:
             self.__cur.execute(query)
             self.__conexion.commit()
@@ -241,7 +247,9 @@ class CRUD:
             traceback.print_exc()
 
     def ascenderAdmin(self,correo,grupo):
-        query = (f"UPDATE MIEMBRO_GRUPO MG INNER JOIN GRUPO G SET MG.ADMIN_GRUPO = 1 WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.NOMBRE_GRUPO = '{grupo}'")
+        #query = (f"UPDATE MIEMBRO_GRUPO MG INNER JOIN GRUPO G SET MG.ADMIN_GRUPO = 1 WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.NOMBRE_GRUPO = '{grupo}'")
+        idTemp = self.sacarID(grupo)
+        query = (f"UPDATE MIEMBRO_GRUPO SET ADMIN_GRUPO = 1 WHERE ID_GRUPO = '{idTemp}' AND CORREO_USUARIO = '{correo}'")
         try:
             self.__cur.execute(query)
             self.__conexion.commit()
@@ -249,7 +257,9 @@ class CRUD:
             traceback.print_exc()
 
     def eliminarPersona(self,correo,nombreGrupo):
-        query = (f"DELETE FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.NOMBRE_GRUPO = '{nombreGrupo}'")
+        #query = (f"DELETE FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO AND MG.CORREO_USUARIO='{correo}' AND G.NOMBRE_GRUPO = '{nombreGrupo}'")
+        idTemp = self.sacarID(nombreGrupo)
+        query = (f"DELETE FROM MIEMBRO_GRUPO WHERE ID_GRUPO = '{idTemp}' AND CORREO_USUARIO = '{correo}'")
         try:
             self.__cur.execute(query)
             self.__conexion.commit()
@@ -258,18 +268,16 @@ class CRUD:
             
     def buscarSiHayAdmin(self,nombreGrupo):
         conteo = 0
-        query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}'")
+        #query = (f"SELECT MG.ADMIN_GRUPO FROM MIEMBRO_GRUPO MG INNER JOIN GRUPO G WHERE MG.ID_GRUPO = G.ID_GRUPO and G.NOMBRE_GRUPO = '{nombreGrupo}'")
+        idTemp = self.sacarID(nombreGrupo)
+        query = (f"SELECT ADMIN_GRUPO FROM MIEMBRO_GRUPO WHERE ID_GRUPO = '{idTemp}'")
         try:
             self.__cur.execute(query)
             Lista = self.__cur.fetchall()
-            print(Lista)
             for i in range(len(Lista)):
                 if Lista[i][0] == 1:
                     conteo+=1
-            if conteo>1:
-                return True
-            else:
-                return False
+            return conteo
         except:
             traceback.print_exc()
 
@@ -302,6 +310,33 @@ class CRUD:
             self.__conexion.commit()
         except:
             traceback.print_exc()
+
+    def eliminarGrupo(self,nombreGrupo):
+        query = (f"DELETE FROM GRUPO WHERE NOMBRE_GRUPO = '{nombreGrupo}'")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()
+
+    def cambiarNombreGrupo(self,nombreGrupo,newNombre):
+        idTemp = self.sacarID(nombreGrupo)
+        query = (f"UPDATE GRUPO SET NOMBRE_GRUPO = '{newNombre}' WHERE ID_GRUPO = '{idTemp}'")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()
+
+    def cambiarDescripcionGrupo(self,nombreGrupo,newDescripcion):
+        idTemp = self.sacarID(nombreGrupo)
+        query = (f"UPDATE GRUPO SET DESCRIPCION_GRUPO = '{str(newDescripcion)}' WHERE ID_GRUPO = '{idTemp}'")
+        try:
+            self.__cur.execute(query)
+            self.__conexion.commit()
+        except:
+            traceback.print_exc()
+
 
     
     # def createGrupo(self, nombre, descripcion, usuario):
