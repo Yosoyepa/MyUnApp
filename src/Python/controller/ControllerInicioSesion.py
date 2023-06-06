@@ -4,14 +4,16 @@ from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #imports de controladores
-from Python.controller.ControllerMenu import controllerMenu
+from Python.controller.ControllerMenu import selectorMenu
 from controller.ControllerRecuperacionContrasena import controllerRecuperacion
+
 
 from resources.QRC import images
 
 #import de model
 from Python.model.CRUD import CRUD
 from Python.model.Usuario import Usuario
+
 
 
 
@@ -23,7 +25,7 @@ class controllerInicioSesion(QMainWindow):
     	
         self.crd = CRUD()
         #ventanas
-        self.menu = controllerMenu()
+        self.menu = selectorMenu()
         self.recuperacionContrasena = controllerRecuperacion(self)
 
 
@@ -44,6 +46,7 @@ class controllerInicioSesion(QMainWindow):
             print(usr)
             if(usr != None):
                 usr.mostrar()
+                self.menu.setUsuario(usr)
                 self.menu.show()        
                 return True
             else: 
