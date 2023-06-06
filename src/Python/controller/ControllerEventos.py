@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 from resources.QRC import images
 
-from Python.controller.ControllerMenu import selectorMenu
+#from Python.controller.ControllerMenu import selectorMenu
 
 from Python.model.CRUD import CRUD
 from Python.model.Evento import event, controllerCalendar
@@ -22,7 +22,7 @@ class controllerEventos(QMainWindow):
         self.show()
         
         
-        self.menu = selectorMenu()
+        #self.menu = selectorMenu()
         self.logicaEvento1()
 
     def logicaEvento1(self):
@@ -30,9 +30,9 @@ class controllerEventos(QMainWindow):
         
         calendario = controllerCalendar()
         calendario.crearCalendar()
-        id = calendario.getId()
-        eventoCalendario = event(id)
-        data = eventoCalendario.getEvent()
+        self.id = calendario.getId()
+        self.eventoCalendario = event(self.id)
+        data = self.eventoCalendario.getEvent()
 
         if data == None:
             pass
@@ -54,13 +54,38 @@ class controllerEventos(QMainWindow):
 
     def logicaEvento2(self):
         self.cambioEvento2()
+        self.boxGrupos.addItem('·')
+        self.boxGrupos.addItem('Los Rodriguez')
+        self.grupo = self.boxGrupos.currentText()
+        self.calendarWidget.selectionChanged.connect(self.agarrar_fecha)
+
+        self.pushListo.clicked.connect(self.enviarEvento)
+
+    def agarrar_fecha(self):
+        dateSelected = self.calendarWidget.selectedDate()
+
+        self.labelFecha_Mutable.setText(str(dateSelected.toPyDate()))
+        self.fecha_1 = str(dateSelected.toPyDate())
 
 
+    def enviarEvento(self):
+        self.labelTituloMutable.setText('Se ha creado tu evento')
+        self.desc = self.textDesc.toPlainText()
+        self.hora = self.spinHora.value()
+        self.minutos = self.spinMinutos.value()
+        self.labelHora_Mutable.setText(str(self.hora))
+        self.labelMinutos_Mutable.setText(str(self.minutos))
+
+        self.titulo = 'Reunion de ' + self.grupo
+
+        self.fecha = (self.fecha_1.split('-'))
+        for i in range(len(self.fecha)):
+            self.fecha[i] = int(self.fecha[i])
+
+        self.fecha += [self.hora] + [self.minutos]
 
 
-
-    
-        
+        self.eventoCalendario.crearEvent(self.titulo, self.desc, [], self.fecha)
 
 
     def cambioEvento2(self):

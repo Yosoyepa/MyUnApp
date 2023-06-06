@@ -122,7 +122,7 @@ class event(controllerCalendar):
             'transparency': 'transparent',
             'visibility': 'private',
             'location': 'Bogotá, CO',
-            'attendes': [{'email': 'santi4g0303@gmail.com', 'responseStatus': 'accepted'}]
+            'attendes': attendes
         }
         response = service.events().insert(
             calendarId= self.calendarioId,
@@ -164,7 +164,7 @@ class event(controllerCalendar):
 
         
 
-if __name__ == '__main__':
+'''if __name__ == '__main__':
     calendario = controllerCalendar()
     calendario.crearCalendar()
     id = calendario.getId()
@@ -172,7 +172,7 @@ if __name__ == '__main__':
     attendes = ['santi4g0303@gmail.com']
     fecha = [2023, 6, 6, 12, 30]
     eventoCalendario.crearEvent('Reunion de Los Rodriguez', 'Un gran y hermoso evento', [], fecha)
-    eventoCalendario.getEvent()
+    eventoCalendario.getEvent()'''
 
 
         

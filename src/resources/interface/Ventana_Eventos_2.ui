@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>997</width>
-    <height>592</height>
+    <width>957</width>
+    <height>606</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,6 +32,12 @@
     </property>
     <item>
      <widget class="QFrame" name="frame">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(192, 225, 236);</string>
       </property>
@@ -488,6 +494,12 @@ border-radius: 20px;</string>
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
                      <property name="baseSize">
                       <size>
                        <width>0</width>
@@ -504,7 +516,7 @@ border-radius: 20px;</string>
 #qt_calendar_navigationbar{
 	background-color: #FFF;
 	border: 2px solid #B8E2FF;
-	border-botton: 0px;
+	border-bottom: 0px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	
@@ -648,8 +660,8 @@ border-radius: 20px;</string>
 	
 	border: 2px solid #B8E2FF;
 	border-top: 0px;
-	border-botton-left-radius: 5px;
-	border-botton-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 
 }
 
@@ -928,7 +940,7 @@ p, li { white-space: pre-wrap; }
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_5">
                      <item>
-                      <widget class="QComboBox" name="boxHora">
+                      <widget class="QSpinBox" name="spinHora">
                        <property name="minimumSize">
                         <size>
                          <width>0</width>
@@ -936,15 +948,15 @@ p, li { white-space: pre-wrap; }
                         </size>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true">QComboBox {
+                        <string notr="true">QSpinBox {
 	background: solid rgb(255, 255, 255);
 	border: 0px solid rgb(0, 0, 0);
 	border-radius: 10px;
 	color: black;
 }</string>
                        </property>
-                       <property name="editable">
-                        <bool>false</bool>
+                       <property name="maximum">
+                        <number>23</number>
                        </property>
                       </widget>
                      </item>
@@ -976,20 +988,26 @@ p, li { white-space: pre-wrap; }
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="boxMinutos">
+                      <widget class="QSpinBox" name="spinMinutos">
                        <property name="minimumSize">
                         <size>
-                         <width>10</width>
+                         <width>0</width>
                          <height>20</height>
                         </size>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true">QComboBox {
+                        <string notr="true">QSpinBox {
 	background: solid rgb(255, 255, 255);
 	border: 0px solid rgb(0, 0, 0);
 	border-radius: 10px;
 	color: black;
 }</string>
+                       </property>
+                       <property name="maximum">
+                        <number>59</number>
+                       </property>
+                       <property name="singleStep">
+                        <number>5</number>
                        </property>
                       </widget>
                      </item>
@@ -1000,14 +1018,14 @@ p, li { white-space: pre-wrap; }
                      <item>
                       <widget class="QLabel" name="labelFecha_Mutable">
                        <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                          <horstretch>0</horstretch>
                          <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
                        <property name="minimumSize">
                         <size>
-                         <width>200</width>
+                         <width>0</width>
                          <height>0</height>
                         </size>
                        </property>

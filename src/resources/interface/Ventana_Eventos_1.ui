@@ -360,7 +360,7 @@ QPushButton:hover {
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton_6">
+                 <widget class="QPushButton" name="pushCalendario">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
