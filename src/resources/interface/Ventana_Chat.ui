@@ -766,7 +766,7 @@ border-radius: 0px</string>
                                      <item>
                                       <widget class="QListWidget" name="chat_listWidget">
                                        <property name="sizeAdjustPolicy">
-                                        <enum>QAbstractScrollArea::AdjustToContents</enum>
+                                        <enum>QAbstractScrollArea::AdjustIgnored</enum>
                                        </property>
                                        <property name="isWrapping" stdset="0">
                                         <bool>false</bool>

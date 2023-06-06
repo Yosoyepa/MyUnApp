@@ -21,6 +21,8 @@ class controller_Chat(QMainWindow):
     mensaje_recibido = QtCore.pyqtSignal(str)
 
     def __init__(self):
+
+        self.hilo = None
         self.crd = CRUD()
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Chat.ui', self)
@@ -82,10 +84,8 @@ class controller_Chat(QMainWindow):
             self.lista_grupos.addItem(item)
 
     def setUsuario(self, usr: Usuario):
-        self.usuario = usr
-        self.hilo = claseHilo(self.crd, 'TEST1')
-        self.hilo.newValor.connect(self.cargarMensajes)
-        self.hilo.start()	
+        self.usuario = usr        
+        
         
 
     def setear_usuario(self, usr: Usuario):
@@ -96,9 +96,16 @@ class controller_Chat(QMainWindow):
         return nombre_usuario
 
     def mostrar_miembros_grupos(self, item):
-        grupo_seleccionado = item.text()
-        nombre_grupo = grupo_seleccionado
-        print(nombre_grupo, ":asdsad")
+        self.chat_listWidget.clear()
+        if self.hilo != None:
+            self.hilo.terminate()
+
+        self.grupo_seleccionado = item.text()
+        nombre_grupo = self.grupo_seleccionado
+        self.hilo = claseHilo(self.crd, self.grupo_seleccionado)
+        self.hilo.newValor.connect(self.cargarMensajes)
+        self.hilo.start()	
+        print(nombre_grupo)
         self.crd.obtener_miembros_grupos(nombre_grupo)
         self.lista_miembros.clear()
         for miembro in self.crd.Miembros_grupos:
@@ -110,7 +117,7 @@ class controller_Chat(QMainWindow):
     
     def cargarMensajes(self, newValor):                    
         try:    
-            self.id_grupo_seleccionado = self.obtener_id_grupo("TEST1")
+            self.id_grupo_seleccionado = self.obtener_id_grupo(self.grupo_seleccionado)
             mensaje = newValor	
             
             
@@ -120,16 +127,26 @@ class controller_Chat(QMainWindow):
                         self.cajaMensajeEnviado(mensaje[3])
                     else:
                         self.cajaMensajeRecibido(mensaje[3])
+                        
         except:
             print(traceback.format_exc())
         
+
+    def cargarTodosLosMensajes(self):
+        try:
+            mensajesListaTemp = self.crd.obtener_mensajes_grupo("TEST1")
+            print(mensajesListaTemp)
+            for mensaje in mensajesListaTemp:                        
+                self.cargarMensajes(mensaje)
+        except:
+            print(traceback.format_exc())
+
 
     def enviarMensaje(self):
         try:
             texto_mensaje = str(self.message_line_edit.text())
             if texto_mensaje:
-                self.crd.enviar_mensaje_grupo(self.id_grupo_seleccionado, self.usuario.correo, texto_mensaje)
-                self.cajaMensajeEnviado(texto_mensaje)
+                self.crd.enviar_mensaje_grupo(self.id_grupo_seleccionado, self.usuario.correo, texto_mensaje)                
                 
                 self.message_line_edit.clear()
         except:
@@ -175,19 +192,27 @@ class claseHilo(QThread):
         self.nombreGrupo = nombreGrupo
         super(claseHilo, self).__init__()
 
+
+    def setGrupo(self, nombreGrupo):
+        self.nombreGrupo = nombreGrupo
+
     def run(self):
-        mensajesLista = []
-        mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)
-        for mensaje in mensajesListaTemp:                        
-            self.newValor.emit(mensaje)
-        mensajesLista = mensajesListaTemp
-        while True:
-            try:      
-                mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)                                                                              
-                if mensajesListaTemp != mensajesLista:
-                    mensajesLista = mensajesListaTemp
-                    self.newValor.emit(mensajesLista[-1])
-                mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)
-                time.sleep(3)
-            except:
-                print(traceback.format_exc())
+        try:
+            mensajesLista = []
+            mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)
+            print(mensajesListaTemp)
+          
+            mensajesLista = mensajesListaTemp
+            while True:
+                
+                    print("Hilo ejecutandose") 
+                    print(mensajesListaTemp)
+                    mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)                                                                              
+                    if mensajesListaTemp != mensajesLista:
+                        mensajesLista = mensajesListaTemp
+                        self.newValor.emit(mensajesListaTemp[-1])         
+                        print("-----------------------", mensajesListaTemp[-1])       
+                    time.sleep(0.25)
+        except:
+            print(traceback.format_exc())
+            print("Error en el hilo")                    

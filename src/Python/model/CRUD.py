@@ -29,6 +29,7 @@ class CRUD:
             traceback.print_exc()          
         print("conexion exitosa")          
             
+    
             
     def createUsuario(self, usuario:Usuario):
         query = (f"INSERT INTO USUARIO Values('{usuario.correo}', '{usuario.nombre}', '{usuario.apellido}', '{usuario.contrasena}', '{usuario.fechaNacimiento}', NOW())")
@@ -211,38 +212,60 @@ class CRUD:
 
     def obtener_miembros_grupos(self, nombre_grupo):
         try:    
+            self.__conexion = mysql.connector.connect(user=self.__usuarioBD, password=self.__contraseñaBD, host=self.__hostBD, database=self.__dataBase, port=self.__portBD)
+            self.__cur = self.__conexion.cursor()
             query = (f"SELECT U.NOMBRE_USUARIO, U.APELLIDO_USUARIO FROM USUARIO U INNER JOIN MIEMBRO_GRUPO MG ON U.CORREO_USUARIO = MG.CORREO_USUARIO INNER JOIN GRUPO G ON G.ID_GRUPO = MG.ID_GRUPO WHERE G.NOMBRE_GRUPO ='{nombre_grupo}'")
             self.__cur.execute(query)
             self.Miembros_grupos = self.__cur.fetchall()
             print(self.Miembros_grupos)
+            self.__cur.close()
+            self.__conexion.close()
             return self.Miembros_grupos
         except:
             print(traceback.format_exc())
 
     def obtener_mensajes_grupo(self, nombre_grupo):
         try:    
-            query = (f"SELECT M.ID_MENSAJE ,M.ID_GRUPO, U.CORREO_USUARIO , M.TEXTO_MENSAJE, U.NOMBRE_USUARIO, U.APELLIDO_USUARIO, M.FECHA_HORA_MENSAJE FROM MENSAJE M INNER JOIN USUARIO U ON M.CORREO_USUARIO = U.CORREO_USUARIO INNER JOIN GRUPO G ON G.ID_GRUPO = M.ID_GRUPO WHERE G.NOMBRE_GRUPO ='{nombre_grupo}'")
-            self.__cur.execute(query)
+            self.__conexion = mysql.connector.connect(user=self.__usuarioBD, password=self.__contraseñaBD, host=self.__hostBD, database=self.__dataBase, port=self.__portBD)
+            self.__cur = self.__conexion.cursor()
+            query = (f"SELECT M.ID_MENSAJE ,M.ID_GRUPO, U.CORREO_USUARIO , M.TEXTO_MENSAJE, U.NOMBRE_USUARIO, U.APELLIDO_USUARIO, M.FECHA_HORA_MENSAJE FROM MENSAJE M INNER JOIN USUARIO U ON M.CORREO_USUARIO = U.CORREO_USUARIO INNER JOIN GRUPO G ON G.ID_GRUPO = M.ID_GRUPO WHERE G.NOMBRE_GRUPO ='{nombre_grupo}' order by M.ID_MENSAJE")
+            self.__cur.execute(query)            
             self.Mensajes_grupo = self.__cur.fetchall()
-            
+        
+            self.__cur.close()
+            self.__conexion.close()
+
             return self.Mensajes_grupo
+            
         except:
             print(traceback.format_exc())
 
     def enviar_mensaje_grupo(self, id_grupo, correo, mensaje):
-        try:
+        try:            
+            self.__conexion = mysql.connector.connect(user=self.__usuarioBD, password=self.__contraseñaBD, host=self.__hostBD, database=self.__dataBase, port=self.__portBD)
+            self.__cur = self.__conexion.cursor()
+
             query = (f"INSERT INTO MENSAJE VALUES(NULL, {id_grupo}, '{correo}', '{mensaje}' , NOW())")
             self.__cur.execute(query)
             self.__conexion.commit()
             print("Mensaje enviado con exito")
+            
+            self.__cur.close()
+            self.__conexion.close()
         except:
             print(traceback.format_exc())
 
     def obtener_id_grupo(self, nombre_grupo):
         try:
+            self.__conexion = mysql.connector.connect(user=self.__usuarioBD, password=self.__contraseñaBD, host=self.__hostBD, database=self.__dataBase, port=self.__portBD)
+            self.__cur = self.__conexion.cursor()
+
             query = (f"SELECT ID_GRUPO FROM GRUPO WHERE NOMBRE_GRUPO = '{nombre_grupo}'")
             self.__cur.execute(query)
             self.id_grupo = self.__cur.fetchone()[0]
+
+            self.__cur.close()
+            self.__conexion.close()
             return self.id_grupo
         except:
             print(traceback.format_exc())

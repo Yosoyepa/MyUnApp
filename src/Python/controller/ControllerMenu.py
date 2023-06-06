@@ -51,23 +51,31 @@ class selectorMenu(QMainWindow):
 
 
     def conexiones(self):
-        self.controllerMenu.botonGrupos.clicked.connect(self.cambioBusquedaGruposFromMenu)
-        self.controllerMenu.botonChat.clicked.connect(self.cambioChatFromMenu)
 
+        ###CONEXIONES VISTA MENU
+        self.controllerMenu.botonGrupos.clicked.connect(self.cambioBusquedaGrupos)
+        self.controllerMenu.botonChat.clicked.connect(self.cambioChat)        
 
-        self.controllerGrupos.Boton_Menu.clicked.connect(self.cambioMenuFromBusquedaGrupos)
+        ###CONEXIONES VISTA BUSQUEDA GRUPOS
+        self.controllerGrupos.Boton_Menu.clicked.connect(self.cambioMenu)
         self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.comprobarAdmin)
-        self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGruposFromMenu)
+        self.controllerGrupos.Boton_Chat.clicked.connect(self.cambioChat)
 
-    def cambioBusquedaGruposFromMenu(self):
+        self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGrupos)
+
+        ###CONEXIONES VISTA CHAT
+        self.controllerChat.botonMenu.clicked.connect(self.cambioMenu)	
+        self.controllerChat.botonGrupos.clicked.connect(self.cambioBusquedaGrupos)
+
+    def cambioBusquedaGrupos(self):
         self.setWindowTitle("Busqueda Grupos")
         self.pilaWidget.setCurrentWidget(self.controllerGrupos)
 
-    def cambioMenuFromBusquedaGrupos(self):
+    def cambioMenu(self):
         self.setWindowTitle("Menu")
         self.pilaWidget.setCurrentWidget(self.controllerMenu)
 
-    def cambioChatFromMenu(self):
+    def cambioChat(self):
         self.setWindowTitle("Chat")        
         self.pilaWidget.setCurrentWidget(self.controllerChat)
 
