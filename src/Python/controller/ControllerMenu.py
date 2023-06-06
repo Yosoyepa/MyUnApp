@@ -2,6 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from controller.Controller_Chat import controller_Chat
 from resources.QRC import images
 from Python.model.Usuario import Usuario
 
@@ -24,12 +25,14 @@ class selectorMenu(QMainWindow):
         self.controllerGrupos = ControllerBusquedaGrupo()  
         self.controllerMenu = ControllerMenu()
         self.controllerAdminGrupos = ControllerAdminGrupo()
+        self.controllerChat = controller_Chat()
 
         self.pilaWidget = QtWidgets.QStackedWidget(self)
 
         self.pilaWidget.addWidget(self.controllerMenu)
         self.pilaWidget.addWidget(self.controllerGrupos)
         self.pilaWidget.addWidget(self.controllerAdminGrupos)
+        self.pilaWidget.addWidget(self.controllerChat)
         
         self.setCentralWidget(self.pilaWidget)
 
@@ -44,12 +47,16 @@ class selectorMenu(QMainWindow):
     def setUsuario(self, usuario):
         self.usuario = usuario
         self.controllerGrupos.setUsuario(self.usuario)
+        self.controllerChat.setUsuario(self.usuario)
 
 
     def conexiones(self):
         self.controllerMenu.botonGrupos.clicked.connect(self.cambioBusquedaGruposFromMenu)
+        self.controllerMenu.botonChat.clicked.connect(self.cambioChatFromMenu)
+
+
         self.controllerGrupos.Boton_Menu.clicked.connect(self.cambioMenuFromBusquedaGrupos)
-        self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.ComprovarAdmin)
+        self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.comprobarAdmin)
         self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGruposFromMenu)
 
     def cambioBusquedaGruposFromMenu(self):
@@ -60,14 +67,20 @@ class selectorMenu(QMainWindow):
         self.setWindowTitle("Menu")
         self.pilaWidget.setCurrentWidget(self.controllerMenu)
 
-    def ComprovarAdmin(self):
+    def cambioChatFromMenu(self):
+        self.setWindowTitle("Chat")        
+        self.pilaWidget.setCurrentWidget(self.controllerChat)
+
+    def comprobarAdmin(self):
         nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()
         if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG):
-            self.AbrirAdministracionGrupos()
+            self.abrirAdministracionGrupos()
 
-    def AbrirAdministracionGrupos(self):
+    def abrirAdministracionGrupos(self):
         self.setWindowTitle("Ajustes grupo")
         self.pilaWidget.setCurrentWidget(self.controllerAdminGrupos)
+
+    
 '''
 app = QtWidgets.QApplication(sys.argv)
 controlador = controllerMenu()

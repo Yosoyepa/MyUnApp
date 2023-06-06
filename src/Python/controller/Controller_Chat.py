@@ -1,54 +1,58 @@
-import sys
-import threading
+
+import time
+import traceback
 from PyQt5.QtWidgets import QWidget, QMainWindow, QApplication
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5.QtCore import QThread, pyqtSignal
 from resources.QRC import images
 from Python.model.Usuario import Usuario
 from Python.model.CRUD import CRUD
-import os
-from google.cloud import pubsub_v1
+#import os
+#from google.cloud import pubsub_v1
 
 from Python.model.CRUD import CRUD
 
 
-credentials_path = "src\Python\controller\exalted-summer-387903-263021af32c1.json"
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+#credentials_path = "src\Python\controller\exalted-summer-387903-263021af32c1.json"
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
 
 class controller_Chat(QMainWindow):
     mensaje_recibido = QtCore.pyqtSignal(str)
 
     def __init__(self):
+        self.crd = CRUD()
         QMainWindow.__init__(self)
-        uic.loadUi('src/resources/interface/Pagina_Chat.ui', self)
+        uic.loadUi('src/resources/interface/Ventana_Chat.ui', self)
         uic.loadUi('src/resources/interface/Receptor.ui', self)
         self.pushButton_7.clicked.connect(self.actualizar_lista_widget_grupos)
         self.lista_grupos.itemClicked.connect(self.mostrar_miembros_grupos)
-        self.send_button.clicked.connect(self.enviar_mensaje_a_topic)
-        self.send_button.clicked.connect(self.enviar_mensaje)
-        self.lista_grupos.itemClicked.connect(self.recibir_mensajes_topic)
+
+        self.send_button.clicked.connect(self.enviarMensaje)
+        ##self.lista_grupos.itemClicked.connect(self.recibir_mensajes_topic)
         self.widgets_enviados = []
         self.widgets_recibidos = []
         self.receptor_widget = QtWidgets.QWidget()
         self.mensaje_recibido.connect(self.mostrar_mensaje_recibido)
         uic.loadUi('src/resources/interface/Receptor.ui', self.receptor_widget)
 
+        
 
-    def enviar_mensaje(self):
-        texto_mensaje = str(self.message_line_edit.text())
-        if texto_mensaje:
+
+    def cajaMensajeEnviado(self, mensaje):
+        print("Mensaje enviado:", mensaje)
+        if mensaje:
             sendWidget = QtWidgets.QWidget()
             uic.loadUi('src/resources/interface/Mensajero.ui', sendWidget)
-            sendWidget.message_mensajero.setText(texto_mensaje)
+            sendWidget.message_mensajero.setText(str(mensaje))
             item = QtWidgets.QListWidgetItem()
             item.setSizeHint(sendWidget.sizeHint())
             self.chat_listWidget.addItem(item)
             self.chat_listWidget.setItemWidget(item, sendWidget)
             self.chat_listWidget.setMinimumWidth(sendWidget.width())
-            self.widgets_enviados.append(sendWidget)
-        self.message_line_edit.clear()
+            self.widgets_enviados.append(sendWidget)        
 
-    def recibir_mensaje(self, mensaje):
+    def cajaMensajeRecibido(self, mensaje):
         print("Mensaje recibido:", mensaje)
         if mensaje:
             receiveWidget = QtWidgets.QWidget()
@@ -64,12 +68,11 @@ class controller_Chat(QMainWindow):
     def mostrar_mensaje_recibido(self, mensaje):
         self.mensaje_recibido.emit(mensaje)
 
-    def obtener_id_grupo(self, nombre_grupo):
-        self.crd.obtener_id_grupo(nombre_grupo)
-        return self.crd.id_grupo
+    def obtener_id_grupo(self, nombre_grupo):        
+        return self.crd.obtener_id_grupo(nombre_grupo)
 
     def actualizar_lista_widget_grupos(self):
-        self.crd = CRUD()
+        
         self.crd.obtener_nombres_grupo(self.usuario.correo)
         print(self.crd.Nombres_grupos)
         self.lista_grupos.clear()
@@ -78,8 +81,12 @@ class controller_Chat(QMainWindow):
             item.setText(str(nombre[0]))
             self.lista_grupos.addItem(item)
 
-    def set_usuario(self, usr: Usuario):
+    def setUsuario(self, usr: Usuario):
         self.usuario = usr
+        self.hilo = claseHilo(self.crd, 'TEST1')
+        self.hilo.newValor.connect(self.cargarMensajes)
+        self.hilo.start()	
+        
 
     def setear_usuario(self, usr: Usuario):
         self.crd_usuario = usr
@@ -100,7 +107,36 @@ class controller_Chat(QMainWindow):
             self.lista_miembros.addItem(item)
 
         self.id_grupo_seleccionado = self.obtener_id_grupo(nombre_grupo)
+    
+    def cargarMensajes(self, newValor):                    
+        try:    
+            self.id_grupo_seleccionado = self.obtener_id_grupo("TEST1")
+            mensaje = newValor	
+            
+            
+            if mensaje[1] == self.id_grupo_seleccionado:
+                    print(mensaje[3])
+                    if(mensaje[2] == self.usuario.correo):
+                        self.cajaMensajeEnviado(mensaje[3])
+                    else:
+                        self.cajaMensajeRecibido(mensaje[3])
+        except:
+            print(traceback.format_exc())
+        
 
+    def enviarMensaje(self):
+        try:
+            texto_mensaje = str(self.message_line_edit.text())
+            if texto_mensaje:
+                self.crd.enviar_mensaje_grupo(self.id_grupo_seleccionado, self.usuario.correo, texto_mensaje)
+                self.cajaMensajeEnviado(texto_mensaje)
+                
+                self.message_line_edit.clear()
+        except:
+            print(traceback.format_exc())
+
+
+'''
     def enviar_mensaje_a_topic(self):
         texto_mensaje = str(self.message_line_edit.text())
         if texto_mensaje:
@@ -129,4 +165,29 @@ class controller_Chat(QMainWindow):
         thread = threading.Thread(target=lambda: subscriber.subscribe(subscription_path, callback=callback))
         thread.start()
 
+'''
 
+class claseHilo(QThread):
+    newValor = pyqtSignal(tuple)
+    def __init__(self,  crd: CRUD=None, nombreGrupo = None):
+
+        self.crd = CRUD()
+        self.nombreGrupo = nombreGrupo
+        super(claseHilo, self).__init__()
+
+    def run(self):
+        mensajesLista = []
+        mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)
+        for mensaje in mensajesListaTemp:                        
+            self.newValor.emit(mensaje)
+        mensajesLista = mensajesListaTemp
+        while True:
+            try:      
+                mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)                                                                              
+                if mensajesListaTemp != mensajesLista:
+                    mensajesLista = mensajesListaTemp
+                    self.newValor.emit(mensajesLista[-1])
+                mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)
+                time.sleep(3)
+            except:
+                print(traceback.format_exc())

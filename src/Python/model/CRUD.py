@@ -221,16 +221,17 @@ class CRUD:
 
     def obtener_mensajes_grupo(self, nombre_grupo):
         try:    
-            query = (f"SELECT M.CUERPO_MENSAJE, M.FECHA_MENSAJE, U.NOMBRE_USUARIO, U.APELLIDO_USUARIO FROM MENSAJE M INNER JOIN USUARIO U ON M.CORREO_USUARIO = U.CORREO_USUARIO INNER JOIN GRUPO G ON G.ID_GRUPO = M.ID_GRUPO WHERE G.NOMBRE_GRUPO ='{nombre_grupo}'")
+            query = (f"SELECT M.ID_MENSAJE ,M.ID_GRUPO, U.CORREO_USUARIO , M.TEXTO_MENSAJE, U.NOMBRE_USUARIO, U.APELLIDO_USUARIO, M.FECHA_HORA_MENSAJE FROM MENSAJE M INNER JOIN USUARIO U ON M.CORREO_USUARIO = U.CORREO_USUARIO INNER JOIN GRUPO G ON G.ID_GRUPO = M.ID_GRUPO WHERE G.NOMBRE_GRUPO ='{nombre_grupo}'")
             self.__cur.execute(query)
             self.Mensajes_grupo = self.__cur.fetchall()
+            
             return self.Mensajes_grupo
         except:
             print(traceback.format_exc())
 
     def enviar_mensaje_grupo(self, id_grupo, correo, mensaje):
         try:
-            query = (f"INSERT INTO MENSAJE VALUES(NULL, '{id_grupo}', '{correo}', '{mensaje} , NOW(),')")
+            query = (f"INSERT INTO MENSAJE VALUES(NULL, {id_grupo}, '{correo}', '{mensaje}' , NOW())")
             self.__cur.execute(query)
             self.__conexion.commit()
             print("Mensaje enviado con exito")
@@ -254,3 +255,5 @@ class CRUD:
             return self.topic_grupo
         except:
             print(traceback.format_exc())
+    
+    

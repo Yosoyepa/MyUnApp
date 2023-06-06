@@ -25,7 +25,7 @@ class controllerInicioSesion(QMainWindow):
     	
         self.crd = CRUD()
         #ventanas
-        self.menu = controller_Chat()
+        self.menu = selectorMenu()
         self.recuperacionContrasena = controllerRecuperacion(self)
 
 
