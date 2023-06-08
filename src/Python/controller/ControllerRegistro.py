@@ -8,22 +8,22 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 
 #import de model
-from Python.model.CRUD import CRUD
+from Python.model import CRUD
 from Python.model.Usuario import Usuario
 from controller.ControllerCodigo import controllerCodigo
 
 
 from resources.QRC import images
 class controllerRegistro(QMainWindow):
-    def __init__(self, parent = None, crd = None):
+    def __init__(self, parent = None):
         
 
 
-        self.parent = parent
+        self.parent = parent # type: ignore
 
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Registro.ui', self)
-        self.crd = crd
+        
         self.set_image_opacity(0.44)
         
         self.controllerCodigo = controllerCodigo(instruccion = False, parent = self.parent, parent2= self)
@@ -37,9 +37,9 @@ class controllerRegistro(QMainWindow):
 
     def registrar(self):
         
-        user:Usuario = None
+        user:Usuario = None # type: ignore
         if(self.Line_Nombre.text() == '' or self.Line_Apellido.text() == '' or self.Line_Email.text() == '' or self.Line_Contrasena.text() == '' or self.Line_ConfirmarContrasena.text() == ''):
-            self.crd.mostrarCajaDeMensaje("ADVERTENCIA", 'No deje campos de texto vacíos', QtWidgets.QMessageBox.Warning)
+            CRUD.mostrarCajaDeMensaje("ADVERTENCIA", 'No deje campos de texto vacíos', QtWidgets.QMessageBox.Warning)
             
         else:
             try:
@@ -65,10 +65,10 @@ class controllerRegistro(QMainWindow):
                             
                         
                     else:
-                        self.crd.mostrarCajaDeMensaje("ADVERTENCIA", 'La contraseña y la confirmación no coinciden.', QtWidgets.QMessageBox.Warning)
+                        CRUD.mostrarCajaDeMensaje("ADVERTENCIA", 'La contraseña y la confirmación no coinciden.', QtWidgets.QMessageBox.Warning)
                         
                 else:
-                    self.crd.mostrarCajaDeMensaje("ADVERTENCIA", 'el correo no es válido.', QtWidgets.QMessageBox.Warning)
+                    CRUD.mostrarCajaDeMensaje("ADVERTENCIA", 'el correo no es válido.', QtWidgets.QMessageBox.Warning)
                     
             except:
                 print(traceback.format_exc())    
@@ -85,7 +85,7 @@ class controllerRegistro(QMainWindow):
 
     def habilitarVentana(self, habilitar: bool):
         self.centralwidget.setEnabled(habilitar)
-        self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, habilitar)
+        self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, habilitar) # type: ignore
         
 '''
 app = QtWidgets.QApplication(sys.argv)

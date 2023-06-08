@@ -26,6 +26,7 @@ class Usuario:
 
 
     def setFechaNacimiento(self, fechaTexto:str, separador:str):
+        fechaArr = []
         try:
             fechaArr = fechaTexto.split(separador)
             self.fechaNacimiento:datetime.date = datetime.date(int(fechaArr[0]), int(fechaArr[1]), int(fechaArr[2]))

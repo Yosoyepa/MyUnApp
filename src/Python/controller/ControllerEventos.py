@@ -8,7 +8,7 @@ from resources.QRC import images
 
 #from Python.controller.ControllerMenu import selectorMenu
 
-from Python.model.CRUD import CRUD
+from Python.model import CRUD
 from Python.model.Evento import event, controllerCalendar
 from Python.model.Usuario import Usuario
 
@@ -16,12 +16,8 @@ from Python.model.Usuario import Usuario
 class controllerEventos(QMainWindow):
     def __init__(self):
         super(controllerEventos, self).__init__()
-
-        QMainWindow.__init__(self)
-        self.crd = CRUD()
-        
-        self.cambioEvento1()
-        
+        QMainWindow.__init__(self)                
+        self.cambioEvento1()        
         #self.menu = selectorMenu()
         self.logicaEvento1()
 
@@ -58,9 +54,9 @@ class controllerEventos(QMainWindow):
 
     def logicaEvento2(self):
         self.cambioEvento2()
-        grupos = self.crd.obtener_nombres_grupo(self.usuario.correo)
+        grupos = CRUD.obtener_nombres_grupo(self.usuario.correo)
 
-        for grupo in grupos:
+        for grupo in grupos:#type: ignore
             self.boxGrupos.addItem(grupo[0])
         self.grupo = self.boxGrupos.currentText()
         self.calendarWidget.selectionChanged.connect(self.agarrar_fecha)
@@ -87,7 +83,7 @@ class controllerEventos(QMainWindow):
 
         self.fecha = (self.fecha_1.split('-'))
         for i in range(len(self.fecha)):
-            self.fecha[i] = int(self.fecha[i])
+            self.fecha[i] = int(self.fecha[i]) #type: ignore
 
         self.fecha += [self.hora] + [self.minutos]
 

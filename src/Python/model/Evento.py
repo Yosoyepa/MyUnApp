@@ -69,6 +69,7 @@ class controllerCalendar():
 
     def getId(self):
         try: 
+            temp = None
             service = build('calendar', 'v3', credentials=self.creds)
             lista_calendars = service.calendarList().list().execute()
             lista_usuario = lista_calendars.get('items')

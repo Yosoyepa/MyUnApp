@@ -6,11 +6,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtCore import QThread, pyqtSignal
 from resources.QRC import images
 from Python.model.Usuario import Usuario
-from Python.model.CRUD import CRUD
+from Python.model import CRUD
 #import os
 #from google.cloud import pubsub_v1
 
-from Python.model.CRUD import CRUD
+
 
 
 #credentials_path = "src\Python\controller\exalted-summer-387903-263021af32c1.json"
@@ -23,7 +23,7 @@ class controller_Chat(QMainWindow):
     def __init__(self):
 
         self.hilo = None
-        self.crd = CRUD()
+        
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Chat.ui', self)
         uic.loadUi('src/resources/interface/Receptor.ui', self)
@@ -71,29 +71,21 @@ class controller_Chat(QMainWindow):
         self.mensaje_recibido.emit(mensaje)
 
     def obtener_id_grupo(self, nombre_grupo):        
-        return self.crd.obtener_id_grupo(nombre_grupo)
+        return CRUD.obtener_id_grupo(nombre_grupo)
 
     def actualizar_lista_widget_grupos(self):
         
-        self.crd.obtener_nombres_grupo(self.usuario.correo)
-        print(self.crd.Nombres_grupos)
+        listaNombres = CRUD.obtener_nombres_grupo(self.usuario.correo) #type: ignore
+        print(listaNombres)
         self.lista_grupos.clear()
-        for nombre in self.crd.Nombres_grupos:
+        for nombre in listaNombres: #type: ignore
             item = QtWidgets.QListWidgetItem()
-            item.setText(str(nombre[0]))
+            item.setText(str(nombre[0])) #type: ignore
             self.lista_grupos.addItem(item)
 
     def setUsuario(self, usr: Usuario):
         self.usuario = usr        
-        
-        
-
-    def setear_usuario(self, usr: Usuario):
-        self.crd_usuario = usr
-        nombre_usuario = str(self.crd_usuario.nombre + " " + self.crd_usuario.apellido)
-        nombre_usuario = nombre_usuario.replace(" ", "_")
-        print(nombre_usuario)
-        return nombre_usuario
+                            
 
     def mostrar_miembros_grupos(self, item):
         self.chat_listWidget.clear()
@@ -102,13 +94,13 @@ class controller_Chat(QMainWindow):
 
         self.grupo_seleccionado = item.text()
         nombre_grupo = self.grupo_seleccionado
-        self.hilo = claseHilo(self.crd, self.grupo_seleccionado)
+        self.hilo = claseHilo(self.grupo_seleccionado)
         self.hilo.newValor.connect(self.cargarMensajes)
         self.hilo.start()	
         print(nombre_grupo)
-        self.crd.obtener_miembros_grupos(nombre_grupo)
+        
         self.lista_miembros.clear()
-        for miembro in self.crd.Miembros_grupos:
+        for miembro in CRUD.obtener_miembros_grupos(nombre_grupo):#type: ignore
             item = QtWidgets.QListWidgetItem()
             item.setText(str(miembro[0]) + " " + str(miembro[1]))
             self.lista_miembros.addItem(item)
@@ -134,9 +126,9 @@ class controller_Chat(QMainWindow):
 
     def cargarTodosLosMensajes(self):
         try:
-            mensajesListaTemp = self.crd.obtener_mensajes_grupo("TEST1")
+            mensajesListaTemp = CRUD.obtener_mensajes_grupo("TEST1")
             print(mensajesListaTemp)
-            for mensaje in mensajesListaTemp:                        
+            for mensaje in mensajesListaTemp:   #type: ignore                     
                 self.cargarMensajes(mensaje)
         except:
             print(traceback.format_exc())
@@ -146,7 +138,7 @@ class controller_Chat(QMainWindow):
         try:
             texto_mensaje = str(self.message_line_edit.text())
             if texto_mensaje:
-                self.crd.enviar_mensaje_grupo(self.id_grupo_seleccionado, self.usuario.correo, texto_mensaje)                
+                CRUD.enviar_mensaje_grupo(self.id_grupo_seleccionado, self.usuario.correo, texto_mensaje)                
                 
                 self.message_line_edit.clear()
         except:
@@ -186,9 +178,9 @@ class controller_Chat(QMainWindow):
 
 class claseHilo(QThread):
     newValor = pyqtSignal(tuple)
-    def __init__(self,  crd: CRUD=None, nombreGrupo = None):
+    def __init__(self, nombreGrupo = None):
 
-        self.crd = CRUD()
+        
         self.nombreGrupo = nombreGrupo
         super(claseHilo, self).__init__()
 
@@ -199,7 +191,7 @@ class claseHilo(QThread):
     def run(self):
         try:
             mensajesLista = []
-            mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)
+            mensajesListaTemp = CRUD.obtener_mensajes_grupo(self.nombreGrupo)
             print(mensajesListaTemp)
           
             mensajesLista = mensajesListaTemp
@@ -207,12 +199,12 @@ class claseHilo(QThread):
                 
                     print("Hilo ejecutandose") 
                     print(mensajesListaTemp)
-                    mensajesListaTemp = self.crd.obtener_mensajes_grupo(self.nombreGrupo)                                                                              
+                    mensajesListaTemp = CRUD.obtener_mensajes_grupo(self.nombreGrupo)                                                                              
                     if mensajesListaTemp != mensajesLista:
                         mensajesLista = mensajesListaTemp
-                        self.newValor.emit(mensajesListaTemp[-1])         
-                        print("-----------------------", mensajesListaTemp[-1])       
-                    time.sleep(0.25)
+                        self.newValor.emit(mensajesListaTemp[-1])       #type: ignore  
+                        print("-----------------------", mensajesListaTemp[-1])       #type: ignore
+                    #time.sleep(0.25)
         except:
             print(traceback.format_exc())
             print("Error en el hilo")                    

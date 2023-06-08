@@ -1,4 +1,3 @@
-
 import traceback
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
@@ -8,16 +7,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 from resources.QRC import images
 
-from model.CRUD import CRUD
+from Python.model import CRUD
 from Python.model.Usuario import Usuario
 
 class controllerCambioContrasena(QMainWindow):
-    def __init__(self, parent = None):
-
-        self.crd = CRUD()
+    def __init__(self, parent = None):        
 
         QMainWindow.__init__(self)
-        self.parent = parent
+        self.parent = parent  # type: ignore
         uic.loadUi('src/resources/interface/Ventana_Cambio_Contrasena.ui', self)
         self.set_image_opacity(0.44)
         
@@ -33,6 +30,6 @@ class controllerCambioContrasena(QMainWindow):
         self.correo = correo
 
     def cambiaContrasena(self):
-        self.crd.cambiarContrasena(self.correo, self.textoContrasena.text())    
+        CRUD.cambiarContrasena(self.correo, self.textoContrasena.text())    
         self.parent.habilitarVentana(True)    
         self.close()

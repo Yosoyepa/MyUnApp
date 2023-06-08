@@ -16,7 +16,7 @@ class app(QMainWindow):
         self.pilaWidgets = QtWidgets.QStackedWidget(self)
 
         self.inicioSesion = controllerInicioSesion()
-        self.registro = controllerRegistro(self, self.inicioSesion.crd)
+        self.registro = controllerRegistro(self)
         self.menu = selectorMenu()        
         
 

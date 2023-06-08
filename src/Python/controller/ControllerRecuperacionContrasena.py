@@ -8,20 +8,20 @@ from controller.ControllerCodigo import controllerCodigo
 
 from resources.QRC import images
 
-from model.CRUD import CRUD
+from Python.model import CRUD
 from Python.model.Usuario import Usuario
 
 
 class controllerRecuperacion(QMainWindow):
     def __init__(self, parent = None):
-        self.crd = CRUD()
+        
         QMainWindow.__init__(self)
 
-        self.parent = parent
+        self.parent = parent # type: ignore
 
         uic.loadUi('src/resources/interface/Ventana_Recuperacion.ui', self)
 
-        self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False)
+        self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False) # type: ignore
 
         self.set_image_opacity(0.44)
 
@@ -38,26 +38,26 @@ class controllerRecuperacion(QMainWindow):
         self.label_fondo.setGraphicsEffect(graphics_effect)
 
 
-    def enviarCodigo(self) -> bool:
+    def enviarCodigo(self) -> bool: # type: ignore
         try:
             if self.textoEmail.text() != "":
                 correoUnalArr = self.textoEmail.text().split("@")
                 correo_Unal = correoUnalArr[1]
                 if correo_Unal == "unal.edu.co":      
-                    if self.crd.usuarioExiste(self.textoEmail.text()):
+                    if CRUD.usuarioExiste(self.textoEmail.text()):
                         
                         return True
                       
                     
                 else:
-                    self.crd.mostrarCajaDeMensaje("ADVERTENCIA", "El correo escrito no es de la UNAL.", QtWidgets.QMessageBox.Warning)
+                    CRUD.mostrarCajaDeMensaje("ADVERTENCIA", "El correo escrito no es de la UNAL.", QtWidgets.QMessageBox.Warning)
                     return False
 
             else:
-                self.crd.mostrarCajaDeMensaje("ADVERTENCIA", "No ha escrito ningún correo.", QtWidgets.QMessageBox.Warning)
+                CRUD.mostrarCajaDeMensaje("ADVERTENCIA", "No ha escrito ningún correo.", QtWidgets.QMessageBox.Warning)
                 return False
         except:
-            self.crd.mostrarCajaDeMensaje("ADVERTENCIA", "El correo escrito no es válido.", QtWidgets.QMessageBox.Warning)
+            CRUD.mostrarCajaDeMensaje("ADVERTENCIA", "El correo escrito no es válido.", QtWidgets.QMessageBox.Warning)
             print(traceback.format_exc())
             return False
 
