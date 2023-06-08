@@ -5,7 +5,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #imports de controladores
 from Python.controller.ControllerMenu import selectorMenu
-from controller.ControllerRecuperacionContrasena import controllerRecuperacion
+from Python.controller.ControllerRecuperacionContrasena import controllerRecuperacion
 
 
 from resources.QRC import images

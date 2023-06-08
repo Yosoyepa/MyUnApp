@@ -10,7 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 #import de model
 from Python.model.CRUD import CRUD
 from Python.model.Usuario import Usuario
-from controller.ControllerCodigo import controllerCodigo
+from Python.controller.ControllerCodigo import controllerCodigo
 
 
 from resources.QRC import images

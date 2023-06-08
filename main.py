@@ -1,6 +1,6 @@
 
 import sys
-
+import os
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from resources.QRC import images
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
@@ -9,7 +9,6 @@ from Python.controller.ControllerMenu import selectorMenu
 from Python.controller.ControllerInicioSesion import controllerInicioSesion
 from Python.controller.ControllerRegistro import controllerRegistro
 from Python.controller.Controller_Chat import controller_Chat
-
 class app(QMainWindow):
     def __init__(self) :
         super(app, self).__init__()

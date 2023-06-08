@@ -1,15 +1,15 @@
 import sys
+import os
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from controller.Controller_Chat import controller_Chat
+from Python.controller.Controller_Chat import controller_Chat
 from resources.QRC import images
 from Python.model.Usuario import Usuario
 
-
-from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
-from controller.ControllerAdminGrupos import ControllerAdminGrupo
-from controller.ControllerEventos import controllerEventos
+from Python.controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
+from Python.controller.ControllerAdminGrupos import ControllerAdminGrupo
+#from Python.controller.ControllerEventos import controllerEventos
 
 
 class ControllerMenu(QMainWindow):
@@ -27,7 +27,7 @@ class selectorMenu(QMainWindow):
         self.controllerMenu = ControllerMenu()
         self.controllerAdminGrupos = ControllerAdminGrupo()
         self.controllerChat = controller_Chat()
-        self.controllerEventos = controllerEventos()
+        #self.controllerEventos = controllerEventos()
 
         self.pilaWidget = QtWidgets.QStackedWidget(self)
 
@@ -35,7 +35,7 @@ class selectorMenu(QMainWindow):
         self.pilaWidget.addWidget(self.controllerGrupos)
         self.pilaWidget.addWidget(self.controllerAdminGrupos)
         self.pilaWidget.addWidget(self.controllerChat)
-        self.pilaWidget.addWidget(self.controllerEventos)
+        #self.pilaWidget.addWidget(self.controllerEventos)
         self.setCentralWidget(self.pilaWidget)
 
         self.pilaWidget.setCurrentWidget(self.controllerMenu)
@@ -50,7 +50,7 @@ class selectorMenu(QMainWindow):
         self.usuario = usuario
         self.controllerGrupos.setUsuario(self.usuario)
         self.controllerChat.setUsuario(self.usuario)
-        self.controllerEventos.setUsuario(self.usuario)
+        #self.controllerEventos.setUsuario(self.usuario)
 
 
     def conexiones(self):
@@ -69,15 +69,15 @@ class selectorMenu(QMainWindow):
         ###CONEXIONES VISTA CHAT
         self.controllerChat.botonMenu.clicked.connect(self.cambioMenu)	
         self.controllerChat.botonGrupos.clicked.connect(self.cambioBusquedaGrupos)
-        self.controllerMenu.botonCalendario.clicked.connect(self.cambioAEventos)
+        #self.controllerMenu.botonCalendario.clicked.connect(self.cambioAEventos)
 
     def cambioBusquedaGrupos(self):
         self.controllerAdminGrupos.limpiar()
         self.setWindowTitle("Busqueda Grupos")
         self.pilaWidget.setCurrentWidget(self.controllerGrupos)
 
-    def cambioAEventos(self):
-        self.pilaWidget.setCurrentWidget(self.controllerEventos)
+    #def cambioAEventos(self):
+    #    self.pilaWidget.setCurrentWidget(self.controllerEventos)
 
     def cambioMenu(self):
         self.setWindowTitle("Menu")

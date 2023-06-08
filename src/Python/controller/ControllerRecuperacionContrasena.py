@@ -3,12 +3,12 @@ import traceback
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from controller.ControllerCodigo import controllerCodigo
+from Python.controller.ControllerCodigo import controllerCodigo
 
 
 from resources.QRC import images
 
-from model.CRUD import CRUD
+from Python.model.CRUD import CRUD
 from Python.model.Usuario import Usuario
 
 

@@ -8,7 +8,7 @@ from Python.model.CRUD import CRUD
 from Python.model.Usuario import Usuario
 
 
-from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
+from Python.controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
 
 
 
