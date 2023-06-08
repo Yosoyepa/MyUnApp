@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QMainWindow
 from resources.QRC import images
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
-from Python.controller.ControllerMenu import selectorMenu
+from Python.controller.ControllerMenu import ControllerMenu
 from Python.controller.ControllerInicioSesion import controllerInicioSesion
 from Python.controller.ControllerRegistro import controllerRegistro
 from Python.controller.Controller_Chat import controller_Chat
@@ -17,7 +17,7 @@ class app(QMainWindow):
 
         self.inicioSesion = controllerInicioSesion()
         self.registro = controllerRegistro(self)
-        self.menu = selectorMenu()        
+        self.menu = ControllerMenu()        
         
 
         self.pilaWidgets.addWidget(self.inicioSesion)

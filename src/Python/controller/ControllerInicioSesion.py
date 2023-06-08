@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #imports de controladores
-from Python.controller.ControllerMenu import selectorMenu
+from Python.controller.ControllerMenu import ControllerMenu
 from controller.ControllerRecuperacionContrasena import controllerRecuperacion
 
 
@@ -25,7 +25,7 @@ class controllerInicioSesion(QMainWindow):
     	
         
         #ventanas
-        self.menu = selectorMenu()
+        self.menu = ControllerMenu()
         self.recuperacionContrasena = controllerRecuperacion(self)
 
 
