@@ -26,7 +26,7 @@ class controller_Chat(QMainWindow):
         
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Chat.ui', self)
-        uic.loadUi('src/resources/interface/Receptor.ui', self)
+        #uic.loadUi('src/resources/interface/Receptor.ui', self)
         self.pushButton_7.clicked.connect(self.actualizar_lista_widget_grupos)
         self.lista_grupos.itemClicked.connect(self.mostrar_miembros_grupos)
 

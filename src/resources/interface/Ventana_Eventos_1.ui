@@ -41,7 +41,7 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,10">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="10">
        <property name="spacing">
         <number>0</number>
        </property>
@@ -58,166 +58,6 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QFrame" name="frame_5">
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(1, 35, 60);</string>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="pushButton">
-            <property name="minimumSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../QRC/imagenesInicioSesion.qrc">
-              <normaloff>:/newPrefix/Icons/Exterior.png</normaloff>:/newPrefix/Icons/Exterior.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="minimumSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../QRC/imagenesInicioSesion.qrc">
-              <normaloff>:/newPrefix/Icons/User_Groups_Icon.png</normaloff>:/newPrefix/Icons/User_Groups_Icon.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_3">
-            <property name="minimumSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../QRC/imagenesInicioSesion.qrc">
-              <normaloff>:/newPrefix/Icons/Chat_Room_Icon.png</normaloff>:/newPrefix/Icons/Chat_Room_Icon.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_4">
-            <property name="minimumSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../QRC/imagenesInicioSesion.qrc">
-              <normaloff>:/newPrefix/Icons/Events_Icon.png</normaloff>:/newPrefix/Icons/Events_Icon.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_5">
-            <property name="minimumSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../QRC/imagenesInicioSesion.qrc">
-              <normaloff>:/newPrefix/Icons/Adjust_Icon.png</normaloff>:/newPrefix/Icons/Adjust_Icon.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>80</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
         <widget class="QFrame" name="frame_2">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -225,7 +65,7 @@
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,8">
+         <layout class="QVBoxLayout" name="verticalLayout_2" stretch="8">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -241,19 +81,6 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
-           <widget class="QFrame" name="frame_3">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(1, 35, 60);</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-           </widget>
-          </item>
           <item>
            <widget class="QFrame" name="frame_4">
             <property name="frameShape">
