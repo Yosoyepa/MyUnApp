@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>377</width>
-    <height>107</height>
+    <width>415</width>
+    <height>116</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -77,6 +77,22 @@ border-radius: 10px</string>
            <string/>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="username_receptor">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(1, 35, 60);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
            <item>
             <widget class="QLabel" name="message_receptor">
              <property name="sizePolicy">
