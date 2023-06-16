@@ -24,6 +24,9 @@ class controller_Chat(QMainWindow):
 
         self.hilo = None
         
+        self.username_receptor = None
+        self.username_mensajero = None
+        
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Chat.ui', self)
         #uic.loadUi('src/resources/interface/Receptor.ui', self)
@@ -35,8 +38,12 @@ class controller_Chat(QMainWindow):
         self.widgets_enviados = []
         self.widgets_recibidos = []
         self.receptor_widget = QtWidgets.QWidget()
+        self.mensajero_widget = QtWidgets.QWidget()
         self.mensaje_recibido.connect(self.mostrar_mensaje_recibido)
         uic.loadUi('src/resources/interface/Receptor.ui', self.receptor_widget)
+        self.username_receptor = self.receptor_widget.findChild(QtWidgets.QLabel, 'username_receptor')
+        uic.loadUi('src/resources/interface/Mensajero.ui', self.mensajero_widget)
+        self.username_mensajero = self.mensajero_widget.findChild(QtWidgets.QLabel, 'username_mensajero')
 
         
 
@@ -52,9 +59,10 @@ class controller_Chat(QMainWindow):
             self.chat_listWidget.addItem(item)
             self.chat_listWidget.setItemWidget(item, sendWidget)
             self.chat_listWidget.setMinimumWidth(sendWidget.width())
-            self.widgets_enviados.append(sendWidget)        
+            self.widgets_enviados.append(sendWidget)
+            sendWidget.username_mensajero.setText(self.usuario.nombre+" "+self.usuario.apellido)       
 
-    def cajaMensajeRecibido(self, mensaje):
+    def cajaMensajeRecibido(self, mensaje, nombre_usuario_receptor):
         print("Mensaje recibido:", mensaje)
         if mensaje:
             receiveWidget = QtWidgets.QWidget()
@@ -66,6 +74,8 @@ class controller_Chat(QMainWindow):
             self.chat_listWidget.setItemWidget(item, receiveWidget)
             self.chat_listWidget.setMinimumWidth(receiveWidget.width())
             self.widgets_recibidos.append(receiveWidget)
+            self.nombre_usuario_receptor_caja = CRUD.Obtener_nombre_usario_por_correo(nombre_usuario_receptor)
+            receiveWidget.username_receptor.setText(self.nombre_usuario_receptor_caja)
 
     def mostrar_mensaje_recibido(self, mensaje):
         self.mensaje_recibido.emit(mensaje)
@@ -118,8 +128,9 @@ class controller_Chat(QMainWindow):
                     if(mensaje[2] == self.usuario.correo):
                         self.cajaMensajeEnviado(mensaje[3])
                     else:
-                        self.cajaMensajeRecibido(mensaje[3])
-                        
+                        self.cajaMensajeRecibido(mensaje[3], mensaje[2])
+                        print(mensaje[2])
+        
         except:
             print(traceback.format_exc())
         

@@ -13,7 +13,7 @@ from Python.model.Usuario import Usuario
 from controller.ControllerCodigo import controllerCodigo
 
 
-from resources.QRC import images
+from resources.QRC import images2
 class controllerRegistro(QMainWindow):
     def __init__(self, parent = None):
         

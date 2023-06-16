@@ -119,6 +119,19 @@ def mandarCodigoVerificacion(correo):
         print(traceback.format_exc())
         mostrarCajaDeMensaje("Error", "No se pudo enviar el correo.", QMessageBox.Critical)
         return None
+def Obtener_nombre_usario_por_correo(correo):
+    con = None
+    try:
+        con = Conexion()
+        query = (f"SELECT CONCAT(NOMBRE_USUARIO, ' ', APELLIDO_USUARIO) AS NOMBRE_COMPLETO FROM USUARIO WHERE CORREO_USUARIO ='{correo}'")
+        con.cur.execute(query)
+        result = con.cur.fetchall()
+        return result[0][0]
+    except:
+        print(traceback.format_exc())
+    finally:
+        if(con != None):
+            del con
 
 def createGrupo(grupo:grupo, usuario:Usuario):
     con = None

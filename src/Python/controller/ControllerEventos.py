@@ -4,7 +4,7 @@ import re
 from PyQt5.QtWidgets import QWidget, QMainWindow, QApplication
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
-from resources.QRC import images
+from resources.QRC import images2
 
 #from Python.controller.ControllerMenu import selectorMenu
 
