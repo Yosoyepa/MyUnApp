@@ -5,7 +5,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 
 
-from resources.QRC import images2
+from resources.QRC import images
 
 from Python.model import CRUD
 from Python.model.Usuario import Usuario
