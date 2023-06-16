@@ -2,7 +2,7 @@
 import sys
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
-from resources.QRC import images
+#from resources.QRC import images
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 from Python.controller.ControllerMenu import ControllerMenu
