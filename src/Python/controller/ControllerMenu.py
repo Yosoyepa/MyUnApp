@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from controller.Controller_Chat import controller_Chat
-from resources.QRC import images2
+from resources.QRC import images
 from Python.model.Usuario import Usuario
 
 
