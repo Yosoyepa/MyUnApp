@@ -28,6 +28,7 @@ class ControllerBusquedaGrupo(QMainWindow):
         self.solButton.clicked.connect(self.enviar_solicitud)
         self.List_BuscGrupos.itemClicked.connect(self.sel_grupo)
         self.Boton_Eliminar.clicked.connect(self.salirGrupo)
+        self.Boton_lupa.clicked.connect(self.actualizar_lista_de_un_grupo_especifico)
 
 
     def creargrupo(self):
@@ -69,6 +70,19 @@ class ControllerBusquedaGrupo(QMainWindow):
                 CRUD.mostrarCajaDeMensaje("Advertencia","El grupo no puede quedar sin administradores",QtWidgets.QMessageBox.Warning)
 
 
+    def actualizar_lista_de_un_grupo_especifico(self):
+        if nombreGrupo := self.Busqueda_grupos.text():
+            resultados = CRUD.obtener_nombres_grupo_especifico(nombreGrupo)
+            print(resultados)
+            self.List_BuscGrupos.clear()
+            for nombre in resultados: #type: ignore
+                item = QtWidgets.QListWidgetItem()
+                item.setText(str(nombre[0]))
+                self.List_BuscGrupos.addItem(item)
+        else:
+            CRUD.mostrarCajaDeMensaje("Advertencia","No debe dejar espacios en blanco",QtWidgets.QMessageBox.Warning)
+        self.Busqueda_grupos.clear()
+    
     def actualizar_lista_todoslosgrupos(self):
 
         nombresGrupos = CRUD.obtener_nombres_todoslosgrupos()

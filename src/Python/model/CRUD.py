@@ -7,6 +7,7 @@ import mysql.connector
 from Python.model.Usuario import Usuario
 from PyQt5.QtWidgets import QMessageBox
 from Python.model.Grupo import grupo
+import Levenshtein
 
 from Python.model.MiembroGrupo import MiembroGrupo
 credentials_path = "src\Python\controller\exalted-summer-387903-263021af32c1.json" #type: ignore
@@ -70,6 +71,37 @@ def cambiarContrasena(correo, contrasena):
     finally:
         if(con != None):
             del con
+
+
+def obtener_nombres_grupo_especifico(nombre_grupo):
+    con = None
+    resultados = []
+
+    try:
+        con = Conexion()
+
+        # Obtener todos los nombres de grupo
+        query = "SELECT NOMBRE_GRUPO FROM GRUPO"
+        con.cur.execute(query)
+        nombres_grupo = con.cur.fetchall()
+
+        # Calcular la similitud utilizando Levenshtein Distance y ordenar los resultados
+        for nombre in nombres_grupo:
+            similitud = Levenshtein.distance(str(nombre_grupo), str(nombre[0]))  # Calcula la distancia de Levenshtein
+            resultados.append((nombre[0], similitud))
+
+        resultados.sort(key=lambda x: x[1])  # Ordena los resultados por similitud (distancia de Levenshtein)
+
+        resultados = resultados[:3]  # Obtiene los primeros 3 resultados
+
+    except:
+        traceback.print_exc()
+
+    if con:
+        del con
+
+    return resultados
+
 
 def usuarioExiste(correo):  
     con = None

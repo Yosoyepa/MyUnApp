@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>949</width>
+    <width>955</width>
     <height>744</height>
    </rect>
   </property>
@@ -908,7 +908,7 @@ QPushButton::pressed{
                               <number>0</number>
                              </property>
                              <item>
-                              <widget class="QLineEdit" name="lineEdit">
+                              <widget class="QLineEdit" name="Busqueda_grupos">
                                <property name="text">
                                 <string/>
                                </property>
@@ -928,7 +928,7 @@ QPushButton::pressed{
                               </spacer>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="pushButton">
+                              <widget class="QPushButton" name="Boton_lupa">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                                  <horstretch>0</horstretch>
