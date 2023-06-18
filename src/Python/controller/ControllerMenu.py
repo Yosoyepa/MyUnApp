@@ -46,6 +46,7 @@ class ControllerMenu(QMainWindow):
         self.botonCalendario.clicked.connect(self.cambioAEventos)
         self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.comprobarAdmin)
         self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGrupos)
+        self.Boton_Info.clicked.connect(self.InfoPerrona)
         
         
 
@@ -78,6 +79,10 @@ class ControllerMenu(QMainWindow):
     def abrirAdministracionGrupos(self):
         self.setWindowTitle("Ajustes grupo")
         self.stackedWidget_4.setCurrentWidget(self.controllerAdminGrupos)
+
+    def InfoPerrona(self):
+        mensaje = "CREADORES DE ESTA MAGNIFICA APP \n\nJuan Felipe Hernandez \n Juan Felipe Pastrana \n Juan Carlos Andrade \n Santiago Villota Alava \n Luis Miguel Sanchez \n Carlos Javier Camacho \n Carlos Enrique Amaya"
+        CRUD.mostrarCajaDeMensaje("Informacion", mensaje, QtWidgets.QMessageBox.information)
 
 
     
