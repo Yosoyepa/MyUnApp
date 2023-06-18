@@ -2,14 +2,14 @@ import sys
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from controller.Controller_Chat import controller_Chat
+from Python.controller.Controller_Chat import controller_Chat
 from resources.QRC import images
 from Python.model.Usuario import Usuario
 
 
-from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
-from controller.ControllerAdminGrupos import ControllerAdminGrupo
-from controller.ControllerEventos import controllerEventos
+from Python.controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
+from Python.controller.ControllerAdminGrupos import ControllerAdminGrupo
+from Python.controller.ControllerEventos import controllerEventos
 
 
 class ControllerMenu(QMainWindow):
@@ -55,6 +55,7 @@ class ControllerMenu(QMainWindow):
 
     def cambioAEventos(self):
         self.stackedWidget_4.setCurrentWidget(self.controllerEventos)
+        self.controllerEventos.logicaEvento1()
 
     def cambioMenu(self):
         self.setWindowTitle("Menu")

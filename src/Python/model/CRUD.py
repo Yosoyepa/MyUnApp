@@ -558,6 +558,27 @@ def obtener_topic_grupo(id_grupo):
         if(con != None):
             del con    
 
+def create_log_cal(CalendarId):
+    
+    query = (f"INSERT INTO LOG_CALENDARIO (ID_CALENDARIO, FECHAHORA_INGRESO) VALUES('{CalendarId}', now());")
+    try: 
+        con = Conexion()        
+        con.cur.execute(query)
+        con.conexion.commit()
+        del	con
+    except :
+        traceback.print_exc()
+
+
+def create_evento(id_grupo, correo, nombre_evento, fecha_hora_evento):
+    #query = (f"INSERT INTO LOG_CALENDARIO (ID_CALENDARIO, FECHAHORA_INGRESO) VALUES('{CalendarId}', now());")
+    return
+
+
+
+
+
+
 class Conexion:
     
     def __init__(self):

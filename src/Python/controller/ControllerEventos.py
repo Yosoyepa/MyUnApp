@@ -16,10 +16,8 @@ from Python.model.Usuario import Usuario
 class controllerEventos(QMainWindow):
     def __init__(self):
         super(controllerEventos, self).__init__()
-        QMainWindow.__init__(self)                
-        self.cambioEvento1()        
-        #self.menu = selectorMenu()
-        self.logicaEvento1()
+        QMainWindow.__init__(self)              
+
 
     def setUsuario(self, usuario: Usuario):
         self.usuario = usuario
@@ -35,7 +33,8 @@ class controllerEventos(QMainWindow):
         data = self.eventoCalendario.getEvent()
 
         if data == None:
-            pass
+            CRUD.mostrarCajaDeMensaje('No se encontro eventos futuros', 'Agrega o crea un nuevo evento', QtWidgets.QMessageBox.Warning)
+            #QtWidgets.QMessageBox.Information
         else:
             self.labelTitulo.setText(data[1])
             self.labelDesc.setText(data[2])
@@ -72,14 +71,13 @@ class controllerEventos(QMainWindow):
 
 
     def enviarEvento(self):
-        self.labelTituloMutable.setText('Se ha creado tu evento')
+        
+        self.agarrar_fecha()
         self.desc = self.textDesc.toPlainText()
         self.hora = self.spinHora.value()
         self.minutos = self.spinMinutos.value()
-        self.labelHora_Mutable.setText(str(self.hora))
-        self.labelMinutos_Mutable.setText(str(self.minutos))
 
-        self.titulo = 'Reunion de ' + self.grupo
+        
 
         self.fecha = (self.fecha_1.split('-'))
         for i in range(len(self.fecha)):
@@ -87,8 +85,11 @@ class controllerEventos(QMainWindow):
 
         self.fecha += [self.hora] + [self.minutos]
 
-
-        self.eventoCalendario.crearEvent(self.titulo, self.desc, [], self.fecha)
+        try:
+            self.eventoCalendario.crearEvent(self.usuario.correo, self.grupo, self.desc, [], self.fecha)
+            CRUD.mostrarCajaDeMensaje('Se ha creado tu evento', 'Revisa tu google calendar', QtWidgets.QMessageBox.Information)
+        except:
+            print('Hubo un error, revisa tu conexion a internet')
 
 
     def cambioEvento2(self):
