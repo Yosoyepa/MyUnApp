@@ -33,15 +33,14 @@ def readUsuario(correo, contrasena):
     try:
         con = Conexion()
         con.cur.execute(query)
-        result = con.cur.fetchone()
-        del con
+        result = con.cur.fetchone()      
         if(result != None):
             
             if(Usuario.verificarContrasena(contrasena, result[3])):
                 print('inicio de sesion exitoso')
                 user = Usuario(result[0], result[1], result[2], result[5])                    
                 user.setFechaNacimiento(str(result[4]), '-')
-                
+                user.setFotoPerfil(result[6])
                 user.setContrasenaConHash(result[3])
                 return user
             else:
@@ -52,9 +51,9 @@ def readUsuario(correo, contrasena):
     except:
         traceback.print_exc()
     
-    if(con != None): # type: ignore
-        del con # type: ignore
-    return None
+    finally:
+        if(con != None):
+            del con
     
     
 def cambiarContrasena(correo, contrasena):
@@ -590,6 +589,22 @@ def obtener_topic_grupo(id_grupo):
         if(con != None):
             del con    
 
+def actualizarImagenPerfil(archivoBinario, correoUsuario: str):
+    con = None
+    
+    query = ("UPDATE USUARIO SET FOTOPERFIL_USUARIO = %s WHERE CORREO_USUARIO = %s")
+    print(query)
+    try:
+        con = Conexion()
+        con.cur.execute(query, (archivoBinario, correoUsuario))
+        con.conexion.commit()
+    except:
+        print(traceback.format_exc())
+    finally:
+        if(con != None):
+            del con
+
+
 class Conexion:
     
     def __init__(self):
@@ -603,6 +618,8 @@ class Conexion:
             self.conexion = mysql.connector.connect(user=self.__usuarioBD, password=self.__contraseñaBD, host=self.__hostBD, database=self.__dataBase, port=self.__portBD)
             self.cur = self.conexion.cursor()
         except :
+            mostrarCajaDeMensaje("Error de conexion", "No se pudo conectar a la base de datos", QMessageBox.Critical)   
+            print("Error de conexion")
             traceback.print_exc()          
         print("conexion exitosa")  
 
