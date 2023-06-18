@@ -141,7 +141,7 @@
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,1,0,0">
+               <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,0,0,0">
                 <property name="spacing">
                  <number>0</number>
                 </property>
@@ -314,7 +314,7 @@ border-radius: 0px</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>265</width>
+                           <width>530</width>
                            <height>344</height>
                           </rect>
                          </property>
@@ -713,7 +713,11 @@ QPushButton::pressed{
                         <number>0</number>
                        </property>
                        <item>
-                        <widget class="QListWidget" name="lista_miembros"/>
+                        <widget class="QListWidget" name="lista_miembros">
+                         <property name="textElideMode">
+                          <enum>Qt::ElideRight</enum>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </widget>
