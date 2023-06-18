@@ -31,20 +31,24 @@ class controllerEventos(QMainWindow):
         self.id = calendario.getId()
         self.eventoCalendario = event(self.id)
         data = self.eventoCalendario.getEvent()
+        length = self.eventoCalendario.len_events_list()
+        index = 0
+        print(length)
 
         if data == None:
             CRUD.mostrarCajaDeMensaje('No se encontro eventos futuros', 'Agrega o crea un nuevo evento', QtWidgets.QMessageBox.Warning)
             #QtWidgets.QMessageBox.Information
         else:
-            self.labelTitulo.setText(data[1])
-            self.labelDesc.setText(data[2])
-            temp = data[1].split()
+            self.maxLabel.setText(str(length))
+            self.labelTitulo.setText(data[0][1])
+            self.labelDesc.setText(data[0][2])
+            temp = data[0][1].split()
             grupo = ''
             for i in range(len(temp)):
                 if i > 1:
                     grupo += temp[i] + ' '
             self.labelGrupoMutable.setText(grupo)
-            fecha_hora = re.split("[A-Z]+", data[0])
+            fecha_hora = re.split("[A-Z]+", data[0][0])
             self.labelFechaMutable.setText(fecha_hora[0])
             self.labelHoraMutable.setText(fecha_hora[1])
         
