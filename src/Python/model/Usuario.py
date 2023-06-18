@@ -12,6 +12,8 @@ class Usuario:
         self.apellido:str = apellido      
         self.fechaRegistro:datetime.datetime = fechaRegistro
 
+    def setFotoPerfil(self, fotoPerfil):
+        self.fotoPerfil = fotoPerfil
 
 
     def setContrasenaConHash(self, contrasena):

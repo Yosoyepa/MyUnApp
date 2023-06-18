@@ -10,7 +10,7 @@ from Python.model.Usuario import Usuario
 from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
 from controller.ControllerAdminGrupos import ControllerAdminGrupo
 from controller.ControllerEventos import controllerEventos
-
+from controller.ControllerPersonalizacion import ControllerPersonalizacion
 
 class ControllerMenu(QMainWindow):
     def __init__(self):
@@ -21,13 +21,14 @@ class ControllerMenu(QMainWindow):
         self.controllerAdminGrupos = ControllerAdminGrupo()
         self.controllerChat = controller_Chat()
         self.controllerEventos = controllerEventos()   
-
+        self.controllerPersonalizacion = ControllerPersonalizacion()
         
         
         self.stackedWidget_4.addWidget(self.controllerGrupos)
         self.stackedWidget_4.addWidget(self.controllerAdminGrupos)
         self.stackedWidget_4.addWidget(self.controllerChat)
         self.stackedWidget_4.addWidget(self.controllerEventos)
+        self.stackedWidget_4.addWidget(self.controllerPersonalizacion)
         
         self.conexiones()
 
@@ -37,14 +38,14 @@ class ControllerMenu(QMainWindow):
         self.controllerGrupos.setUsuario(self.usuario)
         self.controllerChat.setUsuario(self.usuario)
         self.controllerEventos.setUsuario(self.usuario)
-
+        self.controllerPersonalizacion.setUsuario(self.usuario) # type: ignore
 
     def conexiones(self):
         self.botonChat.clicked.connect(self.cambioChat)
         self.botonGrupos.clicked.connect(self.cambioBusquedaGrupos)
         self.botonCalendario.clicked.connect(self.cambioAEventos)
         self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.comprobarAdmin)
-        
+        self.configBoton.clicked.connect(self.cambioPersonalizacion)
         
 
 
@@ -63,6 +64,10 @@ class ControllerMenu(QMainWindow):
     def cambioChat(self):
         self.setWindowTitle("Chat")        
         self.stackedWidget_4.setCurrentWidget(self.controllerChat)
+
+    def cambioPersonalizacion(self):
+        self.setWindowTitle("Personalizacion")
+        self.stackedWidget_4.setCurrentWidget(self.controllerPersonalizacion)
 
     def comprobarAdmin(self):
         nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()

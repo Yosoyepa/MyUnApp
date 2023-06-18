@@ -22,7 +22,7 @@ class controllerCodigo(QMainWindow):
         self.parent = parent # type: ignore
         self.parent2 = parent2
 
-        self.controllerCambioContrasena = controllerCambioContrasena(self.parent)
+        self.controllerCambioContrasena = controllerCambioContrasena(self.parent) # type: ignore
         uic.loadUi('src/resources/interface/Ventana_Codigo.ui', self)
         self.set_image_opacity(0.44)
 
