@@ -54,19 +54,22 @@ class ControllerBusquedaGrupo(QMainWindow):
             self.List_MisGrupos.addItem(item)
     
     def salirGrupo(self):
-        grupoTemp = self.List_MisGrupos.currentItem().text()
-        usuarios = CRUD.mostrarMiembrosGrupo(grupoTemp)
-        cantidaAdmin = CRUD.buscarSiHayAdmin(grupoTemp)
-        if cantidaAdmin > 1 or (cantidaAdmin == 1 and CRUD.admin(self.usuario.correo,grupoTemp)==False): #type: ignore
-            CRUD.eliminarPersona(self.usuario.correo,grupoTemp)
-            CRUD.mostrarCajaDeMensaje("Informacion", "Usted ha salido del grupo "+grupoTemp+" satisfactoriamente", QtWidgets.QMessageBox.Information)
-        else:
-            if len(usuarios) == 1:#type: ignore
+        try:
+            grupoTemp = self.List_MisGrupos.currentItem().text()
+            usuarios = CRUD.mostrarMiembrosGrupo(grupoTemp)
+            cantidaAdmin = CRUD.buscarSiHayAdmin(grupoTemp)
+            if cantidaAdmin > 1 or (cantidaAdmin == 1 and CRUD.admin(self.usuario.correo,grupoTemp)==False): #type: ignore
                 CRUD.eliminarPersona(self.usuario.correo,grupoTemp)
                 CRUD.mostrarCajaDeMensaje("Informacion", "Usted ha salido del grupo "+grupoTemp+" satisfactoriamente", QtWidgets.QMessageBox.Information)
-                CRUD.eliminarGrupo(grupoTemp)
             else:
-                CRUD.mostrarCajaDeMensaje("Advertencia","El grupo no puede quedar sin administradores",QtWidgets.QMessageBox.Warning)
+                if len(usuarios) == 1:#type: ignore
+                    CRUD.eliminarPersona(self.usuario.correo,grupoTemp)
+                    CRUD.mostrarCajaDeMensaje("Informacion", "Usted ha salido del grupo "+grupoTemp+" satisfactoriamente", QtWidgets.QMessageBox.Information)
+                    CRUD.eliminarGrupo(grupoTemp)
+                else:
+                    CRUD.mostrarCajaDeMensaje("Advertencia","El grupo no puede quedar sin administradores",QtWidgets.QMessageBox.Warning)
+        except:
+            CRUD.mostrarCajaDeMensaje("Advertencia","Debe escojer un grupo",QtWidgets.QMessageBox.Warning)
 
 
     def actualizar_lista_todoslosgrupos(self):

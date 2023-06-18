@@ -168,7 +168,7 @@ border-radius: 10px
  </widget>
  <resources>
   <include location="../QRC/imagenesInicioSesion.qrc"/>
-  <include location="../../../../../../AppData/Local/Programs/Python/Python310/lib/site-packages/QRC/imagenesInicioSesion.qrc"/>
+  <include location="../QRC/imagenesInicioSesion.qrc"/>
  </resources>
  <connections/>
 </ui>

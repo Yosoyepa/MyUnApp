@@ -5,6 +5,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from controller.Controller_Chat import controller_Chat
 from resources.QRC import images
 from Python.model.Usuario import Usuario
+from Python.model import CRUD
 
 
 from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
@@ -44,6 +45,7 @@ class ControllerMenu(QMainWindow):
         self.botonGrupos.clicked.connect(self.cambioBusquedaGrupos)
         self.botonCalendario.clicked.connect(self.cambioAEventos)
         self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.comprobarAdmin)
+        self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGrupos)
         
         
 
@@ -65,9 +67,13 @@ class ControllerMenu(QMainWindow):
         self.stackedWidget_4.setCurrentWidget(self.controllerChat)
 
     def comprobarAdmin(self):
-        nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()
-        if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG)==True:
-            self.abrirAdministracionGrupos()
+        try:
+            nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()
+            if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG)==True:
+                self.abrirAdministracionGrupos()
+        except:
+            CRUD.mostrarCajaDeMensaje("Advertencia","Debe escojer un grupo",QtWidgets.QMessageBox.Warning)
+
 
     def abrirAdministracionGrupos(self):
         self.setWindowTitle("Ajustes grupo")
