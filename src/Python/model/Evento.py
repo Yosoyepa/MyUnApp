@@ -62,7 +62,7 @@ class controllerCalendar():
 
             if flag == False:
                 calendar_creation = service.calendars().insert(body = request_body).execute()
-                id = self.getId
+                id = self.getId()
                 CRUD.create_log_cal(id)
                 print(calendar_creation['summary'])
             else:
@@ -143,9 +143,6 @@ class event(controllerCalendar):
         ).execute()
 
 
-        id_grupo = CRUD.obtener_id_grupo(grupo)
-        CRUD.create_evento(id_grupo, correo, titulo, date_1)
-
         
 
 
@@ -179,8 +176,6 @@ class event(controllerCalendar):
             for event in events:
                 start = event['start'].get('dateTime', event['start'].get('date'))
                 self.events_list += [(start, event['summary'], event['description'])]
-            
-
             return self.events_list
 
         except HttpError as error:
@@ -188,7 +183,7 @@ class event(controllerCalendar):
 
         
 
-if __name__ == '__main__':
+'''if __name__ == '__main__':
     calendario = controllerCalendar()
     calendario.crearCalendar()
     id = calendario.getId()
@@ -197,6 +192,6 @@ if __name__ == '__main__':
     fecha = [2023, 6, 20, 18, 30]
     eventoCalendario.crearEvent('savillotaa@gmail.com','GANAMOS', 'Un gran y hermoso evento', [], fecha)
     eventoCalendario.getEvent()
-
+'''
 
         

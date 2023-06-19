@@ -16,11 +16,33 @@ from Python.model.Usuario import Usuario
 class controllerEventos(QMainWindow):
     def __init__(self):
         super(controllerEventos, self).__init__()
-        QMainWindow.__init__(self)              
+        QMainWindow.__init__(self)     
+        self.index = 0         
 
 
     def setUsuario(self, usuario: Usuario):
         self.usuario = usuario
+
+    def sum_1(self):
+
+        if self.index <= self.length-2:
+            self.index += 1
+            self.mostrarEvento(self.data, self.index)
+            self.currLabel.setText(str(self.index+1))
+            
+        else:
+            return
+        
+    def res_1(self):
+        
+
+        if self.index >= 1:
+            self.index -= 1
+            self.mostrarEvento(self.data, self.index)
+            self.currLabel.setText(str(self.index+1))
+
+        else: 
+            return
 
 
     def logicaEvento1(self):
@@ -30,29 +52,25 @@ class controllerEventos(QMainWindow):
         calendario.crearCalendar()
         self.id = calendario.getId()
         self.eventoCalendario = event(self.id)
-        data = self.eventoCalendario.getEvent()
-        length = self.eventoCalendario.len_events_list()
-        index = 0
-        print(length)
+        self.data = self.eventoCalendario.getEvent()
+        self.length = self.eventoCalendario.len_events_list()
+        self.maxLabel.setText(str(self.length))
+        
 
-        if data == None:
-            CRUD.mostrarCajaDeMensaje('No se encontro eventos futuros', 'Agrega o crea un nuevo evento', QtWidgets.QMessageBox.Warning)
-            #QtWidgets.QMessageBox.Information
-        else:
-            self.maxLabel.setText(str(length))
-            self.labelTitulo.setText(data[0][1])
-            self.labelDesc.setText(data[0][2])
-            temp = data[0][1].split()
-            grupo = ''
-            for i in range(len(temp)):
-                if i > 1:
-                    grupo += temp[i] + ' '
-            self.labelGrupoMutable.setText(grupo)
-            fecha_hora = re.split("[A-Z]+", data[0][0])
-            self.labelFechaMutable.setText(fecha_hora[0])
-            self.labelHoraMutable.setText(fecha_hora[1])
+
+        self.mostrarEvento(self.data, self.index)
+
+        self.leftEvent.clicked.connect(self.res_1)
+        self.rightEvent.clicked.connect(self.sum_1)
+        
+
+            
+            
         
         self.pushCalendario.clicked.connect(self.logicaEvento2)
+        
+
+        
 
 
     def logicaEvento2(self):
@@ -66,6 +84,38 @@ class controllerEventos(QMainWindow):
 
         self.pushListo.clicked.connect(self.enviarEvento)
         self.eventosButton.clicked.connect(self.logicaEvento1)
+
+    def mostrarEvento(self, data, index):
+        if data == None:
+            CRUD.mostrarCajaDeMensaje('No se encontro eventos futuros', 'Agrega o crea un nuevo evento', QtWidgets.QMessageBox.Warning)
+            #QtWidgets.QMessageBox.Information
+        else:
+            
+            self.labelTitulo.setText(data[index][1])
+            self.labelDesc.setText(data[index][2])
+            temp = data[0][1].split()
+            grupo = ''
+            for i in range(len(temp)):
+                if i > 1:
+                    grupo += temp[i] + ' '
+            self.labelGrupoMutable.setText(grupo)
+            fecha_hora = re.split("[A-Z]+", data[index][0])
+            temp_0 = fecha_hora[0]
+            temp_0 = temp_0.split('-')
+            temp_0[2] = str(int(temp_0[2])-1)
+            fecha_hora[0] = temp_0[0] + '-' + temp_0[1] + '-' + temp_0[2]
+            self.labelFechaMutable.setText(fecha_hora[0])
+            temp_1 = fecha_hora[1]
+            temp_1 = temp_1.split(':')
+            temp_int = int(temp_1[0]) - 5
+            if temp_int < 0:
+                temp_int = 24 + temp_int
+            temp_1[0] = str(temp_int)
+            fecha_hora[1] = temp_1[0] + ':' + temp_1[1] + ':' + temp_1[2]
+            self.labelHoraMutable.setText(fecha_hora[1])
+        
+        self.pushCalendario.clicked.connect(self.logicaEvento2)
+
 
     def agarrar_fecha(self):
         dateSelected = self.calendarWidget.selectedDate()

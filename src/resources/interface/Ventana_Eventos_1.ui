@@ -741,7 +741,7 @@ QPushButton::pressed{
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="maxLabel">
+                    <widget class="QLabel" name="slashLabel">
                      <property name="maximumSize">
                       <size>
                        <width>50</width>
@@ -775,7 +775,7 @@ QPushButton::pressed{
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="slashLabel">
+                    <widget class="QLabel" name="maxLabel">
                      <property name="maximumSize">
                       <size>
                        <width>50</width>
