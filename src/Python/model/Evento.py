@@ -6,6 +6,7 @@ import datetime
 import os.path
 
 from Python.model import CRUD
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -105,45 +106,50 @@ class event(controllerCalendar):
 
     def crearEvent(self, correo,  grupo, desc, attendes, fecha):
         # fecha = [año, mes, dia, hora, minutos]
-        service = build('calendar', 'v3', credentials=self.creds)
-        titulo = 'Reunion de ' + grupo
+        try:
+            service = build('calendar', 'v3', credentials=self.creds)
+            titulo = 'Reunion de ' + grupo
 
-        hour_adjustment = 5
-        if fecha[3] >= 19:
-            hour = fecha[3] - 24
-            day = fecha[2] + 1
-            date = self.convert_to_RFC_datetime(fecha[0], fecha[1], day, hour + hour_adjustment, fecha[4])
-            date_1 = str(fecha[0]) + '-' + str(fecha[1]) + '-' + str(day) + ' ' + str(hour) + ':' + str(fecha[4]) + ':' + '00'
-        else:
-            date = self.convert_to_RFC_datetime(fecha[0], fecha[1], fecha[2], fecha[3] + hour_adjustment, fecha[4])
-            date_1 = str(fecha[0]) + '-' + str(fecha[1]) + '-' + str(fecha[2]) + ' ' + str(fecha[3]) + ':' + str(fecha[4]) + ':' + '00'
+            hour_adjustment = 5
+            if fecha[3] >= 19:
+                hour = fecha[3] - 24
+                day = fecha[2] + 1
+                date = self.convert_to_RFC_datetime(fecha[0], fecha[1], day, hour + hour_adjustment, fecha[4])
+                date_1 = str(fecha[0]) + '-' + str(fecha[1]) + '-' + str(day) + ' ' + str(hour) + ':' + str(fecha[4]) + ':' + '00'
+            else:
+                date = self.convert_to_RFC_datetime(fecha[0], fecha[1], fecha[2], fecha[3] + hour_adjustment, fecha[4])
+                date_1 = str(fecha[0]) + '-' + str(fecha[1]) + '-' + str(fecha[2]) + ' ' + str(fecha[3]) + ':' + str(fecha[4]) + ':' + '00'
 
-        
-        event_request_body = {
-            'start': {
-                'dateTime': date,
-                'timeZone': 'America/Bogota'
-            },
-            'end' : {
-                'dateTime': date,
-                'timeZone': 'America/Bogota'
-            },
-            'summary': titulo,
-            'description' : desc,
-            'colorId': 2,
-            'status': 'confirmed',
-            'transparency': 'transparent',
-            'visibility': 'private',
-            'location': 'Bogotá, CO',
-            'attendes': attendes
-        }
-        response = service.events().insert(
-            calendarId= self.calendarioId,
-            body= event_request_body
-        ).execute()
+            
+            event_request_body = {
+                'start': {
+                    'dateTime': date,
+                    'timeZone': 'America/Bogota'
+                },
+                'end' : {
+                    'dateTime': date,
+                    'timeZone': 'America/Bogota'
+                },
+                'summary': titulo,
+                'description' : desc,
+                'colorId': 2,
+                'status': 'confirmed',
+                'transparency': 'transparent',
+                'visibility': 'private',
+                'location': 'Bogotá, CO',
+                'attendes': attendes
+            }
+            response = service.events().insert(
+                calendarId= self.calendarioId,
+                body= event_request_body
+            ).execute()
+        except HttpError as error:
+            print('An error occurred: %s' % error)  
+            CRUD.mostrarCajaDeMensaje('Ha ocurrido un error: %s' % error, 'Por favor revisa tu conexion a internet', QtWidgets.QMessageBox.Warning)
+            
 
 
-        
+        emails = CRUD.mostrarMiembrosGrupo(grupo)
 
 
 

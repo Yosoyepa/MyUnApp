@@ -139,14 +139,11 @@ class controllerEventos(QMainWindow):
         temp_fecha = self.fecha
         self.fecha += [self.hora] + [self.minutos]
 
-        try:
-            if self.grupo != None and self.temp_fecha != None and self.hora != None and self.minutos != None:
-                self.eventoCalendario.crearEvent(self.usuario.correo, self.grupo, self.desc, [], self.fecha)
-                CRUD.mostrarCajaDeMensaje('Se ha creado tu evento', 'Revisa tu google calendar', QtWidgets.QMessageBox.Information)
-            else: 
-                CRUD.mostrarCajaDeMensaje('Campos faltantes', 'Por favor revisa que tus campos importantes no este vacios', QtWidgets.QMessageBox.warning)
-        except:
-            print('Hubo un error, revisa tu conexion a internet')
+        if self.grupo != None and temp_fecha != None and self.hora != None and self.minutos != None:
+            self.eventoCalendario.crearEvent(self.usuario.correo, self.grupo, self.desc, [], self.fecha)
+            CRUD.mostrarCajaDeMensaje('Se ha creado tu evento', 'Revisa tu google calendar', QtWidgets.QMessageBox.Information)
+        else: 
+            CRUD.mostrarCajaDeMensaje('Campos faltantes', 'Por favor revisa que tus campos importantes no este vacios', QtWidgets.QMessageBox.warning)
 
 
     def cambioEvento2(self):
