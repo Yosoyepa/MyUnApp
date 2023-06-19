@@ -113,6 +113,7 @@ class controllerEventos(QMainWindow):
             temp_1[0] = str(temp_int)
             fecha_hora[1] = temp_1[0] + ':' + temp_1[1] + ':' + temp_1[2]
             self.labelHoraMutable.setText(fecha_hora[1])
+            
         
         self.pushCalendario.clicked.connect(self.logicaEvento2)
 
@@ -140,7 +141,8 @@ class controllerEventos(QMainWindow):
         self.fecha += [self.hora] + [self.minutos]
 
         if self.grupo != None and temp_fecha != None and self.hora != None and self.minutos != None:
-            self.eventoCalendario.crearEvent(self.usuario.correo, self.grupo, self.desc, [], self.fecha)
+            self.eventoCalendario.crearEvent(self.usuario.correo, self.grupo, self.desc, [], self.fecha) 
+            #hay dos fechas porque una esta dividida y la otra no respectivamente
             CRUD.mostrarCajaDeMensaje('Se ha creado tu evento', 'Revisa tu google calendar', QtWidgets.QMessageBox.Information)
         else: 
             CRUD.mostrarCajaDeMensaje('Campos faltantes', 'Por favor revisa que tus campos importantes no este vacios', QtWidgets.QMessageBox.warning)

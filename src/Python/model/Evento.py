@@ -104,11 +104,12 @@ class event(controllerCalendar):
         return dt
 
 
-    def crearEvent(self, correo,  grupo, desc, attendes, fecha):
+    def crearEvent(self, correo_usr,  grupo, desc, attendes, fecha):
         # fecha = [año, mes, dia, hora, minutos]
+        titulo = 'Reunion de ' + grupo
         try:
             service = build('calendar', 'v3', credentials=self.creds)
-            titulo = 'Reunion de ' + grupo
+            
 
             hour_adjustment = 5
             if fecha[3] >= 19:
@@ -143,13 +144,16 @@ class event(controllerCalendar):
                 calendarId= self.calendarioId,
                 body= event_request_body
             ).execute()
+            emails = CRUD.mostrarMiembrosGrupo(grupo)
+
+            CRUD.mandarInvitacionEvento(emails, correo_usr, titulo, desc, date_1)
         except HttpError as error:
             print('An error occurred: %s' % error)  
             CRUD.mostrarCajaDeMensaje('Ha ocurrido un error: %s' % error, 'Por favor revisa tu conexion a internet', QtWidgets.QMessageBox.Warning)
             
 
 
-        emails = CRUD.mostrarMiembrosGrupo(grupo)
+        
 
 
 

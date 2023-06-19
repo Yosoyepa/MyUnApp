@@ -575,6 +575,34 @@ def create_evento(id_grupo, correo, nombre_evento, fecha_hora_evento):
     return
 
 
+def mandarInvitacionEvento(correos, correo_usr, titulo, desc, fecha):
+    try:
+        usr = correo_usr.split('@')
+        fecha_1 = fecha.split(' ')
+
+
+
+        message = "Hola, " + usr[0] + " te ha invitado a: \n" \
+                    +  titulo + "\n" + desc + "\n" +"En la fecha :" + fecha_1[0] + "\n" \
+                    + 'A la hora :' + fecha_1[1] + "\n" + "No faltes!"
+
+        subject = titulo
+        message = 'Subject: {}\n\n{}'.format(subject,message)
+
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        password = "svwazwubbdybkswa" #contraseña ocultada en env/.env
+        server.starttls()
+        server.login("myunapp3@gmail.com", password)
+        for correo in correos:
+            server.sendmail ('myunapp3@gmail.com', correo[0], message) 
+        server.quit()
+        return
+    except:
+        print(traceback.format_exc())
+        mostrarCajaDeMensaje("Error", "No se pudo enviar el correo.", QMessageBox.Critical)
+        return 
+
+
 
 
 
