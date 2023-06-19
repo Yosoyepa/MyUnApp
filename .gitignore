@@ -1,2 +1,7 @@
 # git, ignore .env file
-MyUnApp/env/.env
+env/.env
+/env
+.env
+.venv/
+venv/
+```

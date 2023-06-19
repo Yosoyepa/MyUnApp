@@ -9,11 +9,11 @@ class Usuario:
 
         self.correo:str = correo
         self.nombre:str = nombre
-        self.apellido:str = apellido
-
-        
+        self.apellido:str = apellido      
         self.fechaRegistro:datetime.datetime = fechaRegistro
 
+    def setFotoPerfil(self, fotoPerfil):
+        self.fotoPerfil = fotoPerfil
 
 
     def setContrasenaConHash(self, contrasena):
@@ -27,8 +27,8 @@ class Usuario:
 
 
 
-
     def setFechaNacimiento(self, fechaTexto:str, separador:str):
+        fechaArr = []
         try:
             fechaArr = fechaTexto.split(separador)
             self.fechaNacimiento:datetime.date = datetime.date(int(fechaArr[0]), int(fechaArr[1]), int(fechaArr[2]))

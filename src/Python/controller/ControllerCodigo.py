@@ -10,19 +10,19 @@ from resources.QRC import images
 
 
 
-from Python.model.CRUD import CRUD
+from Python.model import CRUD
 from Python.model.Usuario import Usuario
 
 
 class controllerCodigo(QMainWindow):
     def __init__(self, parent = None, parent2 = None,instruccion = True): #instruccion: true para cambiar contraseña, false para registrar
-        self.crd = CRUD()
+        
         QMainWindow.__init__(self)
 
-        self.parent = parent
+        self.parent = parent # type: ignore
         self.parent2 = parent2
 
-        self.controllerCambioContrasena = controllerCambioContrasena(self.parent)
+        self.controllerCambioContrasena = controllerCambioContrasena(self.parent) # type: ignore
         uic.loadUi('src/resources/interface/Ventana_Codigo.ui', self)
         self.set_image_opacity(0.44)
 
@@ -44,16 +44,16 @@ class controllerCodigo(QMainWindow):
 
     def generarCodigo(self, correo:str):        
         self.correo = correo
-        self.codigo = self.crd.mandarCodigoVerificacion(self.correo)
+        self.codigo = CRUD.mandarCodigoVerificacion(self.correo)
 
     
     
     def registrar(self):
         if self.confirmarCodigo():
-            self.crd.createUsuario(self.user)
-            self.crd.mostrarCajaDeMensaje("COMPLETADO", "El registro fue completado existosamente :D .", QtWidgets.QMessageBox.Information)
+            CRUD.createUsuario(self.user)
+            CRUD.mostrarCajaDeMensaje("COMPLETADO", "El registro fue completado existosamente :D .", QtWidgets.QMessageBox.Information)
             self.parent.cambioInicioSesionFromRegistro()
-            self.parent2.habilitarVentana(True)
+            self.parent2.habilitarVentana(True) #type: ignore
             self.close()
 
     def setUsuario(self, user: Usuario):
@@ -61,7 +61,7 @@ class controllerCodigo(QMainWindow):
     
     def cambioCambiarContrasena(self):
         if self.confirmarCodigo():
-            self.controllerCambioContrasena.setCorreo(self.correo)
+            self.controllerCambioContrasena.setCorreo(self.correo) #type: ignore
             self.controllerCambioContrasena.show()
             self.close()        
             
@@ -74,7 +74,7 @@ class controllerCodigo(QMainWindow):
         if self.textoCodigo.text() == self.codigo :
             return True
         else:
-            self.crd.mostrarCajaDeMensaje("ADVERTENCIA", "El código digitado no coincide con el enviado a su correo.", QtWidgets.QMessageBox.Warning)
+            CRUD.mostrarCajaDeMensaje("ADVERTENCIA", "El código digitado no coincide con el enviado a su correo.", QtWidgets.QMessageBox.Warning)
             self.textoCodigo.setText("")
             return False
             

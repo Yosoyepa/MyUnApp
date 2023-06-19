@@ -1,6 +1,47 @@
 <RCC>
   <qresource prefix="inicioSesion">
     <file>Icons/Adjust_Icon.png</file>
+    <file>Icons/Ajustes.png</file>
+    <file>Icons/Añadir_Grupo_De_Usuarios_Hombre_Hombre.png</file>
+    <file>Icons/Back 2.png</file>
+    <file>Icons/back.png</file>
+    <file>Icons/Cat.png</file>
+    <file>Icons/Chat.png</file>
+    <file>Icons/Chat_Room_Icon.png</file>
+    <file>Icons/check.png</file>
+    <file>Icons/Checked Radio Button.png</file>
+    <file>Icons/Chevron Right 2.png</file>
+    <file>Icons/Coming Soon.png</file>
+    <file>Icons/Conferencia.png</file>
+    <file>Icons/down-arrow.png</file>
+    <file>Icons/Emergency Exit.png</file>
+    <file>Icons/Evento.png</file>
+    <file>Icons/Evento-removebg-preview.png</file>
+    <file>Icons/Events_Icon.png</file>
+    <file>Icons/Exterior.png</file>
+    <file>Icons/Info_Icon.png</file>
+    <file>Icons/left-arrow.png</file>
+    <file>Icons/logo.png</file>
+    <file>Icons/Online.png</file>
+    <file>Icons/Personalizacion de usuario.png</file>
+    <file>Icons/Punisher.png</file>
+    <file>Icons/R2-D2 2.png</file>
+    <file>Icons/R2-D2.png</file>
+    <file>Icons/right-arrow.png</file>
+    <file>Icons/Search.png</file>
+    <file>Icons/Settings.png</file>
+    <file>Icons/Superman.png</file>
+    <file>Icons/Super-Mario.png</file>
+    <file>Icons/Synchronize_Icon.png</file>
+    <file>Icons/up-arrow.png</file>
+    <file>Icons/User Groups.png</file>
+    <file>Icons/User_Groups_Icon.png</file>
+    <file>Icons/Usuario Masculino 5.png</file>
+    <file>Icons/Usuario Masculino 6.png</file>
+    <file>Icons/Walter-White.png</file>
+    <file>imagenesInicioSesion.qrc</file>
+    <file>imagenesInicioSesion.qrc</file>
+    <file>Icons/Adjust_Icon.png</file>
     <file>Icons/Events_Icon.png</file>
     <file>Icons/Evento.png</file>
     <file>Icons/Chat.png</file>
@@ -27,6 +68,11 @@
     <file>Icons/User_Groups_Icon.png</file>
     <file>Icons/Usuario Masculino 5.png</file>
     <file>Icons/Usuario Masculino 6.png</file>
+    <file>Icons/right-arrow.png</file>
+    <file>Icons/left-arrow.png</file>
+    <file>Icons/up-arrow.png</file>
+    <file>Icons/down-arrow.png</file>
+    <file>Icons/check.png</file>
     <file>Images/viejito-01.png</file>
     <file>Images/Fondo.png</file>
   </qresource>

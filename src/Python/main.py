@@ -1,15 +1,14 @@
 
 import sys
-import typing
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
-from resources.QRC import images
+#from resources.QRC import images
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
-from Python.controller.ControllerMenu import controllerMenu
+from Python.controller.ControllerMenu import ControllerMenu
 from Python.controller.ControllerInicioSesion import controllerInicioSesion
 from Python.controller.ControllerRegistro import controllerRegistro
-
+from Python.controller.Controller_Chat import controller_Chat
 
 class app(QMainWindow):
     def __init__(self) :
@@ -18,7 +17,7 @@ class app(QMainWindow):
 
         self.inicioSesion = controllerInicioSesion()
         self.registro = controllerRegistro(self)
-        self.menuC = controllerMenu()        
+        self.menu = ControllerMenu()        
         
 
         self.pilaWidgets.addWidget(self.inicioSesion)
@@ -31,7 +30,7 @@ class app(QMainWindow):
 
         self.pilaWidgets.setCurrentWidget(self.inicioSesion)
 
-        self.inicializar()
+        self.inicializar()       
 
     def inicializar(self):
         self.resize(800, 536)
@@ -48,6 +47,7 @@ class app(QMainWindow):
         self.registro.boton_Iniciar_sesion.clicked.connect(self.cambioInicioSesionFromRegistro)
         self.registro.Boton_Registro.clicked.connect(self.botonRegistrar) 
 
+        
 
 ####CAMBIOS
     def cambioInicioSesionFromRegistro(self):
@@ -59,16 +59,13 @@ class app(QMainWindow):
         self.pilaWidgets.setCurrentWidget(self.registro)
 
 
-
-
 ########FUNCIONES
 
     def botonIniciarSesion(self):
         if(self.inicioSesion.abrirMenu()):
-
+            self.pilaWidgets.setCurrentWidget(self.menu)            
             self.close()
-
-       
+      
     def botonRegistrar(self):
         self.registro.registrar()
         
