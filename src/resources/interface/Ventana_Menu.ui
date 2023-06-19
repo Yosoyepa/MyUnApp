@@ -386,6 +386,50 @@ QPushButton::pressed{
             <property name="lineWidth">
              <number>0</number>
             </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>7000</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Boton_Info">
+               <property name="minimumSize">
+                <size>
+                 <width>40</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>40</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="../QRC/imagenesInicioSesion.qrc">
+                 <normaloff>:/inicioSesion/Icons/Info_Icon.png</normaloff>:/inicioSesion/Icons/Info_Icon.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
@@ -405,8 +449,8 @@ QPushButton::pressed{
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <widget class="QWidget" name="stackedWidget_4Page1" native="true">
-             <layout class="QVBoxLayout" name="verticalLayout_4" stretch="">
+            <widget class="QWidget" name="stackedWidget_4Page1">
+             <layout class="QVBoxLayout" name="verticalLayout_4">
               <property name="spacing">
                <number>0</number>
               </property>

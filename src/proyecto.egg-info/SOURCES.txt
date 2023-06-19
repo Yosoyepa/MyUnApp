@@ -1,6 +1,5 @@
 setup.py
 Python/main.py
-Python/testMain.py
 Python/controller/ControllerAdminGrupos.py
 Python/controller/ControllerBusquedaGrupos.py
 Python/controller/ControllerCambioContrasena.py
@@ -20,7 +19,6 @@ Python/model/MiembroGrupo.py
 Python/model/Usuario.py
 Python/server/Cliente.py
 Python/server/Servidor.py
-Python/view/resource.py
 proyecto.egg-info/PKG-INFO
 proyecto.egg-info/SOURCES.txt
 proyecto.egg-info/dependency_links.txt

@@ -5,6 +5,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from controller.Controller_Chat import controller_Chat
 from resources.QRC import images
 from Python.model.Usuario import Usuario
+from Python.model import CRUD
 
 
 from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
@@ -45,6 +46,8 @@ class ControllerMenu(QMainWindow):
         self.botonGrupos.clicked.connect(self.cambioBusquedaGrupos)
         self.botonCalendario.clicked.connect(self.cambioAEventos)
         self.controllerGrupos.Boton_AjustesGrupo.clicked.connect(self.comprobarAdmin)
+        self.controllerAdminGrupos.Boton_Atras.clicked.connect(self.cambioBusquedaGrupos)
+        self.Boton_Info.clicked.connect(self.InfoPerrona)
         self.configBoton.clicked.connect(self.cambioPersonalizacion)
         
 
@@ -70,13 +73,21 @@ class ControllerMenu(QMainWindow):
         self.stackedWidget_4.setCurrentWidget(self.controllerPersonalizacion)
 
     def comprobarAdmin(self):
-        nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()
-        if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG)==True:
-            self.abrirAdministracionGrupos()
+        try:
+            nombreG = self.controllerGrupos.List_MisGrupos.currentItem().text()
+            if self.controllerAdminGrupos.abrirAjustes(self.usuario.correo,nombreG)==True:
+                self.abrirAdministracionGrupos()
+        except:
+            CRUD.mostrarCajaDeMensaje("Advertencia","Debe escojer un grupo",QtWidgets.QMessageBox.Warning)
+
 
     def abrirAdministracionGrupos(self):
         self.setWindowTitle("Ajustes grupo")
         self.stackedWidget_4.setCurrentWidget(self.controllerAdminGrupos)
+
+    def InfoPerrona(self):
+        mensaje = "CREADORES DE ESTA MAGNIFICA APP \n\nJuan Felipe Hernandez \n Juan Felipe Pastrana \n Juan Carlos Andrade \n Santiago Villota Alava \n Luis Miguel Sanchez \n Carlos Javier Camacho \n Carlos Enrique Amaya"
+        CRUD.mostrarCajaDeMensaje("Informacion", mensaje, QtWidgets.QMessageBox.Information) # type: ignore
 
 
     

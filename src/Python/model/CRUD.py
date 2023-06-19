@@ -272,7 +272,7 @@ def obtener_id(nombre_grupo):
     try:
         con = Conexion()
         con.cur.execute(query)
-        return self.__cur.fetchone()[0] # type: ignore
+        return con.cur.fetchone()[0] # type: ignore
     except:
         print(traceback.format_exc())
         return None
