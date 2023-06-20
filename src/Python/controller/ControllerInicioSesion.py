@@ -5,7 +5,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #imports de controladores
 from Python.controller.ControllerMenu import ControllerMenu
-from controller.ControllerRecuperacionContrasena import controllerRecuperacion
+from Python.controller.ControllerRecuperacionContrasena import controllerRecuperacion
 
 
 from resources.QRC import images
@@ -44,6 +44,7 @@ class controllerInicioSesion(QMainWindow):
         else:
         
             usr: Usuario = CRUD.readUsuario(self.Line_Usuario.text(), self.Line_Contrasena.text()) # type: ignore
+            CRUD.create_ingreso_log(usr.correo)
             print(usr)
             if(usr != None):
                 usr.mostrar()
