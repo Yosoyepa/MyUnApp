@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>481</width>
-    <height>89</height>
+    <height>98</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -83,6 +83,7 @@ border-radius: 10px
             <widget class="QLabel" name="username_mensajero">
              <property name="font">
               <font>
+               <pointsize>12</pointsize>
                <weight>75</weight>
                <italic>false</italic>
                <bold>true</bold>
@@ -109,6 +110,11 @@ border-radius: 10px
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(0, 75, 115);</string>
              </property>
@@ -131,18 +137,33 @@ border-radius: 10px
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="fotoPerfil">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>70</width>
+            <height>70</height>
+           </size>
+          </property>
           <property name="text">
            <string/>
           </property>
           <property name="pixmap">
            <pixmap resource="../QRC/imagenesInicioSesion.qrc">:/newPrefix/Icons/Usuario Masculino 5.png</pixmap>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
