@@ -436,7 +436,7 @@ border-radius: 0px</string>
                                         <enum>QAbstractItemView::ScrollPerPixel</enum>
                                        </property>
                                        <property name="movement">
-                                        <enum>QListView::Free</enum>
+                                        <enum>QListView::Static</enum>
                                        </property>
                                        <property name="isWrapping" stdset="0">
                                         <bool>false</bool>
@@ -699,8 +699,8 @@ QPushButton::pressed{
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>256</width>
-                        <height>73</height>
+                        <width>239</width>
+                        <height>81</height>
                        </rect>
                       </property>
                       <property name="styleSheet">
