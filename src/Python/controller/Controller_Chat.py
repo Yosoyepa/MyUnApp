@@ -8,6 +8,7 @@ from resources.QRC import images
 from Python.model.Usuario import Usuario
 from Python.model import CRUD
 from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMessageBox
 #import os
 #from google.cloud import pubsub_v1
 
@@ -30,12 +31,9 @@ class controller_Chat(QMainWindow):
         
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Chat.ui', self)
-        #uic.loadUi('src/resources/interface/Receptor.ui', self)
         self.pushButton_7.clicked.connect(self.actualizar_lista_widget_grupos)
         self.lista_grupos.itemClicked.connect(self.mostrar_miembros_grupos)
-
         self.send_button.clicked.connect(self.enviarMensaje)
-        ##self.lista_grupos.itemClicked.connect(self.recibir_mensajes_topic)
         self.widgets_enviados = []
         self.widgets_recibidos = []
         self.receptor_widget = QtWidgets.QWidget()
@@ -45,13 +43,12 @@ class controller_Chat(QMainWindow):
         self.username_receptor = self.receptor_widget.findChild(QtWidgets.QLabel, 'username_receptor')
         uic.loadUi('src/resources/interface/Mensajero.ui', self.mensajero_widget)
         self.username_mensajero = self.mensajero_widget.findChild(QtWidgets.QLabel, 'username_mensajero')
-        self.icono_conexion_activo = 'src/resources/QRC/Icons/Online 2.png'
-        self.icono_conexion_inactivo = 'src/resources/QRC/Icons/Online.png'
+        self.icono_conexion_activo = 'src/resources/QRC/Icons/Online.png'
+        self.icono_conexion_inactivo = 'src/resources/QRC/Icons/Online 2.png'
         self.cambio_manual = False
+        self.disponible = True
         
         
-
-
     def cajaMensajeEnviado(self, mensaje):
         print("Mensaje enviado:", mensaje)
         if mensaje:
@@ -123,44 +120,66 @@ class controller_Chat(QMainWindow):
                             
 
     def mostrar_miembros_grupos(self, item):
-        self.chat_listWidget.clear()
-        if self.hilo != None:
-            self.hilo.terminate()
+        self.chat_listWidget.clear() #type: ignore
 
-        self.grupo_seleccionado = item.text()
-        nombre_grupo = self.grupo_seleccionado
-        self.hilo = claseHilo(self.grupo_seleccionado)
-        self.hilo.newValor.connect(self.cargarMensajes)
-        self.hilo.start()	
-        print(nombre_grupo)
+        # Detener el hilo actual si existe
+        if self.hilo is not None:
+            self.hilo.activo = False
+            self.hilo.wait()
         
+        self.usuario_actual = self.usuario.nombre + " " + self.usuario.apellido
+        self.grupo_seleccionado = item.text() #type: ignore
+        nombre_grupo = self.grupo_seleccionado
+
+        # Verificar el estado de la casilla de verificación del usuario actual
+        usuario_actual_activo = True  # Usuario activo por defecto
+        for miembro in CRUD.obtener_miembros_grupos(nombre_grupo): #type: ignore
+            if miembro[0] == self.usuario_actual:
+                usuario_actual_activo = item.checkState() == QtCore.Qt.Checked #type: ignore
+                break
+
+        # Iniciar el hilo solo si el usuario actual está activo
+        if usuario_actual_activo:
+            self.hilo = claseHilo(self.grupo_seleccionado)
+            self.hilo.newValor.connect(self.cargarMensajes)
+            self.hilo.start()
+
         self.lista_miembros.clear()
-        for miembro in CRUD.obtener_miembros_grupos(nombre_grupo):#type: ignore
+        
+
+        for miembro in CRUD.obtener_miembros_grupos(nombre_grupo): #type: ignore
             item = QtWidgets.QListWidgetItem()
             item.setText(str(miembro[0]) + " " + str(miembro[1]))
-            # Agregar icono de conexión
-            icono = QIcon(self.icono_conexion_activo)
+            item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable) #type: ignore
+            if miembro[0] == self.usuario_actual:
+                item.setCheckState(QtCore.Qt.Checked if usuario_actual_activo else QtCore.Qt.Unchecked) #type: ignore
+            else:
+                item.setCheckState(QtCore.Qt.Unchecked) #type: ignore
+            icono = QIcon(self.icono_conexion_activo if usuario_actual_activo else self.icono_conexion_inactivo)
             item.setIcon(icono)
             self.lista_miembros.addItem(item)
-            item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable) #type: ignore
-             # Establecer el estado del ítem como activo solo si no se cambió manualmente
-            if not self.cambio_manual:
-                item.setCheckState(QtCore.Qt.Checked)#type: ignore
 
         self.id_grupo_seleccionado = self.obtener_id_grupo(nombre_grupo)
-        # Conectar la señal itemChanged al método cambiar_estado_miembro
-        self.lista_miembros.itemChanged.connect(self.cambiar_estado_miembro)
+        self.lista_miembros.itemClicked.connect(self.marcar_casilla)
 
-    def cambiar_estado_miembro(self, item):
-        if not self.cambio_manual:
-            self.cambio_manual = True
-            if item.checkState() == QtCore.Qt.Checked:  # Estado activo # type: ignore
-                item.setIcon(QIcon(self.icono_conexion_activo))
-                # Realizar acciones cuando el miembro está activo
-            else:  # Estado inactivo
+    def marcar_casilla(self, item):
+        if item.text().startswith(self.usuario_actual):
+            if item.checkState() == QtCore.Qt.Checked: #type: ignore
+                self.disponible = False
                 item.setIcon(QIcon(self.icono_conexion_inactivo))
-                # Realizar acciones cuando el miembro está inactivo
-            self.cambio_manual = False
+                self.hilo.activo = False #type: ignore
+                QMessageBox.information(self, "Estado", "Estado inactivo. No recibirás mensajes.")
+            else:
+                self.disponible = True
+                item.setIcon(QIcon(self.icono_conexion_activo))
+                self.hilo.activo = True #type: ignore
+                if not self.hilo.isRunning(): #type: ignore
+                    self.hilo = claseHilo(self.grupo_seleccionado)
+                    self.hilo.newValor.connect(self.cargarMensajes)
+                    self.hilo.start() #type: ignore
+                QMessageBox.information(self, "Estado", "Estado activo. Puedes recibir mensajes.")
+        else:
+            item.setCheckState(QtCore.Qt.Unchecked) #type: ignore
     
     def cargarMensajes(self, newValor):                    
         try:    
@@ -184,54 +203,26 @@ class controller_Chat(QMainWindow):
     def cargarTodosLosMensajes(self):
         try:
             mensajesListaTemp = CRUD.obtener_mensajes_grupo("TEST1")
-            
+                
             for mensaje in mensajesListaTemp:   #type: ignore                     
                 self.cargarMensajes(mensaje)
         except:
             print(traceback.format_exc())
-
-
-    def enviarMensaje(self):
-        try:
-            texto_mensaje = str(self.message_line_edit.text())
-            if texto_mensaje:
-                CRUD.enviar_mensaje_grupo(self.id_grupo_seleccionado, self.usuario.correo, texto_mensaje)                
-                
-                self.message_line_edit.clear()
-        except:
-            print(traceback.format_exc())
-
-
-'''
-    def enviar_mensaje_a_topic(self):
-        texto_mensaje = str(self.message_line_edit.text())
-        if texto_mensaje:
-            project_id = 'exalted-summer-387903'
-            publisher = pubsub_v1.PublisherClient()
-            topic_name = self.crd.obtener_topic_grupo(self.id_grupo_seleccionado)
-            topic_path = f'projects/{project_id}/topics/{topic_name}'
-            future = publisher.publish(topic_path, texto_mensaje.encode())
-            future.result()
-            print(f'Mensaje enviado al topic {topic_name}: {texto_mensaje}')
         
-    def recibir_mensajes_topic(self):
-        project_id = 'exalted-summer-387903'
-        subscriber = pubsub_v1.SubscriberClient()
-        nombre_user = self.setear_usuario(self.usuario)
-        subscription_name = f'{nombre_user}_subscription'
-        subscription_path = subscriber.subscription_path(project_id, subscription_name)
+    def enviarMensaje(self):
+        if self.disponible == True:
+            try:
+                texto_mensaje = str(self.message_line_edit.text())
+                if texto_mensaje:
+                    CRUD.enviar_mensaje_grupo(self.id_grupo_seleccionado, self.usuario.correo, texto_mensaje)                
+                    
+                    self.message_line_edit.clear()
+            except:
+                print(traceback.format_exc())
+        else:
+            QMessageBox.information(self, "Informacion", "Actualmente te encuentras en estado inactivo, por lo tanto no puedes enviar mensajes.")
+            self.message_line_edit.clear()
 
-        def callback(message):
-            mensaje = message.data.decode()
-            print(f"Mensaje recibido para {nombre_user}: {mensaje}")
-            print("Mensaje recibido en el hilo secundario:", message.data.decode())
-            self.mensaje_recibido.emit(mensaje)
-            message.ack()
-
-        thread = threading.Thread(target=lambda: subscriber.subscribe(subscription_path, callback=callback))
-        thread.start()
-
-'''
 
 class claseHilo(QThread):
     newValor = pyqtSignal(tuple)
@@ -239,6 +230,7 @@ class claseHilo(QThread):
 
         
         self.nombreGrupo = nombreGrupo
+        self.activo = True  # Variable para controlar la ejecución del hilo
         super(claseHilo, self).__init__()
 
 
@@ -252,7 +244,7 @@ class claseHilo(QThread):
             
           
             mensajesLista = mensajesListaTemp
-            while True:
+            while self.activo:
                 
                     print("Hilo ejecutandose")                     
                     mensajesListaTemp = CRUD.obtener_mensajes_grupo(self.nombreGrupo)                                                                              
