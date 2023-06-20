@@ -337,6 +337,9 @@ border-radius:15px;</string>
                                 <property name="rightMargin">
                                  <number>12</number>
                                 </property>
+                                <property name="bottomMargin">
+                                 <number>13</number>
+                                </property>
                                 <item>
                                  <widget class="QLabel" name="label_8">
                                   <property name="sizePolicy">
@@ -556,6 +559,43 @@ padding: 3px</string>
                                   </property>
                                  </widget>
                                 </item>
+                                <item>
+                                 <widget class="QLabel" name="label_4">
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>11</pointsize>
+                                    <weight>75</weight>
+                                    <bold>true</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">color:#01233C; </string>
+                                  </property>
+                                  <property name="text">
+                                   <string>Descripción:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPlainTextEdit" name="cajaDescripcion">
+                                  <property name="font">
+                                   <font>
+                                    <family>Arial</family>
+                                    <pointsize>13</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color:rgb(255, 255, 255); 
+color:#01233C; 
+border-radius:15px;
+padding: 3px</string>
+                                  </property>
+                                  <property name="placeholderText">
+                                   <string>Escribe aquí tu descripción...</string>
+                                  </property>
+                                 </widget>
+                                </item>
                                </layout>
                               </widget>
                              </widget>
@@ -729,7 +769,7 @@ QPushButton:hover{
                        <item>
                         <widget class="QPushButton" name="botonAplicarCambios">
                          <property name="enabled">
-                          <bool>false</bool>
+                          <bool>true</bool>
                          </property>
                          <property name="font">
                           <font>

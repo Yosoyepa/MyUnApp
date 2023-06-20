@@ -38,6 +38,7 @@ def readUsuarioSinContrasena(correo):
             user.setFechaNacimiento(str(result[4]), '-')
             user.setFotoPerfil(result[6])
             user.setContrasenaConHash(result[3])
+            user.setDescripcion(result[7])
             return user        
     except:
         traceback.print_exc()
@@ -62,6 +63,8 @@ def readUsuario(correo, contrasena):
                 user.setFechaNacimiento(str(result[4]), '-')
                 user.setFotoPerfil(result[6])
                 user.setContrasenaConHash(result[3])
+                if(result[7] != None):
+                    user.setDescripcion(result[7])
                 return user
             else:
                 mostrarCajaDeMensaje("ADVERTENCIA", "La contraseña digitada es incorrecta.", QMessageBox.Critical) # type: ignore
@@ -648,6 +651,17 @@ def create_evento_log(id_grupo, correo, nombre_evento, fecha_hora_evento):
 
 def create_ingreso_log(correo_usr):
     query = (f"insert into LOG_INGRESO values (null, '{correo_usr}', '{datetime.datetime.now()}');")
+    try: 
+        con = Conexion()        
+        con.cur.execute(query)
+        con.conexion.commit()
+        del	con
+    except :
+        print(traceback.print_exc())
+    return
+
+def guardarDescripcionUsuario(correo_usr, descripcion):
+    query = (f"update USUARIO set DESCRIPCION_USUARIO = '{descripcion}' where CORREO_USUARIO = '{correo_usr}';")
     try: 
         con = Conexion()        
         con.cur.execute(query)

@@ -12,6 +12,8 @@ class Usuario:
         self.apellido:str = apellido      
         self.fechaRegistro:datetime.datetime = fechaRegistro
 
+        self.descripcion = None
+
     def setFotoPerfil(self, fotoPerfil):
         self.fotoPerfil = fotoPerfil
 
@@ -36,6 +38,8 @@ class Usuario:
             print(traceback.format_exc())
             self.fechaNacimiento:datetime.date = datetime.date(int(fechaArr[2]), int(fechaArr[1]), int(fechaArr[0]))
 
+    def setDescripcion(self, descripcion):
+        self.descripcion = descripcion
 
     def mostrar(self):
       
