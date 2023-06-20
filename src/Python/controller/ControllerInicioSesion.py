@@ -1,4 +1,5 @@
 import sys
+import traceback
 
 from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
@@ -37,22 +38,26 @@ class controllerInicioSesion(QMainWindow):
         graphics_effect.setOpacity(value)
         self.Label_Imagen.setGraphicsEffect(graphics_effect)
 
-    def abrirMenu(self) -> bool: ###RETORNA BOOLEANO PARA COMPROBAR QUE EL INICIO DE SESION FUE CORRECTO
-        if self.Line_Usuario.text() == '' or self.Line_Contrasena.text() == '':            
-            CRUD.mostrarCajaDeMensaje(self, "ADVERTENCIA", 'No deje campos de texto vacíos', QtWidgets.QMessageBox.Warning)  # type: ignore
-            return False
-        else:
-        
-            usr: Usuario = CRUD.readUsuario(self.Line_Usuario.text(), self.Line_Contrasena.text()) # type: ignore
-            CRUD.create_ingreso_log(usr.correo)
-            print(usr)
-            if(usr != None):
-                usr.mostrar()
-                self.menu.setUsuario(usr)
-                self.menu.show()        
-                return True
-            else: 
+    def abrirMenu(self) -> bool: #type: ignore	
+        ###RETORNA BOOLEANO PARA COMPROBAR QUE EL INICIO DE SESION FUE CORRECTO
+        try:
+            if self.Line_Usuario.text() == '' or self.Line_Contrasena.text() == '':            
+                CRUD.mostrarCajaDeMensaje("ADVERTENCIA", 'No deje campos de texto vacíos', QtWidgets.QMessageBox.Warning)  # type: ignore
                 return False
+            else:
+            
+                usr: Usuario = CRUD.readUsuario(self.Line_Usuario.text(), self.Line_Contrasena.text()) # type: ignore
+                CRUD.create_ingreso_log(usr.correo)
+                print(usr)
+                if(usr != None):
+                    usr.mostrar()
+                    self.menu.setUsuario(usr)
+                    self.menu.show()        
+                    return True
+                else: 
+                    return False
+        except:
+            print(traceback.format_exc())
 
 
     def abrirRecuperacion(self):

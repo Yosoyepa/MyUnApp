@@ -647,14 +647,14 @@ def create_evento_log(id_grupo, correo, nombre_evento, fecha_hora_evento):
     return
 
 def create_ingreso_log(correo_usr):
-    query = (f"insert into LOG_INGRESO values (null, '{correo_usr}', now());")
+    query = (f"insert into LOG_INGRESO values (null, '{correo_usr}', '{datetime.datetime.now()}');")
     try: 
         con = Conexion()        
         con.cur.execute(query)
         con.conexion.commit()
         del	con
     except :
-        traceback.print_exc()
+        print(traceback.print_exc())
     return
 
 

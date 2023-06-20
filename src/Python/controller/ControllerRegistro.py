@@ -38,7 +38,7 @@ class controllerRegistro(QMainWindow):
     def registrar(self):
         
         user:Usuario = None # type: ignore
-        if(self.Line_Nombre.text() == '' or self.Line_Apellido.text() == '' or self.Line_Email.text() == '' or self.Line_Contrasena.text() == '' or self.Line_ConfirmarContrasena.text() == ''):
+        if(self.Line_Nombre.text() == '' or self.Line_Apellido.text() == '' or self.Line_Email.text() == '' or self.Line_Contrasena.text() == '' or self.Line_ConfirmarContrasena.text() == ''): #type: ignore
             CRUD.mostrarCajaDeMensaje("ADVERTENCIA", 'No deje campos de texto vacíos', QtWidgets.QMessageBox.Warning)
             
         else:
@@ -71,6 +71,7 @@ class controllerRegistro(QMainWindow):
                     CRUD.mostrarCajaDeMensaje("ADVERTENCIA", 'el correo no es válido.', QtWidgets.QMessageBox.Warning)
                     
             except:
+                CRUD.mostrarCajaDeMensaje("ADVERTENCIA", 'el correo no es válido.', QtWidgets.QMessageBox.Warning)
                 print(traceback.format_exc())    
                                 
             
