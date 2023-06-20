@@ -8,10 +8,10 @@ from Python.model.Usuario import Usuario
 from Python.model import CRUD
 
 
-from controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
-from controller.ControllerAdminGrupos import ControllerAdminGrupo
-from controller.ControllerEventos import controllerEventos
-from controller.ControllerPersonalizacion import ControllerPersonalizacion
+from Python.controller.ControllerBusquedaGrupos import ControllerBusquedaGrupo
+from Python.controller.ControllerAdminGrupos import ControllerAdminGrupo
+from Python.controller.ControllerEventos import controllerEventos
+from Python.controller.ControllerPersonalizacion import ControllerPersonalizacion
 
 class ControllerMenu(QMainWindow):
     def __init__(self):
