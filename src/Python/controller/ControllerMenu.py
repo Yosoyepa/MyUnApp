@@ -13,7 +13,7 @@ from Python.controller.ControllerAdminGrupos import ControllerAdminGrupo
 from Python.controller.ControllerEventos import controllerEventos
 from Python.controller.ControllerPersonalizacion import ControllerPersonalizacion
 
-class ControllerMenu(QMainWindow):
+class Controller_Menu(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         uic.loadUi('src/resources/interface/Ventana_Menu.ui', self)         
