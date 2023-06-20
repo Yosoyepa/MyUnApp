@@ -26,6 +26,26 @@ def createUsuario(usuario:Usuario):
     except :
         traceback.print_exc()
     
+def readUsuarioSinContrasena(correo):
+    con = None
+    query = (f"SELECT * FROM USUARIO WHERE CORREO_USUARIO = '{correo}'")
+    try:
+        con = Conexion()
+        con.cur.execute(query)
+        result = con.cur.fetchone()      
+        if(result != None):
+            user = Usuario(result[0], result[1], result[2], result[5])                    
+            user.setFechaNacimiento(str(result[4]), '-')
+            user.setFotoPerfil(result[6])
+            user.setContrasenaConHash(result[3])
+            return user        
+    except:
+        traceback.print_exc()
+        return Usuario(None,None,None,None)
+    finally:
+        if(con != None):
+            del con
+        
     
 def readUsuario(correo, contrasena):
     con = None

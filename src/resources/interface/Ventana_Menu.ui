@@ -414,6 +414,22 @@ QPushButton::pressed{
                  <height>40</height>
                 </size>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton{
+	background-color: transparent;
+	border-radius: 0px;
+}
+
+QPushButton:hover{
+	background-color: rgb(0, 82, 127);
+	border-radius: 0px;
+}
+
+QPushButton::pressed{
+	background-color: rgb(62, 201, 255);
+	border-radius: 0px;
+}</string>
+               </property>
                <property name="text">
                 <string/>
                </property>

@@ -51,8 +51,9 @@ class controller_Chat(QMainWindow):
     def cajaMensajeEnviado(self, mensaje):
         print("Mensaje enviado:", mensaje)
         if mensaje:
-            sendWidget = QtWidgets.QWidget()
+            sendWidget = QtWidgets.QWidget()  
             uic.loadUi('src/resources/interface/Mensajero.ui', sendWidget)
+            defaultPixmap = sendWidget.fotoPerfil.pixmap() #type: ignore
             sendWidget.message_mensajero.setText(str(mensaje))
             item = QtWidgets.QListWidgetItem()
             item.setSizeHint(sendWidget.sizeHint())
@@ -60,13 +61,24 @@ class controller_Chat(QMainWindow):
             self.chat_listWidget.setItemWidget(item, sendWidget)
             self.chat_listWidget.setMinimumWidth(sendWidget.width())
             self.widgets_enviados.append(sendWidget)
+            if self.usuario.fotoPerfil == None:
+                sendWidget.fotoPerfil.setPixmap(defaultPixmap) #type: ignore    
+            else:
+
+                pixmap = QtGui.QPixmap() #type: ignore
+                   #type: ignore  
+                pixmap.loadFromData(self.usuario.fotoPerfil) #type: ignore
+                pixmap = pixmap.scaled(70, 70, QtCore.Qt.KeepAspectRatio) #type: ignore
+                sendWidget.fotoPerfil.setPixmap(pixmap) #type: ignore
+
             sendWidget.username_mensajero.setText(self.usuario.nombre+" "+self.usuario.apellido)       
 
-    def cajaMensajeRecibido(self, mensaje, nombre_usuario_receptor):
+    def cajaMensajeRecibido(self, mensaje, correoReceptor):
         print("Mensaje recibido:", mensaje)
         if mensaje:
             receiveWidget = QtWidgets.QWidget()
             uic.loadUi('src/resources/interface/Receptor.ui', receiveWidget)
+            defaultPixmap = receiveWidget.fotoPerfil.pixmap() #type: ignore
             receiveWidget.message_receptor.setText(str(mensaje))
             item = QtWidgets.QListWidgetItem()
             item.setSizeHint(receiveWidget.sizeHint())
@@ -74,8 +86,17 @@ class controller_Chat(QMainWindow):
             self.chat_listWidget.setItemWidget(item, receiveWidget)
             self.chat_listWidget.setMinimumWidth(receiveWidget.width())
             self.widgets_recibidos.append(receiveWidget)
-            self.nombre_usuario_receptor_caja = CRUD.Obtener_nombre_usario_por_correo(nombre_usuario_receptor)
-            receiveWidget.username_receptor.setText(self.nombre_usuario_receptor_caja)
+            usuarioReceptor = CRUD.readUsuarioSinContrasena(correoReceptor)
+            if usuarioReceptor.fotoPerfil == None: #type: ignore
+                receiveWidget.fotoPerfil.setPixmap(defaultPixmap) #type: ignore    
+            else:
+
+                pixmap = QtGui.QPixmap() #type: ignore
+                   #type: ignore  
+                pixmap.loadFromData(usuarioReceptor.fotoPerfil) #type: ignore
+                pixmap = pixmap.scaled(70, 70, QtCore.Qt.KeepAspectRatio) #type: ignore
+                receiveWidget.fotoPerfil.setPixmap(pixmap) #type: ignore
+            receiveWidget.username_receptor.setText(usuarioReceptor.nombre+" "+usuarioReceptor.apellido) #type: ignore
 
     def mostrar_mensaje_recibido(self, mensaje):
         self.mensaje_recibido.emit(mensaje)
@@ -127,6 +148,7 @@ class controller_Chat(QMainWindow):
                     print(mensaje[3])
                     if(mensaje[2] == self.usuario.correo):
                         self.cajaMensajeEnviado(mensaje[3])
+
                     else:
                         self.cajaMensajeRecibido(mensaje[3], mensaje[2])
                         print(mensaje[2])
@@ -138,7 +160,7 @@ class controller_Chat(QMainWindow):
     def cargarTodosLosMensajes(self):
         try:
             mensajesListaTemp = CRUD.obtener_mensajes_grupo("TEST1")
-            print(mensajesListaTemp)
+            
             for mensaje in mensajesListaTemp:   #type: ignore                     
                 self.cargarMensajes(mensaje)
         except:
@@ -203,13 +225,12 @@ class claseHilo(QThread):
         try:
             mensajesLista = []
             mensajesListaTemp = CRUD.obtener_mensajes_grupo(self.nombreGrupo)
-            print(mensajesListaTemp)
+            
           
             mensajesLista = mensajesListaTemp
             while True:
                 
-                    print("Hilo ejecutandose") 
-                    print(mensajesListaTemp)
+                    print("Hilo ejecutandose")                     
                     mensajesListaTemp = CRUD.obtener_mensajes_grupo(self.nombreGrupo)                                                                              
                     if mensajesListaTemp != mensajesLista:
                         mensajesLista = mensajesListaTemp

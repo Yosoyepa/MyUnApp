@@ -650,10 +650,10 @@ padding: 20px</string>
                        </property>
                       </widget>
                      </item>
-                     <item>
+                     <item alignment="Qt::AlignHCenter">
                       <widget class="QLabel" name="imagenPerfil">
                        <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
                          <horstretch>0</horstretch>
                          <verstretch>0</verstretch>
                         </sizepolicy>
@@ -670,8 +670,12 @@ padding: 20px</string>
                          <height>300</height>
                         </size>
                        </property>
+                       <property name="layoutDirection">
+                        <enum>Qt::LeftToRight</enum>
+                       </property>
                        <property name="styleSheet">
-                        <string notr="true">border-radius: 100px;</string>
+                        <string notr="true">border-radius: 100px;
+</string>
                        </property>
                        <property name="text">
                         <string/>

@@ -7,6 +7,7 @@ Python/controller/ControllerCodigo.py
 Python/controller/ControllerEventos.py
 Python/controller/ControllerInicioSesion.py
 Python/controller/ControllerMenu.py
+Python/controller/ControllerPersonalizacion.py
 Python/controller/ControllerRecuperacionContrasena.py
 Python/controller/ControllerRegistro.py
 Python/controller/Controller_Chat.py
@@ -17,6 +18,7 @@ Python/model/Evento.py
 Python/model/Grupo.py
 Python/model/MiembroGrupo.py
 Python/model/Usuario.py
+Python/model/test.py
 Python/server/Cliente.py
 Python/server/Servidor.py
 proyecto.egg-info/PKG-INFO
