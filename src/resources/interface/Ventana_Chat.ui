@@ -322,6 +322,12 @@ border-radius: 0px</string>
                       </property>
                       <item>
                        <widget class="QScrollArea" name="scrollArea">
+                        <property name="frameShadow">
+                         <enum>QFrame::Plain</enum>
+                        </property>
+                        <property name="sizeAdjustPolicy">
+                         <enum>QAbstractScrollArea::AdjustToContents</enum>
+                        </property>
                         <property name="widgetResizable">
                          <bool>true</bool>
                         </property>
@@ -426,6 +432,12 @@ border-radius: 0px</string>
                                        <property name="sizeAdjustPolicy">
                                         <enum>QAbstractScrollArea::AdjustIgnored</enum>
                                        </property>
+                                       <property name="verticalScrollMode">
+                                        <enum>QAbstractItemView::ScrollPerPixel</enum>
+                                       </property>
+                                       <property name="movement">
+                                        <enum>QListView::Free</enum>
+                                       </property>
                                        <property name="isWrapping" stdset="0">
                                         <bool>false</bool>
                                        </property>
@@ -462,30 +474,46 @@ border-radius: 0px</string>
                                <layout class="QHBoxLayout" name="horizontalLayout_5">
                                 <item>
                                  <widget class="QLineEdit" name="message_line_edit">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>13</pointsize>
+                                   </font>
+                                  </property>
                                   <property name="styleSheet">
                                    <string notr="true">border-color: rgb(0, 75, 115);
 background-color: rgb(192, 225, 236);
-border-radius: 5px;</string>
+border-radius: 5px;
+
+padding: 6px;
+</string>
                                   </property>
                                  </widget>
                                 </item>
                                 <item>
                                  <widget class="QPushButton" name="send_button">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>14</pointsize>
+                                   </font>
+                                  </property>
                                   <property name="styleSheet">
                                    <string notr="true">QPushButton{
-	background-color: transparent;
-	border-radius: 0px;
+	background-color:#FFFFFF; 
+	color:#01233C; 
+	border-radius:10px;
+	padding: 6px
 }
 
 QPushButton:hover{
-	background-color: rgb(121, 184, 211);
-	border-radius: 0px;
+	background-color:#01233C; 
+	color:#FFFFFF; 
+	border-radius:10px;
 }
 
 QPushButton::pressed{
-	
-	background-color: rgb(1, 35, 60);
-	border-radius: 0px;
+	background-color:rgb(62, 201, 255); 
+	color:#FFFFFF; 
+	border-radius:10px;
 }</string>
                                   </property>
                                   <property name="text">
@@ -660,6 +688,9 @@ QPushButton::pressed{
 
 </string>
                      </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
+                     </property>
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
@@ -693,8 +724,13 @@ QPushButton::pressed{
                        </property>
                        <item>
                         <widget class="QListWidget" name="lista_grupos">
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
                          <property name="styleSheet">
-                          <string notr="true"/>
+                          <string notr="true">padding: 6px</string>
                          </property>
                          <property name="verticalScrollBarPolicy">
                           <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -720,6 +756,9 @@ QPushButton::pressed{
                       <string notr="true">background-color: rgb(192, 225, 236);
 
 </string>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Plain</enum>
                      </property>
                      <property name="widgetResizable">
                       <bool>true</bool>
@@ -751,6 +790,14 @@ QPushButton::pressed{
                        </property>
                        <item>
                         <widget class="QListWidget" name="lista_miembros">
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">padding: 6px</string>
+                         </property>
                          <property name="textElideMode">
                           <enum>Qt::ElideRight</enum>
                          </property>
