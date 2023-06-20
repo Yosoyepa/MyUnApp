@@ -263,9 +263,6 @@ QPushButton:hover {
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <property name="topMargin">
-                 <number>20</number>
-                </property>
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_6">
                   <property name="sizeConstraint">
@@ -367,22 +364,7 @@ border-radius: 20px;</string>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,10">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_5">
                    <item>
                     <widget class="QLabel" name="labelTitulo">
                      <property name="font">
@@ -704,7 +686,7 @@ QPushButton::pressed{
                  <widget class="QFrame" name="frame_3">
                   <property name="maximumSize">
                    <size>
-                    <width>50</width>
+                    <width>65</width>
                     <height>40</height>
                    </size>
                   </property>

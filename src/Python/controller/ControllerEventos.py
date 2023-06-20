@@ -23,28 +23,7 @@ class controllerEventos(QMainWindow):
     def setUsuario(self, usuario: Usuario):
         self.usuario = usuario
 
-    def sum_1(self):
-
-        if self.index <= self.length-2:
-            self.index += 1
-            self.mostrarEvento(self.data, self.index)
-            self.currLabel.setText(str(self.index+1))
-            
-        else:
-            return
-        
-    def res_1(self):
-        
-
-        if self.index >= 1:
-            self.index -= 1
-            self.mostrarEvento(self.data, self.index)
-            self.currLabel.setText(str(self.index+1))
-
-        else: 
-            return
-
-
+    
     def logicaEvento1(self):
         self.cambioEvento1()
         
@@ -63,27 +42,9 @@ class controllerEventos(QMainWindow):
         self.leftEvent.clicked.connect(self.res_1)
         self.rightEvent.clicked.connect(self.sum_1)
         
-
-            
-            
-        
         self.pushCalendario.clicked.connect(self.logicaEvento2)
-        
 
-        
-
-
-    def logicaEvento2(self):
-        self.cambioEvento2()
-        grupos = CRUD.obtener_nombres_grupo(self.usuario.correo)
-
-        for grupo in grupos:#type: ignore
-            self.boxGrupos.addItem(grupo[0])
-        self.grupo = self.boxGrupos.currentText()
-        self.calendarWidget.selectionChanged.connect(self.agarrar_fecha)
-
-        self.pushListo.clicked.connect(self.enviarEvento)
-        self.eventosButton.clicked.connect(self.logicaEvento1)
+    
 
     def mostrarEvento(self, data, index):
         if data == None:
@@ -118,6 +79,39 @@ class controllerEventos(QMainWindow):
         self.pushCalendario.clicked.connect(self.logicaEvento2)
 
 
+    def logicaEvento2(self):
+        self.cambioEvento2()
+        grupos = CRUD.obtener_nombres_grupo(self.usuario.correo)
+
+        for grupo in grupos:#type: ignore
+            self.boxGrupos.addItem(grupo[0])
+        self.calendarWidget.selectionChanged.connect(self.agarrar_fecha)
+
+        self.pushListo.clicked.connect(self.enviarEvento)
+        self.eventosButton.clicked.connect(self.logicaEvento1)
+
+    def sum_1(self):
+
+        if self.index <= self.length-2:
+            self.index += 1
+            self.mostrarEvento(self.data, self.index)
+            self.currLabel.setText(str(self.index+1))
+            
+        else:
+            return
+        
+    def res_1(self):
+        
+
+        if self.index >= 1:
+            self.index -= 1
+            self.mostrarEvento(self.data, self.index)
+            self.currLabel.setText(str(self.index+1))
+
+        else: 
+            return
+
+
     def agarrar_fecha(self):
         dateSelected = self.calendarWidget.selectedDate()
 
@@ -131,6 +125,7 @@ class controllerEventos(QMainWindow):
         self.desc = self.textDesc.toPlainText()
         self.hora = self.spinHora.value()
         self.minutos = self.spinMinutos.value()
+        self.grupo_sel = self.boxGrupos.currentText()
 
 
         self.fecha = (self.fecha_1.split('-'))
@@ -140,8 +135,8 @@ class controllerEventos(QMainWindow):
         temp_fecha = self.fecha
         self.fecha += [self.hora] + [self.minutos]
 
-        if self.grupo != None and temp_fecha != None and self.hora != None and self.minutos != None:
-            self.eventoCalendario.crearEvent(self.usuario.correo, self.grupo, self.desc, [], self.fecha) 
+        if self.grupo_sel != None and temp_fecha != None and self.hora != None and self.minutos != None:
+            self.eventoCalendario.crearEvent(self.usuario.correo, self.grupo_sel, self.desc, [], self.fecha) 
             #hay dos fechas porque una esta dividida y la otra no respectivamente
             CRUD.mostrarCajaDeMensaje('Se ha creado tu evento', 'Revisa tu google calendar', QtWidgets.QMessageBox.Information)
         else: 
