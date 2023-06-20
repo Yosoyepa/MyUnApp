@@ -145,7 +145,9 @@ class event(controllerCalendar):
                 body= event_request_body
             ).execute()
             emails = CRUD.mostrarMiembrosGrupo(grupo)
+            id = CRUD.obtener_id_grupo(grupo)
 
+            CRUD.create_evento_log(id, correo_usr, titulo, date_1)
             CRUD.mandarInvitacionEvento(emails, correo_usr, titulo, desc, date_1)
         except HttpError as error:
             print('An error occurred: %s' % error)  

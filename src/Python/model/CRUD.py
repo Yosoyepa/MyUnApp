@@ -570,9 +570,28 @@ def create_log_cal(CalendarId):
         traceback.print_exc()
 
 
-def create_evento(id_grupo, correo, nombre_evento, fecha_hora_evento):
-    #query = (f"INSERT INTO LOG_CALENDARIO (ID_CALENDARIO, FECHAHORA_INGRESO) VALUES('{CalendarId}', now());")
+def create_evento_log(id_grupo, correo, nombre_evento, fecha_hora_evento):
+    query = (f"insert into EVENTO values (null, '{id_grupo}', '{correo}', '{nombre_evento}', '{fecha_hora_evento}', 1, now());")
+    try: 
+        con = Conexion()        
+        con.cur.execute(query)
+        con.conexion.commit()
+        del	con
+    except :
+        traceback.print_exc()
     return
+
+def create_ingreso_log(correo_usr):
+    query = (f"insert into LOG_INGRESO values (null, '{correo_usr}', now());")
+    try: 
+        con = Conexion()        
+        con.cur.execute(query)
+        con.conexion.commit()
+        del	con
+    except :
+        traceback.print_exc()
+    return
+
 
 
 def mandarInvitacionEvento(correos, correo_usr, titulo, desc, fecha):
