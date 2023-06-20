@@ -7,6 +7,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 from resources.QRC import images
 from Python.model.Usuario import Usuario
 from Python.model import CRUD
+from PyQt5.QtGui import QIcon
 #import os
 #from google.cloud import pubsub_v1
 
@@ -44,7 +45,10 @@ class controller_Chat(QMainWindow):
         self.username_receptor = self.receptor_widget.findChild(QtWidgets.QLabel, 'username_receptor')
         uic.loadUi('src/resources/interface/Mensajero.ui', self.mensajero_widget)
         self.username_mensajero = self.mensajero_widget.findChild(QtWidgets.QLabel, 'username_mensajero')
-
+        self.icono_conexion_activo = 'src/resources/QRC/Icons/Online 2.png'
+        self.icono_conexion_inactivo = 'src/resources/QRC/Icons/Online.png'
+        self.cambio_manual = False
+        
         
 
 
@@ -113,9 +117,29 @@ class controller_Chat(QMainWindow):
         for miembro in CRUD.obtener_miembros_grupos(nombre_grupo):#type: ignore
             item = QtWidgets.QListWidgetItem()
             item.setText(str(miembro[0]) + " " + str(miembro[1]))
+            # Agregar icono de conexión
+            icono = QIcon(self.icono_conexion_activo)
+            item.setIcon(icono)
             self.lista_miembros.addItem(item)
+            item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable) #type: ignore
+             # Establecer el estado del ítem como activo solo si no se cambió manualmente
+            if not self.cambio_manual:
+                item.setCheckState(QtCore.Qt.Checked)#type: ignore
 
         self.id_grupo_seleccionado = self.obtener_id_grupo(nombre_grupo)
+        # Conectar la señal itemChanged al método cambiar_estado_miembro
+        self.lista_miembros.itemChanged.connect(self.cambiar_estado_miembro)
+
+    def cambiar_estado_miembro(self, item):
+        if not self.cambio_manual:
+            self.cambio_manual = True
+            if item.checkState() == QtCore.Qt.Checked:  # Estado activo # type: ignore
+                item.setIcon(QIcon(self.icono_conexion_activo))
+                # Realizar acciones cuando el miembro está activo
+            else:  # Estado inactivo
+                item.setIcon(QIcon(self.icono_conexion_inactivo))
+                # Realizar acciones cuando el miembro está inactivo
+            self.cambio_manual = False
     
     def cargarMensajes(self, newValor):                    
         try:    
