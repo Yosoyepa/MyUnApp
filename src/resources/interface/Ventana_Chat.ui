@@ -491,23 +491,6 @@ padding: 6px;
                                 </item>
                                 <item>
                                  <widget class="QPushButton" name="send_button">
-<<<<<<< HEAD
-                                  <property name="styleSheet">
-                                   <string notr="true">QPushButton{
-	background-color: transparent;
-	border-radius: 0px;
-}
-
-QPushButton:hover{
-	background-color: rgb(121, 184, 211);
-	border-radius: 0px;
-}
-
-QPushButton::pressed{
-	
-	background-color: rgb(1, 35, 60);
-	border-radius: 0px;
-=======
                                   <property name="font">
                                    <font>
                                     <pointsize>14</pointsize>
@@ -531,7 +514,6 @@ QPushButton::pressed{
 	background-color:rgb(62, 201, 255); 
 	color:#FFFFFF; 
 	border-radius:10px;
->>>>>>> origin/SP3_ImagenesEnChat
 }</string>
                                   </property>
                                   <property name="text">
