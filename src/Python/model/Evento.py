@@ -187,7 +187,10 @@ class event(controllerCalendar):
             # Prints the start and name of the next event
             for event in events:
                 start = event['start'].get('dateTime', event['start'].get('date'))
-                self.events_list += [(start, event['summary'], event['description'])]
+                if 'description' in event.keys():
+                    self.events_list += [(start, event['summary'], event['description'])]
+                else:     
+                    self.events_list += [(start, event['summary'], '')]
             return self.events_list
 
         except HttpError as error:
